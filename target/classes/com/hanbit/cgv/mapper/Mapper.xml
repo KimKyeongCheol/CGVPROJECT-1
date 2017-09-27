@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hanbit.cgv.mapper.Mapper">
+
+	<select id="count" resultType="String" parameterType="com.hanbit.cgv.command.Command">
+		select count(*) count from board;
+	</select>
+	
+</mapper>
