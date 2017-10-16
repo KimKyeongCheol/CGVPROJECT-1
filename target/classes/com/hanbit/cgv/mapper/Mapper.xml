@@ -5,8 +5,16 @@
 
 <mapper namespace="com.hanbit.cgv.mapper.Mapper">
 
-	<select id="count" resultType="String" parameterType="com.hanbit.cgv.command.Command">
-		select count(*) count from board;
+	<select id="selectSome" resultType="List" parameterType="com.hanbit.cgv.command.Command">
+		
+		<choose>
+			<when test="${table} = etc">
+				select * from ${table}
+			</when>
+			<otherwise>
+				select * from ${table}
+			</otherwise>
+		</choose>
 	</select>
 	
 </mapper>
