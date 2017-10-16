@@ -6,7 +6,7 @@
 <mapper namespace="com.hanbit.cgv.mapper.Mapper">
 
 	<select id="count" resultType="String" parameterType="com.hanbit.cgv.command.Command">
-		select count(*) count from board;
+		select count(*) count from board
 	</select>
 	
 </mapper>
