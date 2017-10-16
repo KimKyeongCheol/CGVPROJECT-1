@@ -67,8 +67,10 @@ public class RestController {
 	}
 	
 	@RequestMapping(value="/post/reservation",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> postReservation(@RequestBody Map<Object,Object> param){
+	public @ResponseBody Map<?,?> postReservation(@RequestBody Map<String,Object> param){
 		Map<String,Object> map=new HashMap<>();
+		command.setTable("reservation");
+		command.setParam(param);
 		postService=(x) ->{
 			return mapper.insert(command);
 		};
@@ -76,4 +78,48 @@ public class RestController {
 		return param;
 	}
 	
+	@RequestMapping(value="/get/movieChart",method=RequestMethod.POST)
+	public @ResponseBody Map<?,?> getMovieChart(Model model){
+		Map<String,Object> map=new HashMap<>();
+		command.setTable("movieChart");
+		listService=(x) ->{
+			return mapper.selectSome(command);
+		};
+		map.put("movieChart", listService.excute(command));
+		return map;
+	}
+	
+	@RequestMapping(value="/get/movieDetail",method=RequestMethod.POST)
+	public @ResponseBody Map<?,?> getMovieDetail(Model model){
+		Map<String,Object> map=new HashMap<>();
+		command.setTable("movieDetail");
+		listService=(x) ->{
+			return mapper.selectSome(command);
+		};
+		map.put("movieDetail", listService.excute(command));
+		
+		command.setTable("comment");
+		listService=(x) ->{
+			return mapper.selectSome(command);
+		};
+		map.put("comment", listService.excute(command));
+		return map;
+	}
+	
+	@RequestMapping(value="/get/loginPage",method=RequestMethod.POST)
+	public @ResponseBody Map<?,?> getLoginPage(@RequestBody Map<String,Object> param){
+		Map<String,Object> map=new HashMap<>();
+		command.setTable("login");
+		getService=(x) ->{
+			return mapper.selectOne(command);
+		};
+		String result="";
+		if(getService.excute(command).equals("0")) {
+			result="fail";
+		}else {
+			result="success";
+		}
+		map.put("login", result);
+		return map;
+	}
 }
