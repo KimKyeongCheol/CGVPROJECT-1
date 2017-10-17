@@ -16,7 +16,4 @@ public class Command{
 	protected Map<String,Object> param;
 	
 	
-	
-
-	
 }

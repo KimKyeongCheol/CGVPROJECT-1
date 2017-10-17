@@ -5,8 +5,26 @@
 
 <mapper namespace="com.hanbit.cgv.mapper.Mapper">
 
-	<select id="count" resultType="String" parameterType="com.hanbit.cgv.command.Command">
-		select count(*) count from board
+
+	<select id="selectSome" resultType="map" parameterType="com.hanbit.cgv.command.Command">
+		
+		<choose>
+			<when test="table eq 'movieChart'">
+				select t.*,s.*,p.*,i.* from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq
+			</when>
+			<when test="table eq 'comment'">
+				select c.*,m.profile from ${table} c join member m on c.member_id=m.member_id
+			</when>
+			<otherwise>
+				select * from ${table}
+			</otherwise>
+		</choose>
 	</select>
-	
+	<insert id="insert" parameterType="com.hanbit.cgv.command.Command">
+		<choose>
+			<when test="${table} eq reservation">
+				insert into reservation values(auto_increment,#{param.total_cost},#{param.advance_date},#{param.member_id},#{place_seq},#{theater_seq},#{schedule_seq},#{movie_seq})
+			</when>		
+		</choose>
+	</insert>
 </mapper>
