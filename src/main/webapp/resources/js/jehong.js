@@ -30,7 +30,7 @@ jehong.main=(()=>{
 				  
 				  for(var i=0;i<4;i++){
 					  $('#ol').append(
-							  '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img src="'+d.movieChart[i].poster+'"alt="아이 캔 스피크 포스터"onerror="errorImage(this)"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><a href=""><strong class="title">'+d.movieChart[i].name+'</strong></a><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>2017.09.21<span>개봉</span></strong></span><span class="like"><button class="btn-like"value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation"href="/ticket/?MOVIE_CD=20013611&amp;MOVIE_CD_GROUP=20013611">예매</a></span></div></li>'	   
+							  '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><a href="'+sessionStorage.getItem('ctx')+'/parameter?movieNum='+(i+1)+'"><img src="'+d.movieChart[i].poster+'"alt="아이 캔 스피크 포스터"onerror="errorImage(this)"></a><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>2017.09.21<span>개봉</span></strong></span><span class="like"><button class="btn-like"value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation"href="/ticket/?MOVIE_CD=20013611&amp;MOVIE_CD_GROUP=20013611">예매</a></span></div></li>'	   
 					  );
 				  }
 				  
@@ -38,11 +38,9 @@ jehong.main=(()=>{
 				  
 				  for(var i=4;i<7;i++){
 					  $('#ol2').append(
-							  '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img src="'+d.movieChart[i].poster+'"alt="아이 캔 스피크 포스터"onerror="errorImage(this)"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><a href=""><strong class="title">'+d.movieChart[i].name+'</strong></a><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>2017.09.21<span>개봉</span></strong></span><span class="like"><button class="btn-like"value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation"href="/ticket/?MOVIE_CD=20013611&amp;MOVIE_CD_GROUP=20013611">예매</a></span></div></li>'	   
+							  '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><a href="'+sessionStorage.getItem('ctx')+'/parameter?movieNum='+(i+1)+'"><img src="'+d.movieChart[i].poster+'"alt="아이 캔 스피크 포스터"onerror="errorImage(this)"></a><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>2017.09.21<span>개봉</span></strong></span><span class="like"><button class="btn-like"value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation"href="/ticket/?MOVIE_CD=20013611&amp;MOVIE_CD_GROUP=20013611">예매</a></span></div></li>'	   
 					  );
 				  }
-				   
-			   
 			},
 			error : (x,s,m)=>{
 				alert('에러가발생');
@@ -50,7 +48,6 @@ jehong.main=(()=>{
 		});
 		
    }
-	   
 	 
    
    var data = {

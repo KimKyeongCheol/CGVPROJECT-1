@@ -1,6 +1,7 @@
 package com.hanbit.cgv;
 
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ public class HomeController {
 	@RequestMapping("/{page}")
 	public String pageMove(Model model,@PathVariable String page) {
 		System.out.println("page is "+page);
+		
 		return page;
 	}
 	
