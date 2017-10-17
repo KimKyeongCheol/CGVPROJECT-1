@@ -7,6 +7,7 @@
 
 	<select id="count" resultType="String" parameterType="com.hanbit.cgv.command.Command">
 		select count(*) count from board
+		</select>
 
 	<select id="selectSome" resultType="map" parameterType="com.hanbit.cgv.command.Command">
 		
