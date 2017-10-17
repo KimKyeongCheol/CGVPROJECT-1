@@ -19,8 +19,10 @@ jehong2.main=(()=>{
 				$('#movie_title').text(d.movieDetail.name);
 				$('#reserve_rate').text(d.movieDetail.reserve_rate+'%');
 				$('#score_percent').text(d.movieDetail.score+'%');
-				$('#people_count').text(d.movieDetail.people_count+'%');
+				$('#people_count').text(d.movieDetail.people_count);
 				$('#staff').text(d.movieDetail.staff);
+				$('#genre').text('장르 : '+d.movieDetail.genre);
+				$('#release_date').text('개봉날짜 : '+d.movieDetail.release_date);
 				$('#like_count').text(d.movieDetail.like_count);
 				$('#introduce_text').text(d.movieDetail.introduce);
 			},

@@ -153,7 +153,9 @@
             </div>
             <!-- 떨어지는 얘 이전 요소에 class=on을 넣는다 -->
         <div class="spec">
-			<dl id="staff"></dl>            
+			<dl id="staff"></dl>
+			<dl id="genre"></dl>
+			<dl id="release_date"></dl>            
         </div>
        
         <span class="like">
