@@ -33,6 +33,11 @@ jahun.main=(()=>{
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/mypage";
 		});
+		$('#loginBtn').click(()=>{
+			alert('go loginBtn');
+			$('#content').empty();
+			location.href=sessionStorage.getItem('ctx')+"/loginpage";
+		});
 		
 	};
 	return {
