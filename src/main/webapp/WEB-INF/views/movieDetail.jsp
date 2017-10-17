@@ -123,29 +123,24 @@
     <h3><strong>킹스맨: 골든 서클</strong>기본정보</h3>
     <div class="box-image">
         <a href="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000079/79949/79949_1000.jpg" title="포스터 크게 보기 새창" target="_blank">
-            <span class="thumb-image"> 
-                <img src="http://img.cgv.co.kr/Movie/Thumbnail/Poster/000079/79949/79949_185.jpg" alt="킹스맨: 골든 서클 포스터 새창" onerror="errorImage(this)">
-                <span class="ico-posterdetail">포스터 크게 보기</span>
-                <span class="ico-grade grade-19"> 청소년 관람불가</span>
+            <span class="thumb-image" id="poster"> 
+                
             </span> 
         </a> 
     </div>
     <div class="box-contents">
         <div class="title"> 
-            <strong>킹스맨: 골든 서클</strong>
+            <strong id="movie_title"></strong>
             <em class="round lightblue"><span>현재상영중</span></em>
-            
-            
-            <p>Kingsman: The Golden Circle</p>
         </div>
         <div class="score"> 
-            <strong class="percent">예매율&nbsp;<span>24.4%</span></strong>
+            <strong class="percent">예매율&nbsp;<span id="reserve_rate"></span></strong>
           
             <div class="egg-gage small">
             <span class="egg great"></span>
             
             
-				<span class="percent"> 93% </span>
+				<span class="percent" id="score_percent"></span>
                                      
 			</div>
             <!--
@@ -154,66 +149,17 @@
             </div>
              -->
             <strong class="count">
-                (<span class="view">실관람객 :&nbsp;<em>52,634명</em></span>) </strong> 
+                (<span class="view">실관람객 :&nbsp;<em id="people_count"></em></span>) </strong> 
             </div>
             <!-- 떨어지는 얘 이전 요소에 class=on을 넣는다 -->
         <div class="spec">
-            <dl>
-                <dt>감독 :&nbsp;</dt>
-                <dd>
-                    
-                        
-                        <a href="/movies/persons/?pidx=10709">매튜 본</a>                    
-                        
-                </dd>
-                
-                <dd>
-                    
-                </dd>
-
-                <dt>&nbsp;/ 배우 :&nbsp;</dt>
-                <dd class="on">
-                    
-                        
-                        <a href="/movies/persons/?pidx=1391">콜린 퍼스</a>                    
-                        
-                        ,&nbsp;
-                        <a href="/movies/persons/?pidx=656">줄리안 무어</a>                    
-                        
-                        ,&nbsp;
-                        <a href="/movies/persons/?pidx=115561">태런 에저튼</a>                    
-                        
-                        ,&nbsp;
-                        <a href="/movies/persons/?pidx=32641">마크 스트롱</a>                    
-                        
-                </dd>
-
-              
-
-
-                <dt>장르 :&nbsp;액션,&nbsp;어드벤처,&nbsp;코미디</dt> 
-                <dd></dd>
-                <dt>&nbsp;/ 기본 :&nbsp;</dt>
-                <dd class="on">청소년 관람불가,&nbsp;141분,&nbsp;미국, 영국</dd>
-                <dt>개봉 :&nbsp;</dt>
-                <dd class="on">2017.09.27</dd>
-
-
-            
-
-            </dl>
+			<dl id="staff"></dl>            
         </div>
-        <span class="screentype">
-        
-                <a href="#" class="imax" title="IMAX 상세정보 바로가기" data-regioncode="07">IMAX</a>
-            
-                <a href="#" class="forDX" title="4DX 상세정보 바로가기" data-regioncode="4D14">4DX</a>
-            
-        </span>
+       
         <span class="like">
             <button class="btn-like" value="79949">영화 찜하기</button>
             <span class="count">
-                <strong><i>23,901</i><span>명이 선택</span></strong> 
+                <strong><i id="like_count"></i><span>명이 선택</span></strong> 
                 <i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i>
             </span>
 
@@ -242,16 +188,7 @@
                 <li class="last"><a href="/movies/detail-view/show-times.aspx?midx=79949#menu">상영시간표</a></li>
             </ul>
             <div class="sect-story-movie">
-                <p><strong>“오늘 밤, 다 쓸어버린다!”</strong></p>
-<p><br></p>
-<p>2004년 서울… 하얼빈에서 넘어와 단숨에 기존 조직들을 장악하고 가장 강력한 세력인 춘식이파 보스 ‘황사장(조재윤 분)’까지 위협하며</p>
-<p>도시 일대의 최강자로 급부상한 신흥범죄조직의 악랄한 보스 ‘장첸(윤계상 분)’.</p>
-<p><br></p>
-<p>대한민국을 뒤흔든 ‘장첸(윤계상 분)’ 일당을 잡기 위해 오직 주먹 한방으로 도시의 평화를 유지해 온 괴물형사 ‘마석도(마동석 분)’와</p>
-<p>인간미 넘치는 든든한 리더 ‘전일만(최귀화 분)’ 반장이 이끄는 강력반은 나쁜 놈들을 한방에 쓸어버릴 끝.짱.나.는. 작전을 세우는데…</p>
-<p><br></p>
-<p><strong>통쾌하고! 화끈하고! 살벌하게!</strong></p>
-<p><strong>올 추석, 나쁜 놈들 때려잡는 강력반 형사들의 ‘조폭소탕작전’이 시작된다!</strong></p>
+               <textarea rows="30" cols="90" id="introduce_text"></textarea>
                 
             </div>
             <div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph">

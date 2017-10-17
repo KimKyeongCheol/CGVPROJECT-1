@@ -99,10 +99,10 @@ public class RestController {
 		command.setTable("movieDetail");
 		//command.setMovieNum(request.getParameter("movieNum"));
 		command.setMovieNum("1");
-		listService=(x) ->{
-			return mapper.selectSome(command);
+		getService=(x) ->{
+			return mapper.selectOne(command);
 		};
-		map.put("movieDetail", listService.excute(command));
+		map.put("movieDetail", getService.excute(command));
 		
 		command.setTable("comment");
 		listService=(x) ->{
