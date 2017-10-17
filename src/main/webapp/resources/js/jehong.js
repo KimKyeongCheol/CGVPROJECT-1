@@ -45,7 +45,7 @@ jehong.main=(()=>{
 			   
 			},
 			error : (x,s,m)=>{
-				alert('에러발생');
+				alert('에러가발생');
 			}
 		});
 		
