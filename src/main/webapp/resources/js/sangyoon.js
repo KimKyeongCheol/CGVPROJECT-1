@@ -562,7 +562,7 @@ var reservationUI = {
 	+                            '<a href="#" class="btnVisInfo blind_txt">물음표-선택할 수 없는 영화안내</a>'
 	+                            '<p class="infoBx">'
 	+                            '<span class="top"></span>'
-	+                            '<span class="middle">선택 불가능한 정보는 장애인 차별금지법에 따라 패턴 디자인을 적용하여 모든 사용자가 쉽게 구분할 수 있어요!</span>'
+	+                            '<span class="middle">선택 불가능 정보는 장애인 차별금지법에 따라 패턴 디자인을 적용하여 모든 사용자가 쉽게 구분할 수 있어요!</span>'
 	+                            '<span class="bottom"></span>'
 	+                            '</p>'
 	+                        '</li>'
