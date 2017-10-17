@@ -30,6 +30,9 @@
 			<when test="table eq 'movieDetail'">
 				select * from (select t.*,s.steelcut,p.poster,p.trailer,i.genre,i.movie_time,i.like_count,i.people_count,i.score,i.introduce,i.staff from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq) t where t.movie_seq=#{movieNum}
 			</when>
+			<when test="table eq 'login'">
+				select * from member where member_id=#{param.member_id} and pass=#{param.pass}
+			</when>
 			<otherwise>
 				select * from ${table}
 			</otherwise>

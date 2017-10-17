@@ -115,17 +115,24 @@ public class RestController {
 	@RequestMapping(value="/get/loginPage",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> getLoginPage(@RequestBody Map<String,Object> param){
 		Map<String,Object> map=new HashMap<>();
+		Map<String,Object> member=new HashMap<>();
+		System.out.println("아이디 :"+param.get("member_id")+"비번 : "+param.get("pass"));
 		command.setTable("login");
+		command.setParam(param);
 		getService=(x) ->{
 			return mapper.selectOne(command);
 		};
 		String result="";
-		if(getService.excute(command).equals("0")) {
+		
+		member=(Map<String, Object>) getService.excute(command);
+		System.out.println(member);
+		
+		if(getService.excute(command)==null) {
 			result="fail";
 		}else {
 			result="success";
 		}
-		map.put("login", result);
+		map.put("msg", result);
 		return map;
 	}
 }
