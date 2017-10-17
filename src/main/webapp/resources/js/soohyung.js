@@ -40,7 +40,7 @@ soohyung.logic=(()=>{
 			}),
  			contentType : 'application/json',
  			success : d=>{
- 				 alert('로그인결과 : '+d.msg);
+ 				 alert('로그인결과.. : '+d.msg);
  				 
  				 
  				 
