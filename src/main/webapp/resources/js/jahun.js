@@ -38,6 +38,10 @@ jahun.main=(()=>{
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/loginpage";
 		});
+		$('#goTheater').click(()=>{
+			$('#content').empty();
+			location.href=sessionStorage.getItem('ctx')+"/movieDetail";
+		});
 		
 	};
 	return {

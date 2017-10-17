@@ -97,7 +97,8 @@ public class RestController {
 	public @ResponseBody Map<?,?> getMovieDetail(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
 		command.setTable("movieDetail");
-		command.setMovieNum(request.getParameter("movieNum"));
+		//command.setMovieNum(request.getParameter("movieNum"));
+		command.setMovieNum("1");
 		listService=(x) ->{
 			return mapper.selectSome(command);
 		};

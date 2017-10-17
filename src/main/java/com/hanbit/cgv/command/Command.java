@@ -15,6 +15,4 @@ public class Command{
 	protected String table,movieNum;
 	protected Map<String,Object> param;
 	
-	
-	
 }

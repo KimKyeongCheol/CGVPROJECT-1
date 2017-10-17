@@ -89,7 +89,7 @@
 <link rel="stylesheet" media="all" type="text/css"
 	href="http://img.cgv.co.kr/R2014/css/slick-theme-custom.css" />
 	
-<script src="${path.js}/jehong.js"></script>
+<script src="${path.js}/jehong2.js"></script>
 	
 
 </head>
@@ -953,6 +953,6 @@
 
 </body>
 <script>
-	jehong.main.init('${path.ctx}');
+	jehong2.main.init('${path.ctx}');
 </script>
 </html>
