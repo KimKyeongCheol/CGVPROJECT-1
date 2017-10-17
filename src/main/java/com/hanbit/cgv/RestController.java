@@ -3,6 +3,8 @@ package com.hanbit.cgv;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +29,8 @@ public class RestController {
 	
 	@RequestMapping(value="/parameter",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> parameter(@RequestBody Map<Object,Object> param){
+		
+		
 		return param;
 	}
 	
@@ -90,9 +94,10 @@ public class RestController {
 	}
 	
 	@RequestMapping(value="/get/movieDetail",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> getMovieDetail(Model model){
+	public @ResponseBody Map<?,?> getMovieDetail(HttpServletRequest request){
 		Map<String,Object> map=new HashMap<>();
 		command.setTable("movieDetail");
+		command.setMovieNum(request.getParameter("movieNum"));
 		listService=(x) ->{
 			return mapper.selectSome(command);
 		};
