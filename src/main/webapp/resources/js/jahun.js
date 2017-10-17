@@ -16,35 +16,31 @@ jahun.main=(()=>{
 			alert('go Reservation !');
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/reservation";
-			
 		});
-		$('#goTheater').click(()=>{
-			alert('go Theater !');
-			$('#content').empty();
-			jahun.template.moviechartUI();
-		});
-		$('#loginBtn').click(()=>{
-			alert('go login');
-			$('#content').empty();
-			jahun.template.loginUI();
-		});
+		
 		$('#joinBtn').click(()=>{
 			alert('go joinBtn');
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/join";
-			
 		});
 		$('#adminBtn').click(()=>{
 			alert('go adminBtn');
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/admin";
-			
 		});
 		$('#mycgvBtn').click(()=>{
 			alert('go mycgvBtn');
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/mypage";
-			
+		});
+		$('#loginBtn').click(()=>{
+			alert('go loginBtn');
+			$('#content').empty();
+			location.href=sessionStorage.getItem('ctx')+"/loginpage";
+		});
+		$('#goTheater').click(()=>{
+			$('#content').empty();
+			location.href=sessionStorage.getItem('ctx')+"/movieDetail";
 		});
 		
 	};
