@@ -17,6 +17,7 @@ import com.hanbit.cgv.mapper.Mapper;
 import com.hanbit.cgv.service.IGetService;
 import com.hanbit.cgv.service.IListService;
 import com.hanbit.cgv.service.IPostService;
+import com.hanbit.cgv.service.IPutService;
 
 
 @org.springframework.web.bind.annotation.RestController
@@ -26,6 +27,7 @@ public class RestController {
 	IListService listService=null;
 	IGetService getService=null;
 	IPostService postService=null;
+	IPutService putService=null;
 	
 	@RequestMapping(value="/parameter",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> parameter(@RequestBody Map<Object,Object> param){
@@ -94,14 +96,14 @@ public class RestController {
 	}
 	
 	@RequestMapping(value="/get/movieDetail",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> getMovieDetail(HttpServletRequest request){
+	public @ResponseBody Map<?,?> getMovieDetail(@RequestBody Map<String,Object> param){
 		Map<String,Object> map=new HashMap<>();
 		command.setTable("movieDetail");
-		//command.setMovieNum(request.getParameter("movieNum"));
-		command.setMovieNum("1");
+		command.setParam(param);
 		getService=(x) ->{
 			return mapper.selectOne(command);
 		};
+		
 		map.put("movieDetail", getService.excute(command));
 		
 		command.setTable("comment");
@@ -135,4 +137,108 @@ public class RestController {
 		map.put("msg", result);
 		return map;
 	}
+	
+	@RequestMapping(value="/post/comment",method=RequestMethod.POST)
+	public @ResponseBody Map<?,?> postComment(@RequestBody Map<String,Object> param){
+		
+		System.out.println("post comment 진입..");
+		Map<String,Object> map=new HashMap<>();
+		command.setTable("comment");
+		command.setParam(param);
+		postService=(x) ->{
+			return mapper.insert(command);
+		};
+		String result="";
+		
+		
+		if(postService.excute(command)==0) {
+			result="fail";
+		}else {
+			result="success";
+		}
+		map.put("msg", result);
+		return map;
+	}
+	@RequestMapping(value="/get/findId",method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<?,?> getFindId(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("findid");
+	      command.setParam(param);
+	      System.out.println(param.get("member_name"));
+	      System.out.println(param.get("member_phone"));
+	      getService=(x) ->{
+	         return mapper.selectOne(command);
+	      };
+	      String result="";
+	      if(getService.excute(command).equals("0")) {
+	         result="fail";
+	      }else {
+	         result="success";
+	      }
+	      map.put("msg", result);
+	      map.put("findId", mapper.selectOne(command).get("member_id"));
+	      return map;
+	   }
+	   @RequestMapping(value="/get/findPw",method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<?,?> getFindPw(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("findpw");
+	      command.setParam(param);      
+	      System.out.println(param.get("member_id"));
+	      System.out.println(param.get("member_phone"));
+	      
+	      getService=(x) ->{
+	         
+	         return mapper.selectOne(command);
+	      };
+	      String result="";
+	      if(getService.excute(command).equals("0")) {
+	         result="fail";
+	      }else {
+	         result="success";
+	      }
+	      map.put("msg", result);
+	      map.put("findPw", mapper.selectOne(command).get("pass"));
+	      map.put("findId", mapper.selectOne(command).get("id"));
+	      return map;
+	   }
+	   @RequestMapping(value="/get/updatePw",method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<?,?> updatePw(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      /*command.setTable("updatePw");*/
+	      command.setParam(param);      
+	      System.out.println(param.get("pass"));
+	      System.out.println(param.get("id"));
+	      System.out.println("결과값 : "+String.valueOf(mapper.update(command)));
+	      putService=(x) ->{         
+	         return mapper.update(command);
+	      };
+	      String result="";
+	      if(putService.excute(command)==0) {
+	         result="fail";
+	      }else {
+	         result="success";
+	      }
+	      map.put("msg", result);
+	      return map;
+	   }
+	   
+	   @RequestMapping(value="/put/like",method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<?,?> putLike(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("like");
+	      command.setParam(param);
+	      
+	      putService=(x) ->{
+	         return mapper.update(command);
+	      };
+	      String result="";
+	      if(putService.excute(command)==0) {
+	         result="fail";
+	      }else {
+	         result="success";
+	      }
+	      map.put("msg", result);
+	      return map;
+	   }
 }

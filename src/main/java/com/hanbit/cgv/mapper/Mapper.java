@@ -9,10 +9,10 @@ import com.hanbit.cgv.command.Command;
 
 @Repository
 public interface Mapper {
-	public String insert(Command cmd);
+	public int insert(Command cmd);
 	public List<Map<?,?>> selectSome(Command cmd);
 	public Map<?,?> selectOne(Command cmd);
-	public void update(Command cmd);
+	public int update(Command cmd);
 	public void delete(Command cmd);
 	public String count(Command cmd);
 }

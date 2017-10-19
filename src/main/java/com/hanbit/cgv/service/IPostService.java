@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 @Service
 @FunctionalInterface
 public interface IPostService {
-	public String excute(Object o);
+	public int excute(Object o);
 }

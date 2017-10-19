@@ -10,14 +10,11 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta http-equiv="Pragma" content="no-cache">
-	
-	<link rel="shortcut icon" href="/cjmweb/images/ico/favicon.ico" type="images/x-ico">
 	<link rel="alternate" href="https://m.cjone.com:8443/cjmmobile/member/meberjoinstep2.do">
-	
-	 
 	<link rel="stylesheet" href="${path.ctx}/resources/css/base.css">
 	<link rel="stylesheet" href="${path.ctx}/resources/css/member.css"> 
-
+	 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script src="${path.js}/soohyung2.js"></script>
 </head>
 
 
@@ -30,12 +27,6 @@
 <div id="bodyWrap">
 	
 	<!--header-->
-	
-
-
-
-
-
 <form id="headerFrm" method="get">
 	<input type="hidden" name="h_search_keyword" id="h_search_keyword">
 </form>
@@ -319,14 +310,31 @@
 													<p class="msg_desc">이메일 주소 입력 시 사용 가능 특수 문자 : - . _</p>
 												</td>
 											</tr>
+											
+											
+											<tr class="input">
+												<th scope="row" class="mandatory">
+													<label for="email_addr1"><span class="haze">"필수"</span> 주소</label>
+												</th>
+												<td>
+													<div class="email_write">
+														<input type="text" id="sample4_postcode" placeholder="우편번호">
+														<input type="button" onclick="soohyung2.logic.sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+														<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+														<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+														<span id="guide" style="color:#999"></span>
+													</div>
+													
+												</td>
+											</tr>	
+											
 										</tbody>
 									</table>
 								</div>
-								
-
+														
 									<div class="btn_sec">
-									<button type="button" class="btn" onclick="javascript:goCancel();">취소</button>
-									<button type="button" class="btn btn_em" onclick="javascript:goSubmit();">등록</button>
+									<button type="button" class="btn">취소</button>
+									<button type="button" class="btn btn_em">등록</button>
 								</div>
 								
 							</form>
@@ -391,7 +399,9 @@
 	<input type="hidden" name="upd_coopco_id" id="upd_coopco_id" value="">
 	<input type="hidden" name="card_chk" id="card_chk" value="">
 	</form>
-
+<script>
+soohyung2.main.init('${path.ctx}');
+</script>
 
 
 </body></html>
