@@ -329,8 +329,8 @@
 								</div>
 														
 									<div class="btn_sec">
-									<button type="button" class="btn">취소</button>
-									<button type="button" class="btn btn_em">등록</button>
+									<button type="button" class="btn" id="cancel">취소</button>
+									<button type="button" class="btn btn_em" id="submit">등록</button>
 								</div>
 								
 							</form>

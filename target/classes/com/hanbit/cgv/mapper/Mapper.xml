@@ -50,7 +50,10 @@
 				insert into reservation values(auto_increment,#{param.total_cost},#{param.advance_date},#{param.member_id},#{place_seq},#{theater_seq},#{schedule_seq},#{movie_seq})
 			</when>
 			<when test="table eq 'comment'">
-				insert into comment (movie_seq,member_id,content,comment_like,comment_dislike,regdate) values(#{param.movie_seq},#{param.member_id},#{param.content},'0','0',now());
+				insert into comment (movie_seq,member_id,content,comment_like,comment_dislike,regdate) values(#{param.movie_seq},#{param.member_id},#{param.content},'0','0',now())
+			</when>
+			<when test="table eq 'member'">
+				insert into member (member_id,ssn,name,email,phone,address,profile,zipcode,pass) values(#{param.member_id},#{param.ssn},#{param.name},#{param.email},#{param.phone},#{param.address},#{param.profile},#{param.zipcode},#{param.pass})
 			</when>
 			<otherwise>
 				insert into reservation values(auto_increment,#{param.total_cost},#{param.advance_date},#{param.member_id},#{place_seq},#{theater_seq},#{schedule_seq},#{movie_seq})

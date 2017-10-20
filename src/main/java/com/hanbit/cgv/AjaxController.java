@@ -21,7 +21,7 @@ import com.hanbit.cgv.service.IPutService;
 
 
 @org.springframework.web.bind.annotation.RestController
-public class RestController {
+public class AjaxController {
 	@Autowired Command command;
 	@Autowired Mapper mapper;
 	IListService listService=null;
@@ -176,7 +176,7 @@ public class RestController {
 	         result="success";
 	      }
 	      map.put("msg", result);
-	      map.put("findId", mapper.selectOne(command).get("member_id"));
+	      map.put("resultId", mapper.selectOne(command).get("member_id"));
 	      return map;
 	   }
 	   @RequestMapping(value="/get/findPw",method=RequestMethod.POST, consumes="application/json")
@@ -205,7 +205,7 @@ public class RestController {
 	   @RequestMapping(value="/get/updatePw",method=RequestMethod.POST, consumes="application/json")
 	   public @ResponseBody Map<?,?> updatePw(@RequestBody Map<String,Object> param){
 	      Map<String,Object> map=new HashMap<>();
-	      /*command.setTable("updatePw");*/
+	      command.setTable("updatePw");
 	      command.setParam(param);      
 	      System.out.println(param.get("pass"));
 	      System.out.println(param.get("id"));
@@ -259,4 +259,25 @@ public class RestController {
 	      map.put("msg", result);
 	      return map;
 	   }
+	   
+	   @RequestMapping(value="/post/member",method=RequestMethod.POST)
+		public @ResponseBody Map<?,?> postMember(@RequestBody Map<String,Object> param){
+			
+			Map<String,Object> map=new HashMap<>();
+			command.setTable("member");
+			command.setParam(param);
+			postService=(x) ->{
+				return mapper.insert(command);
+			};
+			String result="";
+			
+			
+			if(postService.excute(command)==0) {
+				result="fail";
+			}else {
+				result="success";
+			}
+			map.put("msg", result);
+			return map;
+		}
 }

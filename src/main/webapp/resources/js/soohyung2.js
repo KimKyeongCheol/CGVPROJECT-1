@@ -36,6 +36,7 @@ soohyung2.logic=(()=>{
 	       }); 
 	  });
 	  
+	  
 	  $('#pass1').keyup(()=>{
 		  var regex=/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,12}/;
 		  var pass1=$('#pass1').val();
@@ -64,6 +65,49 @@ soohyung2.logic=(()=>{
 		  }else{
 			  $('#email_input').val(email_last);
 		  }
+	  });
+	  
+	  $('#submit').click(()=>{
+		  var name=$('#name').val();
+		  var member_id=$('#member_id').val();
+		  var pass=$('#pass1').val();
+		  var ssn=$('#birth_year').val().substring(2,4)+$('#birth_month').val()+$('#birth_day').val()+'-1******';
+		  var phone=$('#phone_first').val()+$('#phone_mid').val()+$('#phone_last').val();
+		  var email=$('#email_first').val()+'@'+$('#email_input').val();
+		  var zipcode=$('#sample4_postcode').val();
+		  var address=$('#sample4_roadAddress').val();
+		  var profile='default.jpg';
+		  
+		  $.ajax({
+	             url : sessionStorage.getItem('ctx')+'/post/member',
+	             method : 'POST',
+	             data : JSON.stringify({
+	            	 name : name,
+	            	 member_id : member_id,
+	            	 pass : pass,
+	            	 ssn : ssn,
+	            	 phone : phone,
+	            	 email : email,
+	            	 zipcode : zipcode,
+	            	 address : address,
+	            	 profile : profile
+	             }),
+	             contentType : 'application/json',
+	             success : d =>{
+	                 if(d.msg=='success'){
+	                	 alert('회원등록 성공 !');
+	                 }else{
+	                	 alert('회원등록 실패.. ');
+	                 }
+	                 location.href=sessionStorage.getItem('ctx')+"/home";
+	                 
+	             },
+	             error : (x,s,m)=>{
+	                alert('오류발생 : '+m);
+	             }             
+	          });
+
+		  
 	  });
   };
   
