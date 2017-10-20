@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* 회원가입 버튼 */
+
+#join_btn {background: url(http://img.cgv.co.kr/R2014/images/common/bg/bg_arrow03.png) right 1px no-repeat;
+padding-right: 9px;border-top-width: 10px;text-decoration: underline;font-size: 12px;line-height:normal;}
+
+#findId_btn {background: url(http://img.cgv.co.kr/R2014/images/common/bg/bg_arrow03.png) right 1px no-repeat;
+padding-right: 9px;border-top-width: 10px;text-decoration: underline;font-size: 12px;line-height:normal;}
+
+#findPw_btn {background: url(http://img.cgv.co.kr/R2014/images/common/bg/bg_arrow03.png) right 1px no-repeat;
+padding-right: 9px;border-top-width: 10px;text-decoration: underline;font-size: 12px;line-height:normal;}
+
+#login_txt_wrap {margin-top: 25px;}
+
+.box-login.login_1408 form#form2_capcha .login {margin-top: 25px;}
+
+.box-login {height: 300px;}
+
+.box-login .login input[type="text"], .box-login .login input[type="password"] {width: 264px;}
+
+#soohyung_p {font-size: 12px};
+
+/* 로그인   */
+.box-login.login_1408 {
+    padding: 0px;
+    border-bottom: 2px solid #898987;
+    padding-top: 50px;
+}

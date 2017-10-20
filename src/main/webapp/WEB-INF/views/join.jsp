@@ -293,12 +293,12 @@
 														</span>
 														<span class="symbol">@</span>
 														<span class="input_txt w110">
-															<input type="hidden" class="text small" title="이메일 도메인 입력" name="email_input" id="email_input" value="" placeholder="이메일 도메인" data-format="email">
+															<input type="text" class="text small" title="이메일 도메인 입력" name="email_input" id="email_input" value="naver.com" data-format="email">
 														</span>
 														<span class="select w100" data-skin="form">
 														<select title="이메일 도메인 선택" name="email_last" id="email_last">
 														<option value="naver.com">naver.com</option><option value="gmail.com">gmail.com</option><option value="nate.com">nate.com</option>
-														<option value="hanmail.net">hanmail.net</option><option id="inputEmail">직접입력</option>
+														<option value="hanmail.net">hanmail.net</option><option value="inputEmail">직접입력</option>
 														</select>
 														</span>
 														<p class="msg_info em hide" id="alert_email_addr">이메일 주소를 다시 확인해주세요.</p>

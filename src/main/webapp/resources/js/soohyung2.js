@@ -57,8 +57,13 @@ soohyung2.logic=(()=>{
 		  }
 	  });
 	  
-	  $('#inputEmail').click(()=>{
-		  alert('클릭됨');
+	  $('#email_last').click(()=>{
+		  var email_last=$('#email_last').val();
+		  if(email_last=='inputEmail'){
+			  $('#email_input').val('');
+		  }else{
+			  $('#email_input').val(email_last);
+		  }
 	  });
   };
   
