@@ -37,7 +37,7 @@ jahun.main=(()=>{
 		$('#loginBtn').click(()=>{
 			alert('go loginBtn');
 			$('#content').empty();
-			soohyung.main.init('${path.ctx}');
+			soohyung.main.init(sessionStorage.getItem('ctx'));
 		});
 		$('#goTheater').click(()=>{
 			$('#content').empty();
