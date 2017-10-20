@@ -4,15 +4,10 @@
 <html lang="ko"><head>
     <meta charset="utf-8">
     <title>회원정보 입력 </title>
-	<meta name="Description" content="CJ ONE 서비스를 이용하실 회원님의 정보를 입력해주세요. 다양한 혜택과 서비스를 받으실 수 있습니다.">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge ,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-	<meta name="format-detection" content="telephone=no">
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta http-equiv="Pragma" content="no-cache">
-	<link rel="alternate" href="https://m.cjone.com:8443/cjmmobile/member/meberjoinstep2.do">
+	
 	<link rel="stylesheet" href="${path.ctx}/resources/css/base.css">
 	<link rel="stylesheet" href="${path.ctx}/resources/css/member.css"> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script src="${path.js}/soohyung2.js"></script>
 </head>
@@ -191,7 +186,7 @@
 													<label for="input_member_name"><span class="haze">"필수"</span> 이름</label>
 												</th>
 												<td>
-													<span class="input_txt"><input type="text" readonly="" value="" class="text readonly member_name" id="input_member_name"></span><!-- 에러시 .error 클래스 추가 -->
+													<span class="input_txt"><input type="text" value="" id="name" class="text"></span>
 												</td>
 											</tr>
 											<tr class="input">
@@ -200,12 +195,12 @@
 												</th>
 												<td>
 													<div class="input_group">
-														<span class="input_txt w250"><input type="text" class="text" title="사용 할 영문 아이디 명 입력" placeholder="아이디를 입력해주세요." name="mbr_id" id="mbr_id" maxlength="12" value=""><!-- 에러시 .error 클래스 추가 --></span>
+														<span class="input_txt w250"><input type="text" class="text" title="사용 할 영문 아이디 명 입력"  name="member_id" id="member_id" maxlength="12"><!-- 에러시 .error 클래스 추가 --></span>
 														
-															<button type="button" class="btn btn_search" onclick="javascript:idCheck();">중복확인</button>
+															<button type="button" class="btn btn_search" id="idCheck">중복확인</button>
 														
-														<a class="btn btn_sm" onclick="cjone.openModal('/cjmweb/join/cjPotalIdInfo.do')" href="javascript://;"><span class="arr">CJ ONE 통합 아이디 안내</span></a>
-														<p class="msg_info em hide" id="alert_mbr_id"></p>
+														
+														<span id="idCheckMsg" style="color: red;"></span>
 													</div>
 													<p class="msg_desc">CGV,CJmall, Mnet 등 기존의 CJ ONE  제휴 브랜드 회원님의 경우는 기존에 사용하고 계신 아이디가 새롭게 생성하신 <br>통합 아이디로 변경됩니다.</p>
 												</td>
@@ -216,8 +211,8 @@
 												</th>
 												<td>
 													<div class="input_group">
-														<span class="input_txt w250"><input type="password" class="text" placeholder="비밀번호를 입력해주세요." name="pwd" id="pwd" maxlength="12"></span>
-														<span class="pwd_lv" id="alert_pwd_strength"></span>
+														<span class="input_txt w250"><input type="password" class="text" placeholder="비밀번호를 입력해주세요." name="pass1" id="pass1" maxlength="12"></span>
+														<span id="passCheckMsg" style="color: red;"></span>
 														<p class="msg_info em hide" id="msg_pwd">비밀번호는 영문자, 숫자, 특수문자 모두 최소 1가지 이상 조합한 8~12자리이어야 합니다.</p>
 													</div>
 													<p class="msg_desc">영문자, 숫자,특수문자 조합하여 8~12자리, 아이디와 4자리이상 동일,반복 문자숫자 불가<br>사용 가능 특수 문자 : !"#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_'{|}~</p>
@@ -229,8 +224,8 @@
 												</th>
 												<td>
 													<div class="input_group">
-														<span class="input_txt"><input type="password" class="text" placeholder="비밀번호를 재입력해주세요." name="pwd_check" id="pwd_check" maxlength="12"></span>
-														<p class="msg_info em hide" id="msg_pwd_check">비밀번호와 비밀번호 확인이 일치하지 않습니다.</p>
+														<span class="input_txt"><input type="password" class="text" placeholder="비밀번호를 재입력해주세요." name="pass2" id="pass2" maxlength="12"></span>
+														<span id="passCheckMsg2" style="color: red;"></span>
 													</div>
 												</td>
 											</tr>
@@ -242,19 +237,19 @@
 												<td>
 													<div class="birthday_select">
 														<span class="select w120" data-skin="form">
-															<select title="생년월일 중 년 선택" id="birth_yy" name="birth_yy">
+															<select title="생년월일 중 년 선택" id="birth_year" name="birth_year">
 																
 															</select>
 														</span>
 														<span class="symbol">년</span>
 														<span class="select w70" data-skin="form">
-															<select title="생년월일 중 월 선택" class="narrow" id="birth_mm" name="birth_mm">
+															<select title="생년월일 중 월 선택" class="narrow" id="birth_month" name="birth_month">
 																
 															</select>
 														</span>
 														<span class="symbol">월</span>
 														<span class="select w70" data-skin="form">
-															<select title="생년월일 중 일 선택" class="narrow" id="birth_dd" name="birth_dd">
+															<select title="생년월일 중 일 선택" class="narrow" id="birth_day" name="birth_day">
 																
 															</select>
 														</span>
@@ -270,17 +265,17 @@
 												<td>
 													<div class="phon_write">
 														<span class="select w100" data-skin="form">
-															<select title="휴대전화 앞자리 선택" id="mob_no_1" name="mob_no_1">
+															<select title="휴대전화 앞자리 선택" id="phone_first" name="phone_first">
 																
 															</select>
 														</span>
 														<span class="symbol">-</span>
 														<span class="input_txt w100">
-															<input type="text" class="text narrow" title="휴대전화 중간자리 입력" data-format="num" id="mob_no_2" name="mob_no_2" maxlength="4" value="">
+															<input type="text" class="text narrow" title="휴대전화 중간자리 입력" data-format="num" id="phone_mid" name="phone_mid" maxlength="4" value="">
 														</span>
 														<span class="symbol">-</span>
 														<span class="input_txt w100">
-															<input type="text" class="text narrow" title="휴대전화 끝자리 입력" data-format="num" id="mob_no_3" name="mob_no_3" maxlength="4" value="">
+															<input type="text" class="text narrow" title="휴대전화 끝자리 입력" data-format="num" id="phone_last" name="phone_last" maxlength="4" value="">
 														</span>
 														<p class="msg_info em hide" id="alert_mob_no"></p>
 													</div>
@@ -294,15 +289,16 @@
 												<td>
 													<div class="email_write">
 														<span class="input_txt w110" data-skin="form">
-															<input type="text" class="text small" title="이메일 아이디 입력" name="email_addr1" id="email_addr1" value="" placeholder="이메일 아이디" data-format="email">
+															<input type="text" class="text small" title="이메일 아이디 입력" name="email_first" id="email_first" value="" placeholder="이메일 아이디" data-format="email">
 														</span>
 														<span class="symbol">@</span>
 														<span class="input_txt w110">
-															<input type="text" class="text small" title="이메일 도메인 입력" name="email_addr2" id="email_addr2" value="" placeholder="이메일 도메인" data-format="email">
+															<input type="hidden" class="text small" title="이메일 도메인 입력" name="email_input" id="email_input" value="" placeholder="이메일 도메인" data-format="email">
 														</span>
 														<span class="select w100" data-skin="form">
-														<select title="이메일 도메인 선택" name="email_addr_opt" id="email_addr_opt" data-control="emailSelector">
-															  
+														<select title="이메일 도메인 선택" name="email_last" id="email_last">
+														<option value="naver.com">naver.com</option><option value="gmail.com">gmail.com</option><option value="nate.com">nate.com</option>
+														<option value="hanmail.net">hanmail.net</option><option id="inputEmail">직접입력</option>
 														</select>
 														</span>
 														<p class="msg_info em hide" id="alert_email_addr">이메일 주소를 다시 확인해주세요.</p>

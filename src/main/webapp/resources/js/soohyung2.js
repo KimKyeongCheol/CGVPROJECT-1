@@ -3,6 +3,8 @@ var soohyung2=soohyung2 || {};
 soohyung2.main=(()=>{
    var init=(ctx)=>{
       soohyung2.session.init(ctx);
+      soohyung2.UI.init();
+      soohyung2.logic.init();
    };
    return {
       init : init,
@@ -10,6 +12,55 @@ soohyung2.main=(()=>{
 })();
 
 soohyung2.logic=(()=>{
+  
+	var init=()=>{
+	  $('#idCheck').click(()=>{
+		  var member_id=$('#member_id').val();
+		  $.ajax({
+	          url : sessionStorage.getItem('ctx')+'/get/idCheck',
+	          method : 'POST',
+	          data : JSON.stringify({
+	            'member_id' : member_id
+	         }),
+	          contentType : 'application/json',
+	          success : d=>{              
+	              if(d.msg=='possible'){
+	                 $('#idCheckMsg').text('사용가능한 아이디입니다');
+	              }else{
+	            	  $('#idCheckMsg').text('중복된 아이디입니다.');
+	              }            
+	          },
+	          error : (x,s,m)=>{
+	             alert('에러가발생');
+	          }
+	       }); 
+	  });
+	  
+	  $('#pass1').keyup(()=>{
+		  var regex=/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,12}/;
+		  var pass1=$('#pass1').val();
+		  
+		  if(regex.test(pass1)){
+			  $('#passCheckMsg').text('사용가능한 비밀번호입니다');
+		  }else{
+			  $('#passCheckMsg').text('형식에 맞지 않는 비밀번호입니다'); 
+		  };
+	  });
+	  
+	  $('#pass2').keyup(()=>{
+		  var pass1=$('#pass1').val();
+		  var pass2=$('#pass2').val();
+		  if(pass2==pass1){
+			  $('#passCheckMsg2').text('비밀번호가 일치합니다');
+		  }else{
+			  $('#passCheckMsg2').text('비밀번호가 일치하지 않습니다');
+		  }
+	  });
+	  
+	  $('#inputEmail').click(()=>{
+		  alert('클릭됨');
+	  });
+  };
   
   var sample4_execDaumPostcode=()=>{
 	  new daum.Postcode({
@@ -61,16 +112,57 @@ soohyung2.logic=(()=>{
       }).open();
   };
   
-  var textAjax=()=>{
-	  $('#testAjax').click(()=>{
-		  
-		  
-	  });
-  };
+  
+  
+
      
    return {
+	   init : init,
 	   sample4_execDaumPostcode : sample4_execDaumPostcode
 	   }
+})();
+
+soohyung2.UI=(()=>{
+	var init=()=>{
+		
+		$('#birth_year').append(
+				'<option value="default">선택</option>'		
+		);
+		
+		$('#birth_month').append(
+				'<option value="default">선택</option>'		
+		);
+		
+		$('#birth_day').append(
+				'<option value="default">선택</option>'		
+		);
+		
+		
+		for(var i=1950;i<2017;i++){
+			$('#birth_year').append(
+					'<option value="'+i+'">'+i+'</option>'		
+			);
+		}
+		for(var i=1;i<13;i++){
+			$('#birth_month').append(
+					'<option value="'+i+'">'+i+'</option>'		
+			);
+		}
+		for(var i=1;i<31;i++){
+			$('#birth_day').append(
+					'<option value="'+i+'">'+i+'</option>'		
+			);
+		}
+		
+		$('#phone_first').append(
+'<option value="010">010</option><option value="011">011</option><option value="017">017</option><option value="019">019</option>'
+		);
+		
+	};
+	
+	return {
+		init : init
+	};
 })();
 
 

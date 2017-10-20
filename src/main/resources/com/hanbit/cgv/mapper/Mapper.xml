@@ -36,7 +36,9 @@
          <when test="table eq 'findpw'">
             select * from member where member_id=#{param.member_id} and phone=#{param.member_phone}
          </when>   
-			
+		<when test="table eq 'idCheck'">
+            select * from member where member_id=#{param.member_id}
+         </when> 
 			<otherwise>
 				select * from ${table}
 			</otherwise>

@@ -241,4 +241,22 @@ public class RestController {
 	      map.put("msg", result);
 	      return map;
 	   }
+	   
+	   @RequestMapping(value="/get/idCheck",method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<?,?> idCheck(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("idCheck");
+	      command.setParam(param);
+	      getService=(x) ->{
+	         return mapper.selectOne(command);
+	      };
+	      String result="";
+	      if(getService.excute(command)==null) {
+	         result="possible";
+	      }else {
+	         result="impossible";
+	      }
+	      map.put("msg", result);
+	      return map;
+	   }
 }
