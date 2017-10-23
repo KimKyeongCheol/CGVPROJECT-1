@@ -97,10 +97,15 @@ kyungchul.logic=(()=>{
 		});
 		
 	};
-     
+
+	var movieDetail=(x)=>{
+		sessionStorage.setItem('movie_seq',x);
+		location.href=sessionStorage.getItem('ctx')+"/movieDetail";
+	};
    return {
 	   init : init,
-	   update : update
+	   update : update,
+	   movieDetail : movieDetail
 	   }
 })();
 
@@ -121,7 +126,7 @@ kyungchul.UI=(()=>{
             success : d =>{
                for(var i=0;i<d.myreservation.length;i++){
             	   $('#reservationImg').append(
- '<img src="'+d.myreservation[i].poster+'"></img>'	   
+ '<img src="'+d.myreservation[i].poster+'" onclick="kyungchul.logic.movieDetail('+d.myreservation[i].movie_seq+')"></img>'	   
             	   );
                }
                 

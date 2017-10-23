@@ -9,7 +9,136 @@ jehong2.main=(()=>{
     
       jehong2.session.init(ctx);
       logic();
+      drawPicture();
       
+   };
+   
+   var drawPicture=()=>{
+
+	   var data = {
+	           period: [
+	       ["5주전", 0.000000],["4주전", 0.000000],["3주전", 0.000000],["2주전", 0.000000],["1주전", 0.000000]
+	           ],
+	           age: [
+	       ["10대", 2],["20대", 47.1],["30대", 34.8],["40대", 16.1]
+	           ],
+	           sex: [
+	        ["남 10%", 10],["여 90%", 90]
+	           ]
+
+	       };
+
+	   var charmRadarChartData = {
+	           labels: ["감독연출", "스토리", "영상미", "배우연기", "OST"],
+	           datasets: [
+	               {
+	                   fillColor: "rgba(218,215,204,0.2)",
+	                   strokeColor: "rgba(204,192,184,1)",
+	                   pointColor: "rgba(151,187,205,1)",
+	                   pointColorList: ["rgba(253,148,135,1)", "rgba(254,196,69,1)", "rgba(143,189,16664,1)", "rgba(100,169,178,1)", "rgba(178,103,183,1)"],            
+	                   pointStrokeColor: "#fff",
+	                   pointHighlightFill: "#fff",
+	                   pointHighlightStroke: "rgba(151,187,205,1)",
+	                   data: [41, 48, 24, 93, 12 ]
+	               }
+	           ]
+	       };
+
+	   	window.charmRadar1 = new Chart(document.getElementById("charmScore1").getContext("2d")).Radar(charmRadarChartData, {
+	   	    pointDot: true,
+	   	    datasetStrokeWidth: 1,
+	   	    scaleLabelsPaddingX: 15,
+	   	    scaleLabelsPaddingY: 3,
+	   	    pointLabelsPadding: 7,
+	   	    centerPointPadding: 7,
+	   	    responsive: false,
+	   	    animation: false,			
+	   	    showTooltips: false,
+	   	    scaleShowLabels: true,
+	   	    showScale: true,
+	   	    pointLabelFontFamily: "'Trebuchet MS', Arial, Helvetica, sans-serif",
+	   	    pointLabelFontSize : 11,
+	   	    //pointLabelFontColor : "rgba(100,100,100,1)",
+	   	    pointLabelFontColor : "#000000",
+	   	    scaleFontFamily: "'Trebuchet MS', Arial, Helvetica, sans-serif",
+	   	    scaleFontSize: 8,
+	   	    scaleFontColor: "#777777",
+	   	    scaleOverride: true,
+	   	    scaleSteps: 4,
+	   	    scaleStepWidth: 25,
+	   	    scaleStartValue: 0});
+	   	
+	   	
+	   	
+	   	
+	   //donut chart	
+	   var htmlBackgroundColor = $('#contaniner').css('background-color');
+	   $.jqplot('jqplot_sex', [data.sex], {
+	   	  grid: {
+	             drawGridLines: false,
+	             gridLineColor: htmlBackgroundColor,
+	             background: htmlBackgroundColor,
+	             borderColor: htmlBackgroundColor,
+	             shadow: false
+	         },
+	   	  seriesDefaults: {
+	         renderer:$.jqplot.DonutRenderer,
+	         rendererOptions:{
+	       	  padding: 18,
+	             innerDiameter : 30,
+	             sliceMargin: 4,
+	             ringMargin : 0,
+	             startAngle: 45,
+	             shadowOffset : 2,
+	             shadowDepth : 3,
+	             highlightMouseOver : false,
+	             dataLabels : 'label',
+	             dataLabelFormatString : '%s',
+	             dataLabelNudge : 50,
+	             scaleFontFamily: "'Trebuchet MS', Arial, Helvetica, sans-serif",
+	             scaleFontSize: 8,
+	             scaleFontColor: "#777777",
+	             scaleOverride: true,
+	             showDataLabels: true
+	         }
+	       }
+	     });
+	     
+	     
+	   //age chart  
+	   $.jqplot('jqplot_age', [data.age], {
+	   	  grid: {
+	           drawGridLines: false,
+	           gridLineColor: htmlBackgroundColor,
+	           background: htmlBackgroundColor,
+	           borderColor: htmlBackgroundColor,
+	           shadow: false
+	       },
+	   	  seriesDefaults: {
+	   		  renderer: $.jqplot.BarRenderer,
+	             marginTop : '20px',
+	             rendererOptions: {
+	                 padding : 50,
+	                 barPadding : 50,
+	                 barMargin : 50,
+	                 varyBarColor: true,
+	                 highlightMouseOver : false,
+	                 barWidth : 30,
+	                 marginBottom : 20
+	   	    }
+	     },
+	     axes: {
+	         xaxis: {
+	             renderer: $.jqplot.CategoryAxisRenderer,
+	             rendererOptions : {fontSize : '12px'},
+	             labelOptions : {fontSize : '12px'},
+	             tickOptions : {formatString: "%s", fontSize : '12px' }
+	         },
+	         yaxis: {show: false, showTicks : false, tickOptions : {formatString: "%s", fontSize : '12px' }}
+	     }
+	   });  
+	     
+
    };
    
    var logic=()=>{
@@ -55,13 +184,17 @@ jehong2.main=(()=>{
             );
             door='false';
             $('#comment_submit').click(()=>{
+            	if(sessionStorage.getItem('member_id')==null){
+            		location.href=sessionStorage.getItem('ctx')+"/loginpage";
+            	}
+            	
                var content=$('#content').val();
                
                $.ajax({
                   url : sessionStorage.getItem('ctx')+'/post/comment',
                   method : 'POST',
                   data : JSON.stringify({
-                        'member_id' : 'jahun',
+                        'member_id' : sessionStorage.getItem('member_id'),
                         'content' : content,
                         'movie_seq' : sessionStorage.getItem('movie_seq')
                      }),
@@ -244,7 +377,8 @@ jehong2.main=(()=>{
       init : init,
       logic : logic,
       comment : comment,
-      like : like
+      like : like,
+      drawPicture : drawPicture
    };
 })();
 

@@ -32,7 +32,6 @@ public class AjaxController {
 	@RequestMapping(value="/parameter",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> parameter(@RequestBody Map<Object,Object> param){
 		
-		
 		return param;
 	}
 	
