@@ -9,12 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="${path.js}/jahun.js"></script>
-<script src="${path.js}/soohyung.js"></script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Expires" content="-1" />
@@ -62,11 +58,21 @@
 	href="http://img.cgv.co.kr/R2014/css/slick.css" />
 <link rel="stylesheet" media="all" type="text/css"
 	href="http://img.cgv.co.kr/R2014/css/slick-theme-custom.css" />
-	
+<link rel="stylesheet" href="${path.ctx}/resources/css/base.css">
+<link rel="stylesheet" href="${path.ctx}/resources/css/member.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="${path.js}/kyungchul.js"></script>
+<script src="${path.js}/jahun.js"></script>
+<script src="${path.js}/soohyung.js"></script>
+<script src="${path.js}/sangyoon.js"></script>
+
 
 </head>
 <body>
-	<div id="content"></div>
+	<div id="content" style="height: 100%;width: 100%"></div>
 </body>
 <script>
 	jahun.main.init('${path.ctx}');

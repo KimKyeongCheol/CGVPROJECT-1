@@ -111,6 +111,13 @@ public class AjaxController {
 			return mapper.selectSome(command);
 		};
 		map.put("comment", listService.excute(command));
+		
+		command.setTable("steelcut");
+		command.setParam(param);
+		listService=(x) ->{
+			return mapper.selectSome(command);
+		};
+		map.put("steelcut", listService.excute(command));
 		return map;
 	}
 	
@@ -136,7 +143,7 @@ public class AjaxController {
 		}
 		
 		map.put("msg", result);
-		map.put("member_id", member.get("member_id"));
+		map.put("member", member);
 		return map;
 	}
 	
@@ -164,6 +171,7 @@ public class AjaxController {
 	@RequestMapping(value="/get/findId",method=RequestMethod.POST, consumes="application/json")
 	   public @ResponseBody Map<?,?> getFindId(@RequestBody Map<String,Object> param){
 	      Map<String,Object> map=new HashMap<>();
+	      Map<String,Object> member=new HashMap<>();
 	      command.setTable("findid");
 	      command.setParam(param);
 	      System.out.println(param.get("member_name"));
@@ -172,18 +180,21 @@ public class AjaxController {
 	         return mapper.selectOne(command);
 	      };
 	      String result="";
-	      if(getService.excute(command).equals("0")) {
+	      member=(Map<String, Object>) getService.excute(command);
+	      System.out.println(member);
+	      if(member==null) {
 	         result="fail";
 	      }else {
 	         result="success";
 	      }
 	      map.put("msg", result);
-	      map.put("resultId", mapper.selectOne(command).get("member_id"));
+	      map.put("member_id", member.get("member_id"));
 	      return map;
 	   }
 	   @RequestMapping(value="/get/findPw",method=RequestMethod.POST, consumes="application/json")
 	   public @ResponseBody Map<?,?> getFindPw(@RequestBody Map<String,Object> param){
 	      Map<String,Object> map=new HashMap<>();
+	      Map<String,Object> member=new HashMap<>();
 	      command.setTable("findpw");
 	      command.setParam(param);      
 	      System.out.println(param.get("member_id"));
@@ -194,36 +205,19 @@ public class AjaxController {
 	         return mapper.selectOne(command);
 	      };
 	      String result="";
-	      if(getService.excute(command).equals("0")) {
+	      member=(Map<String, Object>) getService.excute(command);
+	      System.out.println(member);
+	      if(member==null) {
 	         result="fail";
 	      }else {
 	         result="success";
 	      }
 	      map.put("msg", result);
-	      map.put("findPw", mapper.selectOne(command).get("pass"));
-	      map.put("findId", mapper.selectOne(command).get("id"));
+	      map.put("findPw", member.get("pass"));
+	      map.put("findId", member.get("member_id"));
 	      return map;
 	   }
-	   @RequestMapping(value="/get/updatePw",method=RequestMethod.POST, consumes="application/json")
-	   public @ResponseBody Map<?,?> updatePw(@RequestBody Map<String,Object> param){
-	      Map<String,Object> map=new HashMap<>();
-	      command.setTable("updatePw");
-	      command.setParam(param);      
-	      System.out.println(param.get("pass"));
-	      System.out.println(param.get("id"));
-	      System.out.println("결과값 : "+String.valueOf(mapper.update(command)));
-	      putService=(x) ->{         
-	         return mapper.update(command);
-	      };
-	      String result="";
-	      if(putService.excute(command)==0) {
-	         result="fail";
-	      }else {
-	         result="success";
-	      }
-	      map.put("msg", result);
-	      return map;
-	   }
+	  
 	   
 	   @RequestMapping(value="/put/like",method=RequestMethod.POST, consumes="application/json")
 	   public @ResponseBody Map<?,?> putLike(@RequestBody Map<String,Object> param){
@@ -259,6 +253,7 @@ public class AjaxController {
 	         result="impossible";
 	      }
 	      map.put("msg", result);
+	      map.put("member", getService.excute(command));
 	      return map;
 	   }
 	   
@@ -282,4 +277,41 @@ public class AjaxController {
 			map.put("msg", result);
 			return map;
 		}
+	   
+	   @RequestMapping(value="/put/update",method=RequestMethod.POST)
+		public @ResponseBody Map<?,?> postUpdate(@RequestBody Map<String,Object> param){
+			
+			Map<String,Object> map=new HashMap<>();
+			command.setTable("update");
+			command.setParam(param);
+			putService=(x) ->{
+				return mapper.update(command);
+			};
+			String result="";
+			
+			
+			if(putService.excute(command)==0) {
+				result="fail";
+			}else {
+				result="success";
+			}
+			map.put("msg", result);
+			return map;
+		}
+	   
+	   @RequestMapping(value="/get/myreservation",method=RequestMethod.POST)
+		public @ResponseBody Map<?,?> getMyreservation(@RequestBody Map<String,Object> param){
+			Map<String,Object> map=new HashMap<>();
+			command.setTable("myreservation");
+			command.setParam(param);
+			listService=(x) ->{
+				return mapper.selectSome(command);
+			};
+			map.put("myreservation", listService.excute(command));
+			System.out.println(map);
+			
+			return map;
+		}
+	   
+	   
 }

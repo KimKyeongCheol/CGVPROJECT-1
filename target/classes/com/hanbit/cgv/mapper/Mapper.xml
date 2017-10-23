@@ -15,6 +15,12 @@
 			<when test="table eq 'comment'">
 				select c.*,m.profile from comment c join member m on c.member_id=m.member_id where c.movie_seq=#{param.movie_seq} order by comment_seq desc
 			</when>
+			<when test="table eq 'steelcut'">
+				select * from steelcut where movie_seq=#{param.movie_seq}
+			</when>
+			<when test="table eq 'myreservation'">
+select r.*,p.poster from reservation r join movie_picture p on r.movie_seq=p.movie_seq where r.member_id=#{param.member_id}
+			</when>
 			<otherwise>
 				select * from ${table}
 			</otherwise>
@@ -39,6 +45,7 @@
 		<when test="table eq 'idCheck'">
             select * from member where member_id=#{param.member_id}
          </when> 
+         
 			<otherwise>
 				select * from ${table}
 			</otherwise>
@@ -63,8 +70,8 @@
 	<update id="update" parameterType="com.hanbit.cgv.command.Command">
 		
 		<choose>
-		<when test="table eq 'updatePw'">
-       		update member set pass=#{param.pass} where member_id=#{param.id}
+		<when test="table eq 'update'">
+       		update member set name=#{param.name}, email=#{param.email}, phone=#{param.phone}, address=#{param.address}, profile=#{param.profile}, zipcode=#{param.zipcode}, pass=#{param.pass} where member_id=#{param.member_id}
 		</when>
 		<when test="table eq 'like'">
        		update comment set comment_like=#{param.comment_like} where comment_seq=#{param.comment_seq}

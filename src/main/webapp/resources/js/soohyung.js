@@ -1,12 +1,86 @@
 var soohyung=soohyung || {};
 
+var compUI={
+	      label : ()=>{return $('<label/>')},
+	      btn : (x,y)=>{
+	         return $('<button/>',{id : x, type : y}
+	         )},      
+	      span : ()=>{return $('<span/>')},
+	      br : ()=> {return '<br/>'},
+	      p : ()=>{return $('<p/>')},
+	      h3 : ()=>{
+	         return $('<h3/>');
+	      },
+	      
+	      image : (x,y)=>{
+	            return $('<img/>',
+	            {   
+	               id : x,
+	               src : y
+	            }); 
+	         },
+	      input : (x,y)=>{
+	         return $('<input/>',
+	         {
+	            id : x,
+	            type : y
+	         });
+	      },
+	      h1 : x => {
+	         return $('<h1/>', 
+	               {
+	            id : x
+	         });
+	      },
+	      span : x => {
+	         return $('<span/>', 
+	               {
+	            id : x
+	         });
+	      },
+	      div : x => {
+	         return $('<div/>', 
+	               {
+	            id : x
+	         });
+	      },
+	      iTxt : x => {
+	         return $('<input/>', 
+	               {
+	            id : x, type : 'text'
+	         });
+	      },
+	      aBtn : x => {
+	         return $('<a>',
+	               {
+	            href : '#', role : 'button', id : x
+	         });
+	      },
+	      iBtn : x => {
+	         return $('<input/>', 
+	               {
+	            id : x, type : 'button'
+	         });
+	      },
+	      tag : (x,y) => {
+	         return $('<'+x+'/>',{
+	            id:y
+	         });
+	      },
+	      noIdTag : (x) => {
+	         return $('<'+x+'/>')
+	      },
+	      classTag : (x,y)=> {
+	         return $('<'+x+'/>',{
+	            class:y
+	         });
+	      }
+	   }
+
 soohyung.main=(()=>{
    var init=(ctx)=>{
       soohyung.session.init(ctx);
-    /*location.href=ctx+'/login';*/
-      soohyung.template.loginUI();
      soohyung.logic.login();  
-     /* location.href=ctx+'/join'*/
    };
    return {
       init : init,
@@ -20,36 +94,8 @@ soohyung.logic=(()=>{
          alert('이름 : '+$('#input_member_name').val());
       });
    };
-   /*compUI.span().text('로그인').appendTo*/
-   /*compUI.btn('login','button').attr({'title':'로그인'}).appendTo($('#login_btn'));*/
    var login=()=>{
-      compUI.p().html('귀하의 정보보호를 위해 실제 사용자가'+compUI.br()+'요청을 보내고 있는지'+compUI.br()+'확인하는 절차를 거치고 있습니다.').css({'font-size':'12px'}).appendTo($('.txt_wrap'));
-      compUI.span().text('로그인').css({
-            'display': 'block',
-            'width': '258px',
-            'height': '36px',
-            'border': '1px solid #f07469',
-            'color': '#f2f0e5',
-            'font-size': '15px',
-            'font-family':'NanumBarunGothicBold'
-      }).
-      appendTo(
-            compUI.btn('login','button').
-            css({
-               'width': '264px',
-                'height': '42px',
-                  'line-height': '37px',
-                  'left': '0',
-                  'position': 'static',
-                  'margin-top': '5px',
-                  'padding': '2px',
-                  'background': '#e71a0f',
-                  'text-align': 'center'
-            }).appendTo($('#login_btn')));
-      
-      compUI.btn('join_btn','button').text('회원가입').appendTo($('.login-option'));
-      compUI.btn('findId_btn','button').text('아이디 찾기').appendTo($('.login-option'));
-      compUI.btn('findPw_btn','button').text('비밀번호 찾기').appendTo($('.login-option'));
+     
       
       /*로그인*/
       $('#login_btn').click(()=>{
@@ -69,7 +115,7 @@ soohyung.logic=(()=>{
               if(d.msg=='success'){
                  alert('로그인 성공 !!');
                  $('#content').empty();
-                 sessionStorage.setItem('member_id',d.member_id);
+                 sessionStorage.setItem('member_id',d.member.member_id);
                  location.href=sessionStorage.getItem('ctx')+"/home";
                  
               }else{
@@ -88,6 +134,7 @@ soohyung.logic=(()=>{
       $('#findId_btn').click(()=>{
          alert('아이디 찾기');
          soohyung.template.findIdUI();
+         
          $('#name').before(compUI.label().text('고객님의 이름을 입력하세요'));
          $('#phone').before(compUI.label().text('고객님의 휴대폰 번호를 입력하세요'));
          compUI.input('phone_no2').css({'width':'70px','margin-left':'10px','margin-right':'-10px'}).appendTo(compUI.span('phone_no1_span').appendTo($('#first_lab')));
@@ -136,13 +183,11 @@ soohyung.logic=(()=>{
                    if(d.msg=='success'){
                            alert('아이디 찾기 성공 !!');
                            alert('아이디 찾기 결과 : '+d.msg);
-                           soohyung.template.resultIdUI();
-                           $('#idModal').modal({backdrop: 'static'});
-                           $('#resultId').text(d.resultId);
-                           $('#idModal').on('hidden.bs.modal',()=>{
-                              $('#content').empty();
-                              soohyung.main.init(sessionStorage.getItem('ctx'));
-                           });
+                           $('#login_content').empty();
+                           $('#login_content').append(
+      '<div class="sect-login"><ul class="tab-menu-round"><li class="on"><a href="/user/login/">로그인</a></li></ul><div class="box-login login_1408"><h3 class="hidden">회원로그인</h3><form id="form2_capcha"method="post"action="#"novalidate="novalidate"onsubmit="return false"style="display:block;"><fieldset><legend>회원로그인</legend><div id="login_txt_wrap"class="txt_wrap"><h3></h3><!--<p>정보보호를위해아이디,비밀번호와함께<br/>자동입력방지문자를입력하셔야합니다.</p>--><p>귀하의정보보호를위해실제사용자가<br>요청을보내고있는지<br>확인하는절차를거치고있습니다.</p></div><div id="login-form"class="login"><input type="text"title="아이디"id="txtUserId"name="txtUserId"data-title="아이디를 "data-message="입력하세요."required="required"value=""><input type="password"title="패스워드"id="txtPwd1"name="txtPwd1"data-title="패스워드를 "data-message="입력하세요."required="required"></div><button type="submit"id="submit"title="로그인"><span id="login_btn">로그인</span></button><div class="login-option"><button id="join">회원가입하기</button><button id="findId_btn">아이디찾기</button><button id="findPw_btn">비밀번호찾기</button></div></fieldset></form></div></div><div class="sect-loginad"style="background:#d2cbbe;"><div><iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/sub@Login_bigbanner"width="350"height="300"title=""frameborder="0"scrolling="no"marginwidth="0"marginheight="0"name="Login_bigbanner"id="Login_bigbanner"></iframe></div></div>'	   
+                           );
+                           $('#txtUserId').val(d.member_id);
                         }else{
                            alert('로그인 실패 !!');
                            $('#txtUserId').val("");
@@ -208,42 +253,14 @@ soohyung.logic=(()=>{
                }),
                contentType : 'application/json',
                success : d =>{
-                  alert('비밀번호 수정으로 이동합니다');
-                  soohyung.template.updatePwUI();
-                  $('#updateModal').modal()
-                 $('#move_login').click(()=>{
-                    var pass=$('#updatePw').val();
-                    var confirmPass=$('#confirmPw').val();
-                    var confirmId =id;
-                    alert('id : '+confirmId+' 비번: '+pass+' 비번확인 :'+confirmPass);
-                    if(pass==confirmPass){                       
-                       $.ajax({
-                          url : sessionStorage.getItem('ctx')+'/get/updatePw',
-                          method : 'POST',
-                          data : JSON.stringify({
-                             pass : pass,
-                             id : confirmId
-                          }),
-                          contentType : 'application/json',
-                          success : d => {                            
-                             $('#updateModal').on('hidden.bs.modal',()=>{
-                                alert('비밀번호 수정이 완료되었습니다.');
-                                     $('#content').empty();                                 
-                                     soohyung.main.init(sessionStorage.getItem('ctx'));                                 
-                             });
-                          },
-                          error : (x,s,m)=>{
-                             alert('오류발생 : '+m);
-                          }
-                       });
-                    }else{
-                       alert('비밀번호를 확인해주세요');
-                    };                    
-                    
-                 });
+            	   	
+            		   alert(d.findId);
+            		   sessionStorage.setItem('member_id',d.findId);
+            		   location.href=sessionStorage.getItem('ctx')+"/update";
                },
                error : (x,s,m)=>{
                   alert('오류발생 : '+m);
+                  location.href=sessionStorage.getItem('ctx')+"/loginpage";
                }             
             });
              
@@ -251,7 +268,7 @@ soohyung.logic=(()=>{
       });
       
       /*회원가입*/
-      $('#join_btn').click(()=>{
+      $('#join').click(()=>{
          location.href=sessionStorage.getItem('ctx')+'/join';
       });
    };
@@ -299,7 +316,7 @@ var loginUI=()=>{
          +'<div id="contents" class="">'
          +'<!--Contents Start-->'
          +'<!--실컨텐츠시작-->'
-         +'<div class="wrap-login">'
+         +'<div class="wrap-login" id="login_content">'
          +'<div class="sect-login">'
          +'<ul class="tab-menu-round">'
          +'<li class="on">로그인</li>'
@@ -345,8 +362,8 @@ var loginUI=()=>{
    };   
    var findIdUI=()=>{
       //아이디 찾기 
-      $('#content').empty();
-      $('#content').append(
+      $('#login_content').empty();
+      $('#login_content').append(
       '<div class="skipnaiv">'
       +'<a href="#contents" id="skipHeader">메인컨텐츠바로가기</a>'
       +'</div>'
@@ -403,14 +420,14 @@ var loginUI=()=>{
    };
    var resultIdUI=()=>{
       //아이디 결과 
-      $('#content').append(
+      $('#login_content').append(
                '<!--Modal--><div class="modal fade"id="idModal"role="dialog"><div class="modal-dialog"><!--Modal content--><div class="modal-content"><div class="modal-header"style="padding:35px 50px;"><button type="button"class="close"data-dismiss="modal">&times;</button><h4><span class="glyphicon glyphicon-lock"></span>결과</h4></div><div class="modal-body"style="padding:40px 50px;"><form role="form"><div class="form-group"><label for="usrname"><span class="glyphicon glyphicon-user"></span>아이디</label></br><span id="resultId"></span></div><div class="form-group"><label for="psw"></div><button id="move_login"type="button"class="btn btn-success btn-block" data-dismiss="modal">확인</button></form></div>'      
          );
    };
    var findPwUI=()=>{
       //패스워드 찾기
-      $('#content').empty();
-      $('#content').append(
+      $('#login_content').empty();
+      $('#login_content').append(
       '<div class="skipnaiv">'
       +'<a href="#contents" id="skipHeader">메인컨텐츠바로가기</a>'
       +'</div>'
@@ -483,82 +500,7 @@ var loginUI=()=>{
       }
 })();
 
-var compUI={
-      label : ()=>{return $('<label/>')},
-      btn : (x,y)=>{
-         return $('<button/>',{id : x, type : y}
-         )},      
-      span : ()=>{return $('<span/>')},
-      br : ()=> {return '<br/>'},
-      p : ()=>{return $('<p/>')},
-      h3 : ()=>{
-         return $('<h3/>');
-      },
-      
-      image : (x,y)=>{
-            return $('<img/>',
-            {   
-               id : x,
-               src : y
-            }); 
-         },
-      input : (x,y)=>{
-         return $('<input/>',
-         {
-            id : x,
-            type : y
-         });
-      },
-      h1 : x => {
-         return $('<h1/>', 
-               {
-            id : x
-         });
-      },
-      span : x => {
-         return $('<span/>', 
-               {
-            id : x
-         });
-      },
-      div : x => {
-         return $('<div/>', 
-               {
-            id : x
-         });
-      },
-      iTxt : x => {
-         return $('<input/>', 
-               {
-            id : x, type : 'text'
-         });
-      },
-      aBtn : x => {
-         return $('<a>',
-               {
-            href : '#', role : 'button', id : x
-         });
-      },
-      iBtn : x => {
-         return $('<input/>', 
-               {
-            id : x, type : 'button'
-         });
-      },
-      tag : (x,y) => {
-         return $('<'+x+'/>',{
-            id:y
-         });
-      },
-      noIdTag : (x) => {
-         return $('<'+x+'/>')
-      },
-      classTag : (x,y)=> {
-         return $('<'+x+'/>',{
-            class:y
-         });
-      }
-   }
+
 
 
        

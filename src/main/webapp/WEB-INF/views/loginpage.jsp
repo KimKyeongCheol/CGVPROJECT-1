@@ -45,11 +45,10 @@
 <link rel="stylesheet" media="all" type="text/css" href="http://img.cgv.co.kr/R2014/css/phototicket/phototicket.css" />
 <link rel="stylesheet" media="all" type="text/css" href="http://img.cgv.co.kr/R2014/css/slick.css" />
 <link rel="stylesheet" media="all" type="text/css" href="http://img.cgv.co.kr/R2014/css/slick-theme-custom.css" />
-<script src="${path.js}/soohyung.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${path.ctx}/resources/css/soohyung.css"/> 
-<!-- 각페이지 Header Start--> 
-<!--/각페이지 Header End-->    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="${path.js}/soohyung.js"></script>
+   
 </head>
 <html>
 <body class="">
@@ -80,7 +79,7 @@
 <div id="contents" class="">
 <!-- Contents Start -->
 <!-- 실컨텐츠 시작 -->
-<div class="wrap-login">
+<div class="wrap-login" id="login_content">
 <div class="sect-login">
 <ul class="tab-menu-round">
 <li class="on">
@@ -106,8 +105,8 @@
 <button type="submit" id="submit" title="로그인"><span id="login_btn">로그인</span></button>                                    
 <div class="login-option">
 <button id="join">회원가입하기</button>
-<button id="find_id">아이디 찾기</button>
-<button id="find_pw">비밀번호 찾기</button>
+<button id="findId_btn">아이디 찾기</button>
+<button id="findPw_btn">비밀번호 찾기</button>
 </div>
 </fieldset>
 </form>
@@ -134,7 +133,7 @@
 </div>
 <!-- /Contaniner -->   
 <script>
-soohyung.logic.login('${path.ctx}');
+soohyung.main.init('${path.ctx}');
 </script>
 </body>
 </html>

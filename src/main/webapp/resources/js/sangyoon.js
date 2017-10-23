@@ -904,23 +904,23 @@ var reservationUI = {
 		+					'<div class="info payment-ticket" style="margin-left:10px;">'
 		+						'<div class="row payment-adult">'
 		+							'<span class="header">일반</span>'
-		+							'<span class="data"><span class="price"></span>원 x <span class="quantity"></span></span>'
+		+							'<span class="data"><span class="price" id="adultPrice"></span>원 <span class="quantity"></span></span>'
 		+						'</div>'
 		+						'<div class="row payment-youth">'
 		+							'<span class="header" style="width:45px;">청소년</span>'
-		+							'<span class="data"><span class="price"></span>원 x <span class="quantity"></span></span>'
+		+							'<span class="data"><span class="price" id="youthPrice"></span>원 <span class="quantity"></span></span>'
 		+						'</div>'
 		+						'<div class="row payment-child">'
 		+							'<span class="header" style="width:45px;">어린이</span>'
-		+							'<span class="data"><span class="price"></span>원 x <span class="quantity"></span></span>'
+		+							'<span class="data"><span class="price" id="childPrice"></span>원 <span class="quantity"></span></span>'
 		+						'</div>						'
 		+						'<div class="row payment-special">'
 		+							'<span class="header">우대</span>'
-		+							'<span class="data"><span class="price"></span>원 x <span class="quantity"></span></span>'
+		+							'<span class="data"><span class="price"></span>원 <span class="quantity"></span></span>'
 		+						'</div>'
 		+						'<div class="row payment-final">'
 		+							'<span class="header">총금액</span>'
-		+							'<span class="data"><span class="price">0</span><span class="won">원</span></span>'
+		+							'<span class="data"><span class="price" id="totalPrice">0</span><span class="won">원</span></span>'
 		+						'</div>'
 		+					'</div>'
 		+					'<div class="info path">'
@@ -1178,13 +1178,13 @@ lsy.common=(()=> {
 			method : 'POST',
 			contentType : 'application/json',
 			success : d=>{
-				
 				for (var i=0;i<d.movie.length;i++) {
 					$('#movie_list_foreach').append(
 								'<li onclick="lsy.movieDetail.init('+i+');" style="cursor: pointer;" class="movie-list-detail'+i+'">'
 								+	'<span class="movie-icon">'
 								+		'<img src="'+$$("i")+'/'+d.movie[i].age_limit+'.PNG" alt="" />'
 								+	'<input id="age_limit'+i+'" type="hidden" value="'+d.movie[i].age_limit+'"/>'
+								+	'<input id="movie_seq'+i+'" type="hidden" value="'+d.movie[i].movie_seq+'"/>'
 								+	'</span>'
 								+	'<span style="font-weight: bold;" class="movie_text'+i+'">'+d.movie[i].name+'</span>'
 								+'</li>'
@@ -1237,6 +1237,7 @@ lsy.movieDetail=(()=> {
 	};
 	var onCreate=x=>{
 		setContentView();
+		sessionStorage.setItem('movieSeq',$('#movie_seq'+x).val());
 		$('#content-scroll-seoul>li').removeClass('selected').css({'color':'black'});
 		$('#row_date_detail').text('');
 		$('#row_time_detail').text('');
@@ -1258,7 +1259,7 @@ lsy.movieDetail=(()=> {
 			$('#movie_info_text').css({'font-weight':'bold','color':'#cccccc','cursor':'pointer'});
 			$('#movie_info_text').after(compUI.tag('div','movie_rating_box'));
 			$('#movie_rating_box').append(compUI.tag('span','movie_rating'));
-			$('#movie_rating_box').css({'padding-top':'30px'})
+			$('#movie_rating_box').css({'padding-top':'30px'});
 			$('#movie_rating').text($('#age_limit'+x).val()+'세 관람가').css({'font-weight':'bold'});
 			setTimeout("lsy.btnOn.init()",100);
 	};
@@ -1319,7 +1320,7 @@ lsy.btnOn=(()=> {
 											.css({'font-size':'17px','font-weight':'bold','line-height':'25px'})
 											.text(d.schedule[j].name))));
 											$('#date_select_detail_'+i+'_'+j+'>a').append(compUI.classTag('span','count'+j)
-											.text('30석').css({'line-height':'30px','padding-left':'5px','padding-right':'7px'}));
+											.text('30').css({'line-height':'30px','padding-left':'5px','padding-right':'7px'}));
 							}
 						}
 					},
@@ -1382,19 +1383,16 @@ lsy.seatSelect=(()=> {
 
 			$('#cgvwrap').remove();
 			$('body').append(compUI.div('cgvwrap').append(reservationUI.selectSeat()));
-			// 월요일 / 백그라운드 그레이/ 온클릭 논 구현하기
-			// background-color: rgba(0, 0, 0, 0.7);
 			$('#seat_minimap_nano').append(compUI.div('background').css({'height':'350px','width':'700px','margin':'0 auto'}));
 			
-	/*		$('#screen_container').addClass('background');
-			if ($('#screen_container').hasClass('background')) {
-				$('#screen_container').css({'background-color':'rgba(0, 0, 0, 0.15)'});
-			}*/
+			alert('선택된 영화 시퀀스 값은' + sessionStorage.getItem('movieSeq'));
 			
+
 			/*좌석 선택 표 부분*/
 			$('#seats_list').append(compUI.tag('ul','seats_list_ul').css({'height':'230px','width':'110px','margin':'0 auto','text-align':'center','display':'-webkit-inline-box'}));
 			$('#seats_list').css({'text-align':'center'});
 			$('#seats_list_ul').before(compUI.image('abcdef',$$('i')+'/ABCDEF.PNG').css({'width':'20px','height':'120px'}));
+			
 			for (var i=0;i<30;i++) {
 				j=i+1;
 				$('#seats_list_ul')
@@ -1485,16 +1483,18 @@ lsy.seatSelect=(()=> {
 	};
 	return {init:init};
 })();
-var total = 0;
+
+var total=0;
+var adultCount;
+var youthCount;
+var childCount;
 lsy.seatCount=(()=> {
 	var init = (x,y)=> {
 		onCreate(x,y);
 		if (x==0) {
 			total=0;
 		}
-		else {
-			total=total+x;
-		}
+		alert('토탈은'+total);
 	};
 	var onCreate = (x,y)=> {
 		setContentView();
@@ -1504,9 +1504,6 @@ lsy.seatCount=(()=> {
 		var youthMsg;
 		var childMsg;
 		/*인원수체크*/
-		var adultCount;
-		var youthCount;
-		var childCount;
 		$('#user-select-info').append(compUI.input('adultCount','hidden'));
 		$('#user-select-info').append(compUI.input('youthCount','hidden'));
 		$('#user-select-info').append(compUI.input('childCount','hidden'));
@@ -1531,7 +1528,46 @@ lsy.seatCount=(()=> {
 					total = parseInt(adultCount)+parseInt(youthCount)+parseInt(childCount);
 				}
 			}
+			else if ($('#childCount').val()!=="") {
+				total = parseInt(adultCount)+parseInt(childCount);
+				if ($('#youthCount').val()!=="") {
+					total = parseInt(adultCount)+parseInt(youthCount)+parseInt(childCount);
+				}
+			}
 		}
+		
+		if ($('#youthCount').val()!=="") {
+			total = parseInt(youthCount);
+			if ($('#childCount').val()!=="") {
+				total = parseInt(childCount)+parseInt(youthCount);
+				if ($('#adultCount').val()!=="") {
+					total = parseInt(adultCount)+parseInt(youthCount)+parseInt(childCount);
+				}
+			}
+			else if ($('#adultCount').val()!=="") {
+				total = parseInt(adultCount)+parseInt(youthCount);
+				if ($('#childCount').val()!=="") {
+					total = parseInt(adultCount)+parseInt(youthCount)+parseInt(childCount);
+				}
+			}
+		}
+
+		if ($('#childCount').val()!=="") {
+			total = parseInt(childCount);
+			if ($('#adultCount').val()!=="") {
+				total = parseInt(childCount)+parseInt(adultCount);
+				if ($('#youthCount').val()!=="") {
+					total = parseInt(adultCount)+parseInt(youthCount)+parseInt(childCount);
+				}
+			}
+			else if ($('#youthCount').val()!=="") {
+				total = parseInt(childCount)+parseInt(youthCount);
+				if ($('#adultCount').val()!=="") {
+					total = parseInt(adultCount)+parseInt(youthCount)+parseInt(childCount);
+				}
+			}
+		}
+		
 		if (total==0) {
 			$('#background').css({'background-color':'rgba(0, 0, 0, 0.15)'});
 			$('#background').addClass('mouse_block');
@@ -1546,7 +1582,6 @@ lsy.seatCount=(()=> {
 			return false;
 		}
 		/*인원수체크 끝*/
-		
 		if (y==="일반") {
 			age = "adult";
 			adultMsg = y + ' ' + x + '명';
@@ -1659,15 +1694,17 @@ lsy.selectDetail=(()=>{
 			count=0;
 			return false;
 		}
+		alert('현재 카운트는'+count);
 		if (count>total) {
 			alert('좌석을 더이상 선택할수 없습니다');
 			return false;
 		}
-		if (count == total) {
-			$('#tnb_step_btn_right').addClass('btn-right on');
-		}
-		else {
-			$('#tnb_step_btn_right').removeClass('btn-right on');			
+		$('#'+x+'>span>input').val('1');
+		if ($('#'+x+'>span>input').val()==="1") {
+			$('#'+x).addClass('selected');
+			$('#'+x).attr('onclick','false');
+			$('#'+x).css({'background-color':'#ad1712'});
+			$('#'+x+'>span>a').css({'color':'white'});
 		}
 		if (x > 0 && x < 6) {
 			x = 'A'+$('#'+x+'>span>a').text();
@@ -1688,11 +1725,22 @@ lsy.selectDetail=(()=>{
 			x = 'F'+$('#'+x+'>span>a').text();
 		}
 		
-		if ($('#seat_number_list').text()===x) {
-			alert('다른 좌석을 선택해 주세요');
-			count = count-1;
-			return false;
+		if (count == total) {
+			$('#tnb_step_btn_right').addClass('btn-right on');
+			$('#adultPrice').text(adultCount * 9000);
+			$('#youthPrice').text(youthCount * 7000);
+			$('#childPrice').text(childCount * 5000);
+			$('#totalPrice').text(adultCount * 9000+youthCount * 7000+childCount * 5000);
 		}
+		else {
+			$('#tnb_step_btn_right').removeClass('btn-right on');			
+			$('#tnb_step_btn_right').addClass('btn-right');
+		}
+		
+		if ($('#tnb_step_btn_right').hasClass('btn-right on')) {
+			$('#tnb_step_btn_right').attr('onclick','lsy.pay.init()');
+		}
+
 		if ($('#seat_number_list').text()!=="") {
 			var text = $('#seat_number_list').text();
 			$('#seat_number_list').text(text +','+x);
@@ -1700,12 +1748,33 @@ lsy.selectDetail=(()=>{
 		else {
 			$('#seat_number_list').text(x);
 		}
+
 	}
 	var onCreate = ()=> {
 		setContentView();
 	}
 	var setContentView=()=> {
 		
+	}
+	return {init:init}
+})();
+
+lsy.pay = (()=> {
+	var init=()=> {
+		$.ajax({
+			url : $$('x')+'/post/reservation2',
+			method : 'POST',
+			contentType : 'application/json',
+			data : JSON.stringify({
+				'movieSeq' : sessionStorage.getItem('movieSeq')
+			}),
+			success : d => {
+				alert('에이잭스 통신 성공 : '+d.msg);
+			},
+			error : (x,s,m)=>{
+				alert('에러발생');
+			}
+		});
 	}
 	return {init:init}
 })();

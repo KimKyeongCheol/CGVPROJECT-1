@@ -1,5 +1,5 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   <%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,12 +7,9 @@
 <head>
 <title>title</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="${path.js}/jahun.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -22,48 +19,71 @@
 <meta http-equiv="imagetoolbar" content="no" />
 <meta name="viewport" content="width=1024" />
 <meta name="keywords"
-	content="CGV, 시지브이, 영화관, 극장, 영화, 티켓, 박스오피스, 극장, Movie, Theater, Cinema, Cgv, cgv, 예매, 상영작" />
+   content="CGV, 시지브이, 영화관, 극장, 영화, 티켓, 박스오피스, 극장, Movie, Theater, Cinema, Cgv, cgv, 예매, 상영작" />
 <meta name="description"
-	content="CGV는 선진화된 관람문화와 최고의 서비스로 고객에게 잊을 수 없는 감동을 선사합니다. CGV홈페이지를 통해 영화 예매뿐만 아니라 그 이상의 서비스와 감동을 전달하고, 다양한 즐거움과 특별한 경험을 제공하고자 합니다." />
+   content="CGV는 선진화된 관람문화와 최고의 서비스로 고객에게 잊을 수 없는 감동을 선사합니다. CGV홈페이지를 통해 영화 예매뿐만 아니라 그 이상의 서비스와 감동을 전달하고, 다양한 즐거움과 특별한 경험을 제공하고자 합니다." />
 <meta property="og:site_name" content="영화 그 이상의 감동. CGV" />
 <meta id="ctl00_og_title" property="og:title" content="영화 그 이상의 감동. CGV"></meta>
 <meta id="ctl00_og_image" property="og:image"
-	content="http://img.cgv.co.kr/common/cgv_200x200.jpg"></meta>
+   content="http://img.cgv.co.kr/common/cgv_200x200.jpg"></meta>
 <link rel="alternate" href="http://m.cgv.co.kr" />
 <link rel="shortcut icon"
-	href="http://img.cgv.co.kr/theater_img/favicon.ico" type="image/x-icon" />
+   href="http://img.cgv.co.kr/theater_img/favicon.ico" type="image/x-icon" />
 <title id="ctl00_headerTitle">영화그이상의감동.CGV</title>
 <link rel="shortcut icon" type="image/x-icon"
-	href="http://img.cgv.co.kr/R2014/images/favicon.ico" />
+   href="http://img.cgv.co.kr/R2014/images/favicon.ico" />
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/reset.css" />
+   href="http://img.cgv.co.kr/R2014/css/reset.css" />
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/layout.css" />
+   href="http://img.cgv.co.kr/R2014/css/layout.css" />
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/module.css" />
+   href="http://img.cgv.co.kr/R2014/css/module.css" />
 <!--<link rel="stylesheet"media="all"type="text/css"href="http://img.cgv.co.kr/R2014/css/module_170718.css"/>-->
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/common.css" />
+   href="http://img.cgv.co.kr/R2014/css/common.css" />
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/content.css" />
+   href="http://img.cgv.co.kr/R2014/css/content.css" />
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/eggupdate.css" />
+   href="http://img.cgv.co.kr/R2014/css/eggupdate.css" />
 <link rel="stylesheet" media="print" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/print.css" />
+   href="http://img.cgv.co.kr/R2014/css/print.css" />
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/content_prepaid_card_170421.css" />
+   href="http://img.cgv.co.kr/R2014/css/content_prepaid_card_170421.css" />
 <link rel="stylesheet" type="text/css"
-	href="http://img.cgv.co.kr/R2014/js/jquery.ui/smoothness/jquery-ui-1.10.4.custom.min.css" />
+   href="http://img.cgv.co.kr/R2014/js/jquery.ui/smoothness/jquery-ui-1.10.4.custom.min.css" />
 
 <link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/phototicket/phototicket.css" />
-<link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/slick.css" />
-<link rel="stylesheet" media="all" type="text/css"
-	href="http://img.cgv.co.kr/R2014/css/slick-theme-custom.css" />
-	
+   href="http://img.cgv.co.kr/R2014/css/phototicket/phototicket.css" />
+   
+   
+
+
+
+
+
+<!-- chartJS -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script> -->
+
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="http://img.cgv.co.kr/R2014/js/excanvas.min.js"></script><![endif]-->
+<link href="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jquery.jqplot.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jquery.jqplot.min.js"></script>
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jqplot.donutRenderer.min.js"></script>
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.jqplot/jqplot.pointLabels.min.js"></script>
+
+<script type="text/javascript" src="http://img.cgv.co.kr/R2014/js/Chart.custom.js"></script><!-- 평점 개편 스파이더 차트 js 로딩 추가. mwpark_RR2015 -->
+
+
+
+   
 <script src="${path.js}/jehong2.js"></script>
-	
+   
 
 </head>
 <body>
@@ -83,8 +103,8 @@
             </div>
         </div>
 
-		<!-- Contents Area -->
-		<div id="contents" class="">
+      <!-- Contents Area -->
+      <div id="contents" class="">
 <!-- 실컨텐츠 시작 -->
 <div class="wrap-movie-detail" id="select_main">
 
@@ -113,9 +133,9 @@
             <span class="egg great"></span>
             
             
-				<span class="percent" id="score_percent"></span>
+            <span class="percent" id="score_percent"></span>
                                      
-			</div>
+         </div>
             <!--
             <div class="point">
                 <em>93.0</em>
@@ -126,9 +146,9 @@
             </div>
             <!-- 떨어지는 얘 이전 요소에 class=on을 넣는다 -->
         <div class="spec">
-			<dl id="staff"></dl>
-			<dl id="genre"></dl>
-			<dl id="release_date"></dl>            
+         <dl id="staff"></dl>
+         <dl id="genre"></dl>
+         <dl id="release_date"></dl>            
         </div>
        
         <span class="like">
@@ -157,28 +177,35 @@
                 <li><a href="/movies/detail-view/trailer.aspx?midx=79949#menu">트레일러</a></li>
                 <li><a href="/movies/detail-view/still-cut.aspx?midx=79949#menu">스틸컷</a></li>
                
-                <!--<li><a href="/movies/detail-view/point-review.aspx?midx=79949#menu">평점/리뷰</a></li>-->
-                <li><a href="/movies/detail-view/?midx=79949#commentReg">평점/리뷰</a></li>
-               
-                <li class="last"><a href="/movies/detail-view/show-times.aspx?midx=79949#menu">상영시간표</a></li>
+                <li data-target="heading-new"><a>평점/리뷰</a></li>
+                <li class="last" data-target=".heading-new"><a href="/movies/detail-view/show-times.aspx?midx=79949#menu">상영시간표</a></li>
             </ul>
+            
+           
+            
+            
+            
+            
+            
             <div class="sect-story-movie">
-               <textarea rows="30" cols="90" id="introduce_text"></textarea>
+               <textarea rows="15" cols="90" id="introduce_text" readonly="readonly" style="background-color:transparent; border:0; outline: 0;font-size:15px" ></textarea>
                 
             </div>
+            
+            
             <div id="ctl00_PlaceHolderContent_Section_Chart" class="sect-graph">
                 <ul class="graph">
-                    <li>
+                    <li style="height:260px">
                         <strong>매력포인트</strong>
-						<div class="radar-graph" id="chart1">
-							<!-- <canvas id="charmScore1" width="100" height="100"></canvas> -->
-							<!-- ie8 이하 미지원시
-							<div class="sorry">
-								<p>&lsquo;이 영화의 매력포인트&rsquo; 차트는<br />익스플로러9 이상에서 지원 가능합니다.</p>
-							</div>
+                  <div class="radar-graph" id="chart1">
+                     <!-- <canvas id="charmScore1" width="100" height="100"></canvas> -->
+                     <!-- ie8 이하 미지원시
+                     <div class="sorry">
+                        <p>&lsquo;이 영화의 매력포인트&rsquo; 차트는<br />익스플로러9 이상에서 지원 가능합니다.</p>
+                     </div>
                              -->
                             <canvas id="charmScore1" width="221" height="221" style="width: 221px; height: 221px;"></canvas>
-						</div>
+                  </div>
                     </li>
                     <li>
                         <strong>성별 예매 분포</strong>
@@ -258,26 +285,39 @@
                     
                 </ul>
             </div><!-- .sect-trailer -->
-            <div id="ctl00_PlaceHolderContent_Section_Still_Cut" class="sect-stillcut">
+            
+            <div id="ctl00_PlaceHolderContent_Section_Still_Cut" class="sect-stillcut" style="width:100%;">
                 <div class="heading">
-                    <h4>스틸컷</h4><span class="count"><strong id="stillcut_current">1</strong>/57건</span><a class="link-more" href="still-cut.aspx?midx=79949">더보기</a>
+                    <h4>스틸컷</h4><span class="count"><strong id="stillcut_current">2</strong>/51건</span><a class="link-more" href="still-cut.aspx?midx=80056">더보기</a>
                 </div>
-                <div class="slider-wrap">
-                    <div class="slider" id="still_motion">
-                        
-                        <div class="item-wrap">
-                            <div class="item" style="width: 800px; height: 450px;">
-                                <img id="poster_img" style="margin-top: 22.5px;">
-                            </div>
-                        </div>
-                        
-                        
-                        
-                        <button type="button" class="btn-prev">이전 페이지 이동</button>
-                        <button type="button" class="btn-next">다음 페이지 이동</button>
-                    </div>
-                </div>
-            </div><!-- .sect-stillcut -->
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
+  <!-- Indicators -->
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img style="width:100%;" data-src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149031_727.jpg" src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149031_727.jpg">
+    </div>
+    <div class="item">
+      <img style="width:100%;" data-src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149030_727.jpg" src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149030_727.jpg">
+    </div>
+    <div class="item">
+      <img style="width:100%;" data-src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149029_727.jpg" src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149029_727.jpg">
+    </div>
+
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" style="border: 0; outline: 0;">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <!-- <span class="sr-only">Previous</span> -->
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next" style="border: 0; outline: 0;">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <!-- <span class="sr-only">Next</span> -->
+  </a>
+</div>
+            </div>
 
 
               
@@ -289,37 +329,37 @@
                     <p class="txt-write">관람일 포함 7일 이내 관람평을 남기시면 <strong>CJ ONE 20P</strong>가 적립됩니다. <a id="assessment" class="link-gradewrite" href="javascript:void(0);"><span>후기작성</span></a></p>
                 </div>
                 <div id="comment_content">
-				</div>
+            </div>
                 <div class="egg-grade">
-					<a class="info1" id="goldenEggAlert" href="javascript:void(0);">Golden EGG지수<br><img src="http://img.cgv.co.kr/R2014/images/common/ico/ico-question-mark.png" alt="?"></a>
-					<!-- <a class="info2" href="#">이 영화의 감상포인트<br /><img src="images/common/ico/ico-question-mark.png" alt="?" /></a> -->
+               <a class="info1" id="goldenEggAlert" href="javascript:void(0);">Golden EGG지수<br><img src="http://img.cgv.co.kr/R2014/images/common/ico/ico-question-mark.png" alt="?"></a>
+               <!-- <a class="info2" href="#">이 영화의 감상포인트<br /><img src="images/common/ico/ico-question-mark.png" alt="?" /></a> -->
 
-					<div class="massagebox">
-						<p>
+               <div class="massagebox">
+                  <p>
                             <span class="msg-em"><strong id="cgvEggCountTxt">52,634</strong>명의</span>
-							<em>CGV실관람객이</em> 평가해주셨습니다.
-						</p>
-					</div>
+                     <em>CGV실관람객이</em> 평가해주셨습니다.
+                  </p>
+               </div>
                     <!-- great , good-->
-					<div class="egg-gage big" id="eggIconDiv">
-						<span class="egg great"></span>
+               <div class="egg-gage big" id="eggIconDiv">
+                  <span class="egg great"></span>
                         
-						<span class="percent"><strong>93</strong>%</span>
-					</div>
+                  <span class="percent"><strong>93</strong>%</span>
+               </div>
 
-					<div class="radar-graph" id="chart2">
-						<canvas id="charmScore2" width="200" height="200" style="width: 200px; height: 200px;"></canvas>
-						<!-- ie8 이하 미지원시
-						<div class="sorry">
-							<p>&lsquo;이 영화의 매력포인트&rsquo; 차트는<br />익스플로러9 이상에서 지원 가능합니다.</p>
-						</div>
-						 -->
-					</div>
-				</div>
+               <div class="radar-graph" id="chart2">
+                  <canvas id="charmScore2" width="200" height="200" style="width: 200px; height: 200px;"></canvas>
+                  <!-- ie8 이하 미지원시
+                  <div class="sorry">
+                     <p>&lsquo;이 영화의 매력포인트&rsquo; 차트는<br />익스플로러9 이상에서 지원 가능합니다.</p>
+                  </div>
+                   -->
+               </div>
+            </div>
 
                 <div class="wrap-persongrade" id="commentDiv">
                     
-					
+               
                 </div>
             </div><!-- .sect-grade -->
 
@@ -327,8 +367,8 @@
             <!-- add_css -->
 
             <div class="paging" id="paging">
-				<ul id="paging_point"></ul>
-			</div>
+            <ul id="paging_point"></ul>
+         </div>
 
             
             
@@ -429,8 +469,8 @@
             <input type="hidden" name="nick" id="frmPointNick">
         </form>
 
-        
 
+        
 
 
        
@@ -444,12 +484,158 @@
 
             <!--/ Contents End -->
 
-		</div>
+      </div>
 
-	<input id="currentPage" type="text"/>
+   <input id="currentPage" type="text"/>
 
 </body>
+
+
+
+
 <script>
-	jehong2.main.init('${path.ctx}');
+
+	/* $(".tab-menu li").click(function() {
+		  var scrollPosition = $($(this).attr("data-target")).offset().top;
+		 
+		  $("body").animate({
+		        scrollTop: scrollPosition
+		  }, 500);
+	}); */
+
+
+var data = {
+        period: [
+    ["5주전", 0.000000],["4주전", 0.000000],["3주전", 0.000000],["2주전", 0.000000],["1주전", 0.000000]
+        ],
+        age: [
+    ["10대", 2],["20대", 47.1],["30대", 34.8],["40대", 16.1]
+        ],
+        sex: [
+     ["남 46.1%", 46.1],["여 53.9%", 53.9]
+        ]
+
+    };
+
+var charmRadarChartData = {
+        labels: ["감독연출", "스토리", "영상미", "배우연기", "OST"],
+        datasets: [
+            {
+                fillColor: "rgba(218,215,204,0.2)",
+                strokeColor: "rgba(204,192,184,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointColorList: ["rgba(253,148,135,1)", "rgba(254,196,69,1)", "rgba(143,189,16664,1)", "rgba(100,169,178,1)", "rgba(178,103,183,1)"],            
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [41, 48, 24, 93, 12 ]
+            }
+        ]
+    };
+
+
+$(document).ready(function(){
+	//rader chart
+	window.charmRadar1 = new Chart(document.getElementById("charmScore1").getContext("2d")).Radar(charmRadarChartData, {
+	    pointDot: true,
+	    datasetStrokeWidth: 1,
+	    scaleLabelsPaddingX: 15,
+	    scaleLabelsPaddingY: 3,
+	    pointLabelsPadding: 7,
+	    centerPointPadding: 7,
+	    responsive: false,
+	    animation: false,			
+	    showTooltips: false,
+	    scaleShowLabels: true,
+	    showScale: true,
+	    pointLabelFontFamily: "'Trebuchet MS', Arial, Helvetica, sans-serif",
+	    pointLabelFontSize : 11,
+	    //pointLabelFontColor : "rgba(100,100,100,1)",
+	    pointLabelFontColor : "#000000",
+	    scaleFontFamily: "'Trebuchet MS', Arial, Helvetica, sans-serif",
+	    scaleFontSize: 8,
+	    scaleFontColor: "#777777",
+	    scaleOverride: true,
+	    scaleSteps: 4,
+	    scaleStepWidth: 25,
+	    scaleStartValue: 0});
+	
+	
+	
+	
+//donut chart	
+var htmlBackgroundColor = $('#contaniner').css('background-color');
+$.jqplot('jqplot_sex', [data.sex], {
+	  grid: {
+          drawGridLines: false,
+          gridLineColor: htmlBackgroundColor,
+          background: htmlBackgroundColor,
+          borderColor: htmlBackgroundColor,
+          shadow: false
+      },
+	  seriesDefaults: {
+      renderer:$.jqplot.DonutRenderer,
+      rendererOptions:{
+    	  padding: 18,
+          innerDiameter : 30,
+          sliceMargin: 4,
+          ringMargin : 0,
+          startAngle: 45,
+          shadowOffset : 2,
+          shadowDepth : 3,
+          highlightMouseOver : false,
+          dataLabels : 'label',
+          dataLabelFormatString : '%s',
+          dataLabelNudge : 50,
+          scaleFontFamily: "'Trebuchet MS', Arial, Helvetica, sans-serif",
+          scaleFontSize: 8,
+          scaleFontColor: "#777777",
+          scaleOverride: true,
+          showDataLabels: true
+      }
+    }
+  });
+  
+  
+//age chart  
+$.jqplot('jqplot_age', [data.age], {
+	  grid: {
+        drawGridLines: false,
+        gridLineColor: htmlBackgroundColor,
+        background: htmlBackgroundColor,
+        borderColor: htmlBackgroundColor,
+        shadow: false
+    },
+	  seriesDefaults: {
+		  renderer: $.jqplot.BarRenderer,
+          marginTop : '20px',
+          rendererOptions: {
+              padding : 50,
+              barPadding : 50,
+              barMargin : 50,
+              varyBarColor: true,
+              highlightMouseOver : false,
+              barWidth : 30,
+              marginBottom : 20
+	    }
+  },
+  axes: {
+      xaxis: {
+          renderer: $.jqplot.CategoryAxisRenderer,
+          rendererOptions : {fontSize : '12px'},
+          labelOptions : {fontSize : '12px'},
+          tickOptions : {formatString: "%s", fontSize : '12px' }
+      },
+      yaxis: {show: false, showTicks : false, tickOptions : {formatString: "%s", fontSize : '12px' }}
+  }
+});  
+  
+
+});
+
+
+
+
+   jehong2.main.init('${path.ctx}');
 </script>
 </html>
