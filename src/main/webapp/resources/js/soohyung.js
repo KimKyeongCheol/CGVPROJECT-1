@@ -68,6 +68,10 @@ soohyung.logic=(()=>{
           success : d=>{              
               if(d.msg=='success'){
                  alert('로그인 성공 !!');
+                 $('#content').empty();
+                 sessionStorage.setItem('member_id',d.member_id);
+                 location.href=sessionStorage.getItem('ctx')+"/home";
+                 
               }else{
                  alert('로그인 실패 !!');
                  $('#txtUserId').val("");

@@ -134,7 +134,9 @@ public class AjaxController {
 		}else {
 			result="success";
 		}
+		
 		map.put("msg", result);
+		map.put("member_id", member.get("member_id"));
 		return map;
 	}
 	
