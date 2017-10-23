@@ -3,13 +3,13 @@
 <!DOCTYPE html>
 <html lang="ko"><head>
     <meta charset="utf-8">
-    <title>회원정보 입력 </title>
+    <title>회원정보 수정 </title>
 	
 	<link rel="stylesheet" href="${path.ctx}/resources/css/base.css">
 	<link rel="stylesheet" href="${path.ctx}/resources/css/member.css"> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	<script src="${path.js}/soohyung2.js"></script>
+	<script src="${path.js}/kyungchul.js"></script>
 </head>
 
 
@@ -35,6 +35,7 @@
 			<div class="bg_dim">
 			<!-- //20160315 -->
 				<div id="navi" class="hide">
+					<!-- 20160315 -->
 					<h2 class="mobile">메뉴 전체보기</h2>
 					<!-- //20160315 -->
 					<!-- 20160315 -->
@@ -103,11 +104,11 @@
 			<!--title-->
 			
 			<div class="location_wrap">
-				<div class="location"><a href="http://www.cjone.com/cjmweb/main.do" class="home"><span class="haze">홈</span></a><a href="https://www.cjone.com/cjmweb/join.do" class="now"><span>회원가입</span></a></div>
+				<div class="location"><a href="http://www.cjone.com/cjmweb/main.do" class="home"><span class="haze">홈</span></a><a href="https://www.cjone.com/cjmweb/join.do" class="now"><span>회원정보 수정</span></a></div>
 			</div>
 			
 			<div class="cont_header">
-				<h1 class="h1_tit">회원가입</h1>
+				<h1 class="h1_tit">회원정보 수정</h1>
 				<p class="h_desc">라이프스타일 멤버십 CJ ONE! 외식, 쇼핑, 엔터테인먼트 서비스를 한 장의 카드로 즐기세요~</p>
 			</div>
 			<!--title-->
@@ -194,7 +195,7 @@
 												</th>
 												<td>
 													<div class="input_group">
-														<span class="input_txt w250"><input type="text" class="text" title="사용 할 영문 아이디 명 입력"  name="member_id" id="member_id" maxlength="12"><!-- 에러시 .error 클래스 추가 --></span>
+														<span class="input_txt w250"><input type="text" class="text" title="사용 할 영문 아이디 명 입력"  name="member_id" id="member_id" maxlength="12" readonly="readonly"><!-- 에러시 .error 클래스 추가 --></span>
 														
 															<button type="button" class="btn btn_search" id="idCheck">중복확인</button>
 														
@@ -229,42 +230,16 @@
 											</tr>
 											<tr class="input">
 												<th scope="row" class="mandatory">
-													<label for="birth_yy">
-													<span class="haze">"필수"</span> 생년월일</label>
-												</th>
-												<td>
-													<div class="birthday_select">
-														<span class="select w120" data-skin="form">
-															<select title="생년월일 중 년 선택" id="birth_year" name="birth_year">
-																
-															</select>
-														</span>
-														<span class="symbol">년</span>
-														<span class="select w70" data-skin="form">
-															<select title="생년월일 중 월 선택" class="narrow" id="birth_month" name="birth_month">
-																
-															</select>
-														</span>
-														<span class="symbol">월</span>
-														<span class="select w70" data-skin="form">
-															<select title="생년월일 중 일 선택" class="narrow" id="birth_day" name="birth_day">
-																
-															</select>
-														</span>
-														<span class="symbol">일</span>
-													</div>
-													<p class="msg_desc">설정하신 생일을 기준으로 <em>15일 전</em> 생일쿠폰이 발행됩니다.</p>
-												</td>
-											</tr>
-											<tr class="input">
-												<th scope="row" class="mandatory">
 													<label for="mob_no_1"><span class="haze">"필수"</span> 휴대전화</label>
 												</th>
 												<td>
 													<div class="phon_write">
 														<span class="select w100" data-skin="form">
 															<select title="휴대전화 앞자리 선택" id="phone_first" name="phone_first">
-																
+																<option value="010">010</option>
+																<option value="011">011</option>
+																<option value="017">017</option>
+																<option value="019">019</option>
 															</select>
 														</span>
 														<span class="symbol">-</span>
@@ -394,8 +369,7 @@
 	<input type="hidden" name="card_chk" id="card_chk" value="">
 	</form>
 <script>
-soohyung2.main.init('${path.ctx}');
+kyungchul.logic.update();
 </script>
-
 
 </body></html>

@@ -14,9 +14,9 @@ import com.hanbit.cgv.complex.PathFactory;
 
 @Controller
 @SessionAttributes("path")
-public class HomeController {
+public class MoveController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MoveController.class);
 	
 	@RequestMapping("/")
 	public String index(Model model) {

@@ -13,13 +13,16 @@
 		
 		<choose>
 			<when test="table eq 'movieChart'">
-				select t.*,s.*,p.*,i.* from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq
-			</when>
-			<when test="table eq 'movieDetail'">
-				select * from (select t.*,s.steelcut,p.poster,p.trailer,i.genre,i.movie_time,i.like_count,i.people_count,i.score,i.introduce,i.staff from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq) t where t.movie_seq=#{movieNum}
+				select t.*,s.*,p.*,i.* from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq order by search_count desc
 			</when>
 			<when test="table eq 'comment'">
-				select c.*,m.profile from ${table} c join member m on c.member_id=m.member_id
+				select c.*,m.profile from comment c join member m on c.member_id=m.member_id where c.movie_seq=#{param.movie_seq} order by comment_seq desc
+			</when>
+			<when test="table eq 'steelcut'">
+				select * from steelcut where movie_seq=#{param.movie_seq}
+			</when>
+			<when test="table eq 'myreservation'">
+select r.*,p.poster from reservation r join movie_picture p on r.movie_seq=p.movie_seq where r.member_id=#{param.member_id}
 			</when>
 			<otherwise>
 				select * from ${table}
@@ -31,11 +34,21 @@
 		<choose>
 			
 			<when test="table eq 'movieDetail'">
-				select * from (select t.*,s.steelcut,p.poster,p.trailer,i.genre,i.movie_time,i.like_count,i.people_count,i.score,i.introduce,i.staff from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq) t where t.movie_seq=#{movieNum}
+				select * from (select t.*,s.steelcut,p.poster,p.trailer,i.genre,i.movie_time,i.like_count,i.people_count,i.score,i.introduce,i.staff from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq) t where t.movie_seq=#{param.movie_seq}
 			</when>
 			<when test="table eq 'login'">
 				select * from member where member_id=#{param.member_id} and pass=#{param.pass}
 			</when>
+			 <when test="table eq 'findid'">
+            select * from member where name=#{param.member_name} and phone=#{param.member_phone}
+         </when>   
+         <when test="table eq 'findpw'">
+            select * from member where member_id=#{param.member_id} and phone=#{param.member_phone}
+         </when>   
+		<when test="table eq 'idCheck'">
+            select * from member where member_id=#{param.member_id}
+         </when> 
+         
 			<otherwise>
 				select * from ${table}
 			</otherwise>
@@ -43,9 +56,33 @@
 	</select>
 	<insert id="insert" parameterType="com.hanbit.cgv.command.Command">
 		<choose>
-			<when test="${table} eq reservation">
+			<when test="table eq 'reservation'">
 				insert into reservation values(auto_increment,#{param.total_cost},#{param.advance_date},#{param.member_id},#{place_seq},#{theater_seq},#{schedule_seq},#{movie_seq})
-			</when>		
+			</when>
+			<when test="table eq 'comment'">
+				insert into comment (movie_seq,member_id,content,comment_like,comment_dislike,regdate) values(#{param.movie_seq},#{param.member_id},#{param.content},'0','0',now())
+			</when>
+			<when test="table eq 'member'">
+				insert into member (member_id,ssn,name,email,phone,address,profile,zipcode,pass) values(#{param.member_id},#{param.ssn},#{param.name},#{param.email},#{param.phone},#{param.address},#{param.profile},#{param.zipcode},#{param.pass})
+			</when>
+			<otherwise>
+				insert into reservation values(auto_increment,#{param.total_cost},#{param.advance_date},#{param.member_id},#{place_seq},#{theater_seq},#{schedule_seq},#{movie_seq})
+			</otherwise>	
 		</choose>
 	</insert>
+	<update id="update" parameterType="com.hanbit.cgv.command.Command">
+		
+		<choose>
+		<when test="table eq 'update'">
+       		update member set name=#{param.name}, email=#{param.email}, phone=#{param.phone}, address=#{param.address}, profile=#{param.profile}, zipcode=#{param.zipcode}, pass=#{param.pass} where member_id=#{param.member_id}
+		</when>
+		<when test="table eq 'like'">
+       		update comment set comment_like=#{param.comment_like} where comment_seq=#{param.comment_seq}
+		</when>
+		<otherwise>
+			
+		</otherwise>
+		</choose>
+		
+   </update>
 </mapper>

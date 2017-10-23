@@ -9,11 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="${path.js}/jahun.js"></script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Expires" content="-1" />
@@ -54,46 +51,30 @@
 	href="http://img.cgv.co.kr/R2014/css/content_prepaid_card_170421.css" />
 <link rel="stylesheet" type="text/css"
 	href="http://img.cgv.co.kr/R2014/js/jquery.ui/smoothness/jquery-ui-1.10.4.custom.min.css" />
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/app.config.js"></script>
-<script type="text/javascript" src="/common/js/extraTheaters.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.tmpl.min.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.validate.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.paging.min.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.ui/jquery-ui-1.10.4.custom.min.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.utils.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/app.utils.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.utils.pageing.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/app.init.js"></script>
-<!--[if lte IE 9]><script type="text/javascript"src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.placeholder.js"></script><![endif]-->
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/jquery.plugin/jquery.dotdotdot.min.js"></script>
-<script type="text/javascript"
-	src="http://img.cgv.co.kr/R2014/js/silverlight_link.js"></script>
-<script src="http://img.cgv.co.kr/R2014/js/slick/slick.js"
-	type="text/javascript" charset="utf-8"></script>
+
 <link rel="stylesheet" media="all" type="text/css"
 	href="http://img.cgv.co.kr/R2014/css/phototicket/phototicket.css" />
 <link rel="stylesheet" media="all" type="text/css"
 	href="http://img.cgv.co.kr/R2014/css/slick.css" />
 <link rel="stylesheet" media="all" type="text/css"
 	href="http://img.cgv.co.kr/R2014/css/slick-theme-custom.css" />
-	
+<link rel="stylesheet" href="${path.ctx}/resources/css/base.css">
+<link rel="stylesheet" href="${path.ctx}/resources/css/member.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="${path.js}/kyungchul.js"></script>
+<script src="${path.js}/jahun.js"></script>
+<script src="${path.js}/soohyung.js"></script>
+<script src="${path.js}/sangyoon.js"></script>
+
 
 </head>
 <body>
-	<div id="content"></div>
+	<div id="content" style="height: 100%;width: 100%"></div>
 </body>
 <script>
 	jahun.main.init('${path.ctx}');
+	
 </script>
