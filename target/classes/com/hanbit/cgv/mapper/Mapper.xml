@@ -21,6 +21,9 @@
 			<when test="table eq 'myreservation'">
 select r.*,p.poster from reservation r join movie_picture p on r.movie_seq=p.movie_seq where r.member_id=#{param.member_id}
 			</when>
+			<when test="table eq 'myreservation'">
+select * from qna where member_id=#{param.member_id}
+			</when>
 			<otherwise>
 				select * from ${table}
 			</otherwise>
@@ -62,6 +65,9 @@ select r.*,p.poster from reservation r join movie_picture p on r.movie_seq=p.mov
 			<when test="table eq 'member'">
 				insert into member (member_id,ssn,name,email,phone,address,profile,zipcode,pass) values(#{param.member_id},#{param.ssn},#{param.name},#{param.email},#{param.phone},#{param.address},#{param.profile},#{param.zipcode},#{param.pass})
 			</when>
+			<when test="table eq 'qna'">
+				insert into qna values(0,'1111',#{param.content},'읽지않음',now(),#{param.member_id});
+			</when>
 			<otherwise>
 				insert into reservation values(auto_increment,#{param.total_cost},#{param.advance_date},#{param.member_id},#{place_seq},#{theater_seq},#{schedule_seq},#{movie_seq})
 			</otherwise>	
@@ -76,10 +82,27 @@ select r.*,p.poster from reservation r join movie_picture p on r.movie_seq=p.mov
 		<when test="table eq 'like'">
        		update comment set comment_like=#{param.comment_like} where comment_seq=#{param.comment_seq}
 		</when>
+		<when test="table eq 'movieLike'">
+       		update movie_info set like_count=#{param.like_count} where movie_seq=#{param.movie_seq}
+		</when>
 		<otherwise>
 			
 		</otherwise>
 		</choose>
 		
    </update>
+   <delete id="delete" parameterType="com.hanbit.cgv.command.Command">
+	   <choose>
+			<when test="table eq 'deleteQna'">
+	       		delete from qna where qna_seq=#{param.qna_seq}
+			</when>
+			<when test="table eq 'deleteMember'">
+	       		delete from member where member_id=#{param.member_id} and pass=#{param.pass}
+			</when>
+			<otherwise>
+				
+			</otherwise>
+			</choose>
+   
+   </delete>
 </mapper>

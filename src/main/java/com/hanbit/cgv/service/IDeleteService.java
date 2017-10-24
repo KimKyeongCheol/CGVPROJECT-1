@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 @Service
 @FunctionalInterface
 public interface IDeleteService {
-	public void excute(Object o);
+	public int excute(Object o);
 }

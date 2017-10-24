@@ -186,7 +186,7 @@
 													<label for="profile"><span class="haze">"필수"</span> 프로필사진</label>
 												</th>
 												<td>
-													<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQvhWypHUokvJSkITQUDgtOn7wEGFbEAp_DbgSLHvk2yV9_vm2Nw"></img>
+													<img id="profile_img"></img>
 													<input type="file" id="fileName"/>
 												</td>
 											</tr>

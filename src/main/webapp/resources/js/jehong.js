@@ -2,18 +2,12 @@ var jehong=jehong || {};
 
 jehong.main=(()=>{
    var init=(ctx)=>{
-      alert('jehong_main_init!');
       alert('sessionStorage_getItem_movie_seq is '+sessionStorage.getItem('movie_seq'));
       jehong.session.init(ctx);
       logic();
       drawMovieChart();
    };
    var logic=()=>{
-      $('.link-reservation').click(()=>{
-         alert('go Movie Reservation !');
-         $('#content').empty();
-         location.href=sessionStorage.getItem('ctx')+"/reservation";
-      });
       
    };
    var drawMovieChart=()=>{
@@ -23,6 +17,8 @@ jehong.main=(()=>{
          contentType : 'application/json',
          context: this,
          success : d=>{
+        	 
+        	 alert('0번쨰 ? '+d.movieChart[0].name);
             var date
             /*var calDate=(x)=>{
                date=new Date(x);
@@ -34,7 +30,7 @@ jehong.main=(()=>{
                  date=new Date(d.movieChart[i].release_date);
                  releaseDate=date.getFullYear()+'년'+(date.getMonth()+1)+'월'+date.getDate()+'일';
                  $('#ol').append(
-                       '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>'+releaseDate+'<span> 개봉</span></strong></span><span class="like"><button class="btn-like"value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation"href="/ticket/?MOVIE_CD=20013611&amp;MOVIE_CD_GROUP=20013611">예매</a></span></div></li>'      
+ '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>'+releaseDate+'<span> 개봉</span></strong></span><span class="like"><button id="likeBtn_'+d.movieChart[i].movie_seq+'" class="btn-like" onclick="jehong.main.likeMovie('+d.movieChart[i].movie_seq+')" value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i id="likeText'+d.movieChart[i].movie_seq+'">'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation" onclick="jehong.main.goReservation('+d.movieChart[i].movie_seq+')">예매</a></span></div></li>'      
                  );
               }
               
@@ -43,12 +39,12 @@ jehong.main=(()=>{
                  date=new Date(d.movieChart[i].release_date);
                  releaseDate=date.getFullYear()+'년'+(date.getMonth()+1)+'월'+date.getDate()+'일';
                  $('#ol2').append(                       
-                       '<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>'+releaseDate+'<span> 개봉</span></strong></span><span class="like"><button class="btn-like"value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation"href="/ticket/?MOVIE_CD=20013611&amp;MOVIE_CD_GROUP=20013611">예매</a></span></div></li>'      
+'<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">99%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>'+releaseDate+'<span> 개봉</span></strong></span><span class="like"><button id="likeBtn_'+d.movieChart[i].movie_seq+'" class="btn-like" onclick="jehong.main.likeMovie('+d.movieChart[i].movie_seq+')" value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i id="likeText'+d.movieChart[i].movie_seq+'">'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation" onclick="jehong.main.goReservation('+d.movieChart[i].movie_seq+')">예매</a></span></div></li>'      
                  );
               }
-              for(var i=0;i<d.movieChart.length;i++){
+              for(var i=0;i<10;i++){
                  $('#searchList').append(
-                       '<li><a href="/search/?query=%ea%b9%80%ea%b4%91%ec%84%9d">'+(i+1)+'. <strong>'+d.movieChart[i].name+'</strong></a><em><span class="new">NEW</span></em></li>'      
+                       '<li><a onclick="jehong.main.goDetail('+d.movieChart[i].movie_seq+')">'+(i+1)+'. <strong>'+d.movieChart[i].name+'</strong></a><em><span class="new">NEW</span></em></li>'      
                  );
               }
               
@@ -207,8 +203,6 @@ jehong.main=(()=>{
                           +'</div><!-- .sect-popular-trailer -->'
                       +'</div><!-- .col-rank-trailer -->'
                       
-                      
-               
                 );
                 
                 /*$(".movie_steelcut").on("click", function() {
@@ -218,21 +212,21 @@ jehong.main=(()=>{
                     event.stopPropagation();
                  });*/
                 $('.thumb-image').on("click", function() {
-                    alert($(this).attr("name"));
+                    var i = $(this).attr("name");
                     alert('clikck thumb-image !');
                        $('html').append(
                            '<div class="mask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 100; background-color: rgba(0, 0, 0, 0.8);"></div>'
                            +'<div class="layer-wrap" style="margin-top: -355px; margin-left: -510px; position: fixed;" tabindex="0"><div class="popwrap">'
                                +'<div class="sect-layerplayer">'
                                    +'<div class="cols-pop-player">'
-                                       +'<h1 class="title" id="movie_player_popup_title"><span class="ico-trailer hd">HD</span>['+d.movieChart[0].name+'] 예고편</h1>'
+                                       +'<h1 class="title" id="movie_player_popup_title"><span class="ico-trailer hd">HD</span>['+d.movieChart[i].name+'] 예고편</h1>'
                                        +'<div class="col-pop-player">'
                                            +'<div class="warp-pop-player" style="position: relative;">'
-                                               +'<iframe id="ifrm_movie_player_popup" name="ifrm_movie_player_popup" src="http://www.youtube.com/embed/'+d.movieChart[0].trailer+'" style="width:750px;height:450px;" ameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe>'
+                                               +'<iframe id="ifrm_movie_player_popup" name="ifrm_movie_player_popup" src="http://www.youtube.com/embed/'+d.movieChart[i].trailer+'" style="width:750px;height:450px;" ameborder="0" marginheight="0" marginwidth="0" scrolling="no"></iframe>'
                                            +'</div><!-- .warp-pop-player -->'
                                            +'<div class="descri-trailer">'
                                                +'<strong class="title">영상설명</strong>'
-                                               +'<textarea readonly="readonly" id="movie_player_popup_caption" style="width:750px">'+d.movieChart[0].introduce+'</textarea>'
+                                               +'<textarea readonly="readonly" id="movie_player_popup_caption" style="width:750px">'+d.movieChart[i].introduce+'</textarea>'
                                            +'</div>'
                            +'</div><!-- .col-player -->'
                                        +'<div class="col-pop-playerinfo">'
@@ -240,11 +234,11 @@ jehong.main=(()=>{
                                            +'<div id="movie_player_popup_movie_info">'
                                                +'<div class="box-image">'
                                                    +'<a href="/movies/detail-view/?midx=80090" title="신과함께 상세보기 새창">'
-                                                   +'<span class="thumb-image"><img src="'+d.movieChart[0].poster+'" alt="신과함께 포스터"><span class="ico-grade grade-none">미정</span></span></a>'
+                                                   +'<span class="thumb-image"><img src="'+d.movieChart[i].poster+'" alt="신과함께 포스터"><span class="ico-grade grade-none">미정</span></span></a>'
                                                +'</div>'
                                            +'<div class="box-contents">'
-                                               +'<a href="/movies/detail-view/?midx=80090" title="신과함께 상세보기 새창"><strong class="title">'+d.movieChart[0].name+'</strong></a>'
-                                           +'<span class="txt-info" style="margin-bottom:2px;"><em class="genre">'+d.movieChart[0].name+'</em><span><i>2017.12.20</i><strong>개봉</strong><em class="dday">D-64</em>'
+                                               +'<a href="/movies/detail-view/?midx=80090" title="신과함께 상세보기 새창"><strong class="title">'+d.movieChart[i].name+'</strong></a>'
+                                           +'<span class="txt-info" style="margin-bottom:2px;"><em class="genre">'+d.movieChart[i].name+'</em><span><i>2017.12.20</i><strong>개봉</strong><em class="dday">D-64</em>'
                                            +'</span></span></div></div>'
 
                                            +'<div class="sect-trailer">'
@@ -263,18 +257,92 @@ jehong.main=(()=>{
                          $('.mask').remove();
                          $('.layer-wrap').remove();
                        });
+                    
+                       });
+                    //More Content View
+                   $('.btn-more-fontbold').click(()=>{
+                      $('#movie_chart').append('<ol id="movie_more_container" class="list-more"></ol>');
+                      for(var i=8;i<d.movieChart.length;i++){
+                         $('.list-more').append(
+                               '<li style="float: left; width: 260px; margin: 0 0 -3px 0; padding: 30px 0 30px 64px; border-top: 3px solid #241d1e; border-bottom: 3px solid #241d1e;";"><div class="box-image"><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">15세 이상</span></span><span class="screentype"></span></div><div class="box-contents" style=" width: 193px";><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-14] 평점 개편 에그 포인트 및 에그 이미지 노출 추가. start : add_mwpark--><div class="egg-gage small"><span class="egg good"></span><span class="percent">'+d.movieChart[i].score+'%</span></div><!--[2015-12-14] 평점 개편 에그 포인트 및 에그 이미지 노출 추가. end : add_mwpark--></div><span class="txt-info"><strong>'+calDate(d.movieChart[i].release_date)+'<span>개봉</span></strong></span><span class="like"><button class="btn-like" value="80061">영화 찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이 선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation" name="'+d.movieChart[i].movie_seq+'">예매</a></span></div></li>'
+                         );
+                      }
+                      $('.btn-more-fontbold').remove();
+                      $(".movie_steelcut, .li_searchList").on("click", function() {
+                          alert($(this).attr("name"));
+                          sessionStorage.setItem('movie_seq',$(this).attr("name"));
+                          location.href=sessionStorage.getItem('ctx')+'/movieDetail';
+                          event.stopPropagation();
+                       });
+                      $('.link-reservation').on("click", function() {
+                           alert('go Movie Reservation !');
+                           alert($(this).attr("name"));
+                           sessionStorage.setItem('movie_seq',$(this).attr("name"));
+                           location.href=sessionStorage.getItem('ctx')+"/reservation";
+                        });
                    });
-         },
-         error : (x,s,m)=>{
-            alert('에러가발생');
-         }
-      });
-   }
-    
+                   $(".movie_steelcut, .li_searchList").on("click", function() {
+                       alert($(this).attr("name"));
+                       sessionStorage.setItem('movie_seq',$(this).attr("name"));
+                       location.href=sessionStorage.getItem('ctx')+'/movieDetail';
+                       event.stopPropagation();
+                    });
+                   
+                   $('.link-reservation').on("click", function() {
+                        alert('go Movie Reservation !');
+                        alert($(this).attr("name"));
+                        sessionStorage.setItem('movie_seq',$(this).attr("name"));
+                        location.href=sessionStorage.getItem('ctx')+"/reservation";
+                     });
+            },
+            error : (x,s,m)=>{
+               alert('에러가발생');
+            }
+         });
+      }
+   
+   var goReservation=(x)=>{
+	   sessionStorage.setItem('movie_seq',x);
+	   location.href=sessionStorage.getItem('ctx')+"/reservation";
+   };
+   
+   var goDetail=(x)=>{
+	   sessionStorage.setItem('movie_seq',x);
+	   location.href=sessionStorage.getItem('ctx')+"/movieDetail";
+   };
+   
+   var likeMovie=(x)=>{
+	   
+	   var likeNum=$('#likeBtn_'+x+'').val()*1+1;
+	      $('#likeText'+x+'').text(likeNum);
+	      $('#likeBtn_'+x+'').removeAttr("onclick");
+	      $('#likeBtn_'+x+'').attr("class","btn-del");
+	      
+	      $.ajax({
+	             url : sessionStorage.getItem('ctx')+'/put/movieLike',
+	             method : 'POST',
+	             data : JSON.stringify({
+	               'like_count' : likeNum,
+	               'movie_seq' : x
+	            }),
+	             contentType : 'application/json',
+	             success : d=>{
+	                if(d.msg=='success'){
+	                	alert('좋아요 성공!');
+	                }
+	             },
+	             error : (x,s,m)=>{
+	                alert('에러가발생');
+	             }
+	          });  
+   };
    
    return {
       init : init,
-      logic : logic
+      logic : logic,
+      goReservation : goReservation,
+      goDetail : goDetail,
+      likeMovie : likeMovie
    };
 })();
 

@@ -5,7 +5,6 @@ jahun.main=(()=>{
 		jahun.session.init(ctx);
 		jahun.template.mainUI();
 		mainLogic();
-		sessionStorage.setItem('movie_seq',1);
 	};
 	var mainLogic=()=>{
 		

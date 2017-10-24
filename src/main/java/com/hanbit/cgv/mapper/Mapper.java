@@ -13,6 +13,6 @@ public interface Mapper {
 	public List<Map<?,?>> selectSome(Command cmd);
 	public Map<?,?> selectOne(Command cmd);
 	public int update(Command cmd);
-	public void delete(Command cmd);
+	public int delete(Command cmd);
 	public String count(Command cmd);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hanbit.cgv.command.Command;
 import com.hanbit.cgv.mapper.Mapper;
+import com.hanbit.cgv.service.IDeleteService;
 import com.hanbit.cgv.service.IGetService;
 import com.hanbit.cgv.service.IListService;
 import com.hanbit.cgv.service.IPostService;
@@ -28,6 +29,7 @@ public class AjaxController {
 	IGetService getService=null;
 	IPostService postService=null;
 	IPutService putService=null;
+	IDeleteService deleteService=null;
 	
 	@RequestMapping(value="/parameter",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> parameter(@RequestBody Map<Object,Object> param){
@@ -307,10 +309,86 @@ public class AjaxController {
 				return mapper.selectSome(command);
 			};
 			map.put("myreservation", listService.excute(command));
-			System.out.println(map);
+			
+			command.setTable("qna");
+			command.setParam(param);
+			listService=(x) ->{
+				return mapper.selectSome(command);
+			};
+			map.put("qna", listService.excute(command));
 			
 			return map;
 		}
 	   
+	   @RequestMapping(value="/put/qnaDelete",method=RequestMethod.POST)
+		public @ResponseBody Map<?,?> putDelete(@RequestBody Map<String,Object> param){
+			
+			Map<String,Object> map=new HashMap<>();
+			command.setTable("deleteQna");
+			command.setParam(param);
+			deleteService=(x) ->{
+				return mapper.delete(command);
+			};
+			String result="";
+			
+			
+			if(deleteService.excute(command)==0) {
+				result="fail";
+			}else {
+				result="success";
+			}
+			map.put("msg", result);
+			return map;
+		}
 	   
+	   @RequestMapping(value="/post/qna",method=RequestMethod.POST)
+		public @ResponseBody Map<?,?> postQna(@RequestBody Map<String,Object> param){
+			Map<String,Object> map=new HashMap<>();
+			command.setTable("qna");
+			command.setParam(param);
+			postService=(x) ->{
+				return mapper.insert(command);
+			};
+			map.put("msg", postService.excute(command));
+			return param;
+		}
+	   @RequestMapping(value="/put/movieLike",method=RequestMethod.POST, consumes="application/json")
+	   public @ResponseBody Map<?,?> putMovieLike(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("movieLike");
+	      command.setParam(param);
+	      
+	      putService=(x) ->{
+	         return mapper.update(command);
+	      };
+	      String result="";
+	      if(putService.excute(command)==0) {
+	         result="fail";
+	      }else {
+	         result="success";
+	      }
+	      map.put("msg", result);
+	      return map;
+	   }
+	   
+	   @RequestMapping(value="/delete/member",method=RequestMethod.POST)
+		public @ResponseBody Map<?,?> deleteMember(@RequestBody Map<String,Object> param){
+			
+			Map<String,Object> map=new HashMap<>();
+			command.setTable("deleteMember");
+			command.setParam(param);
+			deleteService=(x) ->{
+				return mapper.delete(command);
+			};
+			String result="";
+			
+			
+			if(deleteService.excute(command)==0) {
+				result="fail";
+			}else {
+				result="success";
+			}
+			map.put("msg", result);
+			return map;
+		}
 }

@@ -307,9 +307,6 @@ jehong2.main=(()=>{
              }
           });  
      
-      
-      
-      
    };
    var paging=(startPage,pageCount)=>{
       var currentPage=startPage;

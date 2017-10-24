@@ -36,7 +36,6 @@ soohyung2.logic=(()=>{
 	       }); 
 	  });
 	  
-	  
 	  $('#pass1').keyup(()=>{
 		  var regex=/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,12}/;
 		  var pass1=$('#pass1').val();
