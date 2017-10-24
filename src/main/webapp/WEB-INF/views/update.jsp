@@ -181,6 +181,17 @@
 											<col class="body">
 										</colgroup>
 										<tbody>
+										<tr class="input">
+												<th scope="row" class="mandatory">
+													<label for="profile"><span class="haze">"필수"</span> 프로필사진</label>
+												</th>
+												<td>
+													<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQvhWypHUokvJSkITQUDgtOn7wEGFbEAp_DbgSLHvk2yV9_vm2Nw"></img>
+													<input type="file" id="fileName"/>
+												</td>
+											</tr>
+										
+										
 											<tr class="input">
 												<th scope="row" class="mandatory">
 													<label for="input_member_name"><span class="haze">"필수"</span> 이름</label>

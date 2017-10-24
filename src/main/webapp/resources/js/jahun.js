@@ -32,11 +32,7 @@ jahun.main=(()=>{
 			$('#content').empty();
 			location.href=sessionStorage.getItem('ctx')+"/join";
 		});
-		$('#adminBtn').click(()=>{
-			alert('go adminBtn');
-			$('#content').empty();
-			location.href=sessionStorage.getItem('ctx')+"/admin";
-		});
+		
 		$('#mycgvBtn').click(()=>{
 			alert('go mycgvBtn');
 			$('#content').empty();
@@ -52,10 +48,6 @@ jahun.main=(()=>{
 				$('#loginBtn').text('로그인');
 				$('#loginMsg').text('');
 			}
-		});
-		$('#goTheater').click(()=>{
-			$('#content').empty();
-			location.href=sessionStorage.getItem('ctx')+"/movieDetail";
 		});
 		
 		var posters=[

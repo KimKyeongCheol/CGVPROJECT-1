@@ -14,6 +14,7 @@ kyungchul.main=(()=>{
 kyungchul.logic=(()=>{
   
 	var init=()=>{
+		
 		$('#member_update').click(()=>{
 			alert('업데이트 클릭 !');
 			location.href=sessionStorage.getItem('ctx')+"/update";
@@ -22,9 +23,12 @@ kyungchul.logic=(()=>{
 		$('#goHome').click(()=>{
 			location.href=sessionStorage.getItem('ctx')+"/home";
 		});
+		
 	};
 	
 	var update=()=>{
+		
+		
 		if(sessionStorage.getItem('member_id')==null){
 			alert('로그인을 먼저 해주세요');
 			location.href=sessionStorage.getItem('ctx')+"/loginpage";
