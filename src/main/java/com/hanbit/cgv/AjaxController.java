@@ -124,30 +124,44 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value="/get/movieDetail",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> getMovieDetail(@RequestBody Map<String,Object> param){
-		Map<String,Object> map=new HashMap<>();
-		command.setTable("movieDetail");
-		command.setParam(param);
-		getService=(x) ->{
-			return mapper.selectOne(command);
-		};
-		
-		map.put("movieDetail", getService.excute(command));
-		
-		command.setTable("comment");
-		listService=(x) ->{
-			return mapper.selectSome(command);
-		};
-		map.put("comment", listService.excute(command));
-		
-		command.setTable("steelcut");
-		command.setParam(param);
-		listService=(x) ->{
-			return mapper.selectSome(command);
-		};
-		map.put("steelcut", listService.excute(command));
-		return map;
-	}
+	   public @ResponseBody Map<?,?> getMovieDetail(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("movieDetail");
+	      command.setParam(param);
+	      getService=(x) ->{
+	         return mapper.selectOne(command);
+	      };
+	      
+	      map.put("movieDetail", getService.excute(command));
+	      
+	      command.setTable("comment");
+	      listService=(x) ->{
+	         return mapper.selectSome(command);
+	      };
+	      map.put("comment", listService.excute(command));
+	      
+	      command.setTable("steelcut");
+	      command.setParam(param);
+	      listService=(x) ->{
+	         return mapper.selectSome(command);
+	      };
+	      map.put("steelcut", listService.excute(command));
+	      
+	      command.setTable("genderGraph");
+	      command.setParam(param);
+	      getService=(x) ->{
+	         return mapper.selectOne(command);
+	      };
+	      map.put("genderGraph", getService.excute(command));
+	      
+	      command.setTable("ages");
+	      command.setParam(param);
+	      getService=(x) ->{
+	         return mapper.selectOne(command);
+	      };
+	      map.put("ages", getService.excute(command));
+	      return map;
+	   }
 	
 	@RequestMapping(value="/get/loginPage",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> getLoginPage(@RequestBody Map<String,Object> param){

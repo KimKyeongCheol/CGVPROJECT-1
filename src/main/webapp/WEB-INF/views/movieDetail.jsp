@@ -209,101 +209,34 @@
                     </li>
                     <li>
                         <strong>성별 예매 분포</strong>
-                        <div id="jqplot_sex" class="chart jqplot-target" style="position: relative;"><canvas width="266" height="192" class="jqplot-base-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="jqplot-title" style="height: 0px; width: 0px;"></div><canvas width="266" height="192" class="jqplot-grid-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><canvas width="246" height="159" class="jqplot-series-shadowCanvas" style="position: absolute; left: 10px; top: 10px;"></canvas><canvas width="246" height="159" class="jqplot-series-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas><canvas width="246" height="159" class="jqplot-donutRenderer-highlight-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas><span class="jqplot-donut-series jqplot-data-label" style="position: absolute; left: 44px; top: 141px;">남 45.5%</span><span class="jqplot-donut-series jqplot-data-label" style="position: absolute; left: 176px; top: 24px;">여 54.5%</span><canvas width="246" height="159" class="jqplot-event-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas></div>
+                        <div id="jqplot_sex" class="chart jqplot-target" style="position: relative;"></div>
                     </li>
                     <li>
                         <strong>연령별 예매 분포</strong>
-                        <div id="jqplot_age" class="chart jqplot-target" style="position: relative;"><canvas width="266" height="192" class="jqplot-base-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><div class="jqplot-title" style="height: 0px; width: 0px;"></div><div class="jqplot-axis jqplot-xaxis" style="position: absolute; width: 266px; height: 14px; left: 0px; bottom: 0px;"><div class="jqplot-xaxis-tick" style="position: absolute; font-size: 12px; left: 28.25px;">10대</div><div class="jqplot-xaxis-tick" style="position: absolute; font-size: 12px; left: 89.75px;">20대</div><div class="jqplot-xaxis-tick" style="position: absolute; font-size: 12px; left: 151.25px;">30대</div><div class="jqplot-xaxis-tick" style="position: absolute; font-size: 12px; left: 212.75px;">40대</div></div><div class="jqplot-axis jqplot-yaxis" style="position: absolute; height: 192px; width: 0px; left: 0px; top: 0px;"></div><canvas width="266" height="192" class="jqplot-grid-canvas" style="position: absolute; left: 0px; top: 0px;"></canvas><canvas width="246" height="158" class="jqplot-series-shadowCanvas" style="position: absolute; left: 10px; display: block; top: 10px;"></canvas><canvas width="246" height="158" class="jqplot-series-canvas" style="position: absolute; left: 10px; display: block; top: 10px;"></canvas><div class="jqplot-point-label jqplot-series-0 jqplot-point-3" style="position: absolute; left: 215.75px; top: 113.66px; display: block;">13.8</div><div class="jqplot-point-label jqplot-series-0 jqplot-point-2" style="position: absolute; left: 154.25px; top: 62.0467px; display: block;">33.4</div><div class="jqplot-point-label jqplot-series-0 jqplot-point-1" style="position: absolute; left: 92.75px; top: 18.07px; display: block;">50.1</div><div class="jqplot-point-label jqplot-series-0 jqplot-point-0" style="position: absolute; left: 33.75px; top: 142.627px; display: block;">2.8</div><canvas width="246" height="158" class="jqplot-barRenderer-highlight-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas><canvas width="246" height="158" class="jqplot-event-canvas" style="position: absolute; left: 10px; top: 10px;"></canvas></div>
+                        <div id="jqplot_age" class="chart jqplot-target" style="position: relative;"></div>
                     </li>
                 </ul>
             </div>
 
             <div id="ctl00_PlaceHolderContent_Section_Trailer" class="sect-trailer">
                 <div class="heading">
-                    <h4>트레일러</h4><span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count">11건</span><a class="link-more" href="trailer.aspx?midx=79949">더보기</a>
+                    <h4>트레일러</h4><span id="ctl00_PlaceHolderContent_TrailerTotalCount" class="count"></span><!-- <a class="link-more" href="trailer.aspx?midx=79949">더보기</a> -->
                 </div>
-                <ul>
-                <!-- 사진 동영상 조회 -->
-                
-                    <li>
-                        <div class="box-image">
-                            <!-- TODO : 동영상 팝업 창 작업 후 링크 걸어야 함 //-->
-                            <a href="#" title="새창" class="movie_player_popup" data-gallery-idx="148217">
-                                <span class="thumb-image">
-                                    <img src="http://img.cgv.co.kr/Movie/Thumbnail/Trailer/79949/79949148217_148.jpg" alt="[킹스맨: 골든 서클]ScreenX 예고편" onerror="errorImage(this, {'type':'landscape'})">
-                                    <span class="ico-play">영상보기</span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="box-contents">
-                            <a href="#" title="새창" class="movie_player_popup" data-gallery-idx="148217">
-                                <strong class="title">
-                                    
-                                    <span class="ico-trailer hd">HD</span>
-                                    ScreenX 예고편
-                                </strong>
-                            </a>
-                            <span class="txt-info">2017.09.21</span>
-                        </div>
-                    </li>
+                <ul id="trailerBox">
                     
-                    <li>
-                        <div class="box-image">
-                            <!-- TODO : 동영상 팝업 창 작업 후 링크 걸어야 함 //-->
-                            <a href="#" title="새창" class="movie_player_popup" data-gallery-idx="148145">
-                                <span class="thumb-image">
-                                    <img src="http://img.cgv.co.kr/Movie/Thumbnail/Trailer/79949/79949148145_148.jpg" alt="[킹스맨: 골든 서클]킹스맨 최후의 날 영상" onerror="errorImage(this, {'type':'landscape'})">
-                                    <span class="ico-play">영상보기</span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="box-contents">
-                            <a href="#" title="새창" class="movie_player_popup" data-gallery-idx="148145">
-                                <strong class="title"><span class="ico-trailer hd">HD</span>킹스맨 최후의 날 영상</strong>
-                            </a>
-                            <span class="txt-info">2017.09.20</span>
-                        </div>
-                    </li>
-                    
-                    <li>
-                        <div class="box-image">
-                            <!-- TODO : 동영상 팝업 창 작업 후 링크 걸어야 함 //-->
-                            <a href="#" title="새창" class="movie_player_popup" data-gallery-idx="148144">
-                                <span class="thumb-image">
-                                    <img src="http://img.cgv.co.kr/Movie/Thumbnail/Trailer/79949/79949148144_148.jpg" alt="[킹스맨: 골든 서클]골든 서클 영상" onerror="errorImage(this, {'type':'landscape'})">
-                                    <span class="ico-play">영상보기</span>
-                                </span>
-                            </a>
-                        </div>
-                        <div class="box-contents">
-                            <a href="#" title="새창" class="movie_player_popup" data-gallery-idx="148144">
-                                <strong class="title"><span class="ico-trailer hd">HD</span>골든 서클 영상</strong>
-                            </a>
-                            <span class="txt-info">2017.09.20</span>
-                        </div>
-                    </li>
                     
                 </ul>
             </div><!-- .sect-trailer -->
             
             <div id="ctl00_PlaceHolderContent_Section_Still_Cut" class="sect-stillcut" style="width:100%;">
                 <div class="heading">
-                    <h4>스틸컷</h4><span class="count"><strong id="stillcut_current">2</strong>/51건</span><a class="link-more" href="still-cut.aspx?midx=80056">더보기</a>
+                    <h4>스틸컷</h4><span id="steelcut_count" class="count"><strong id="stillcut_current"> </strong></span><!-- <a class="link-more" href="still-cut.aspx?midx=80056">더보기</a> -->
                 </div>
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="false">
   <!-- Indicators -->
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <img style="width:100%;" data-src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149031_727.jpg" src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149031_727.jpg">
-    </div>
-    <div class="item">
-      <img style="width:100%;" data-src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149030_727.jpg" src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149030_727.jpg">
-    </div>
-    <div class="item">
-      <img style="width:100%;" data-src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149029_727.jpg" src="http://img.cgv.co.kr/Movie/Thumbnail/StillCut/000080/80056/80056149029_727.jpg">
-    </div>
 
   </div>
 
@@ -330,13 +263,13 @@
                 </div>
                 <div id="comment_content">
             </div>
-                <div class="egg-grade">
+                <div class="egg-grade" style="height:215px">
                <a class="info1" id="goldenEggAlert" href="javascript:void(0);">Golden EGG지수<br><img src="http://img.cgv.co.kr/R2014/images/common/ico/ico-question-mark.png" alt="?"></a>
                <!-- <a class="info2" href="#">이 영화의 감상포인트<br /><img src="images/common/ico/ico-question-mark.png" alt="?" /></a> -->
 
                <div class="massagebox">
                   <p>
-                            <span class="msg-em"><strong id="cgvEggCountTxt">52,634</strong>명의</span>
+                            <span class="msg-em"><strong id="cgvEggCountTxt"></strong>명의</span>
                      <em>CGV실관람객이</em> 평가해주셨습니다.
                   </p>
                </div>
@@ -344,7 +277,7 @@
                <div class="egg-gage big" id="eggIconDiv">
                   <span class="egg great"></span>
                         
-                  <span class="percent"><strong>93</strong>%</span>
+                  <span class="percent"><strong id="eggPercent"></strong>%</span>
                </div>
 
                <div class="radar-graph" id="chart2">

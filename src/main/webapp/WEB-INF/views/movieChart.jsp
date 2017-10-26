@@ -9,10 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <script src="${path.js}/jahun.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -60,7 +58,13 @@
 	href="http://img.cgv.co.kr/R2014/css/slick.css" />
 <link rel="stylesheet" media="all" type="text/css"
 	href="http://img.cgv.co.kr/R2014/css/slick-theme-custom.css" />
+
 <script src="${path.js}/jehong.js"></script>
+
+
+
+
+
 
 </head>
 
@@ -108,13 +112,13 @@
         <div class="tit-heading-wrap">
             <h3>무비차트</h3>
            
-            <div class="submenu">
+            <!-- <div class="submenu">
                 <ul>
                     <li class="on"><a href="/movies/" title="선택">무비차트</a></li>
                     <li><a href="/movies/pre-movies.aspx">상영예정작</a></li>
                     <li><a href="/movies/?lt=3">CGV아트하우스</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <!-- //Heading Map Multi -->
         <!-- Sorting -->
@@ -126,21 +130,20 @@
             </div>
             <label for="order_type" class="hidden">정렬</label>
             <select id="order_type" name="order-type">
-				<option title="현재 선택됨" selected="" value="1">예매율순</option>
-                <option value="2">평점순</option>
-                <option value="3">관람객순</option>
+				<option title="현재 선택됨" selected="" value="reserve_rate">예매율순</option>
+                <option value="score">평점순</option>
+                <option value="people_count">관람객순</option>
             </select>
             <button type="button" class="round gray"><span>GO</span></button>
         </div>
         <!-- //Sorting -->
         
         <div class="sect-movie-chart" id="movie_chart">
-            <h4 class="hidden">
-                무비차트 - 예매율순
-            </h4>
+            <h4 class="hidden">무비차트 - 예매율순</h4>
             
             
         </div>
+            <button class="btn-more-fontbold" style="float: right; margin-top: 10px">더보기 <i class="link-more">더보기</i></button>
     </div><!-- .sect-moviechart -->
 
 
@@ -162,7 +165,7 @@
 				<!-- call by Ajax to <li> -->
     
             </ol>
-            <p class="date">2017.09.26기준</p>
+            <!-- <p class="date">2017.09.26기준</p> -->
         </div>
     </div>
 </div>
