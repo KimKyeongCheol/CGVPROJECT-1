@@ -1,16 +1,27 @@
 package com.hanbit.cgv;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hanbit.cgv.command.Command;
 import com.hanbit.cgv.mapper.Mapper;
@@ -19,12 +30,14 @@ import com.hanbit.cgv.service.IGetService;
 import com.hanbit.cgv.service.IListService;
 import com.hanbit.cgv.service.IPostService;
 import com.hanbit.cgv.service.IPutService;
+import com.hanbit.cgv.util.FileUpload;
 
 
 @org.springframework.web.bind.annotation.RestController
 public class AjaxController {
 	@Autowired Command command;
 	@Autowired Mapper mapper;
+	@Autowired FileUpload fileupload;
 	IListService listService=null;
 	IGetService getService=null;
 	IPostService postService=null;
@@ -74,16 +87,30 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value="/post/reservation",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> postReservation(@RequestBody Map<String,Object> param){
-		Map<String,Object> map=new HashMap<>();
-		command.setTable("reservation");
-		command.setParam(param);
-		postService=(x) ->{
-			return mapper.insert(command);
-		};
-		map.put("result", postService.excute(command));
-		return param;
-	}
+	   public @ResponseBody Map<?,?> postReservation(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("reservation");
+	      command.setParam(param);
+	      
+	      map.put("result", new IPostService() {
+	         @Override
+	         public int excute(Object o) {
+	            return mapper.insert(command);
+	         }
+	      }.excute(command));
+	      if (map.get("result").equals(1)) {
+	         System.out.println("예약은 됐다");
+	         command.setTable("apply");
+	         command.setParam(param);
+	         map.put("apply", new IPutService() {
+	            @Override
+	            public int excute(Object o) {
+	               return mapper.update(command);
+	            }
+	         }.excute(command));
+	      }
+	      return map;
+	   }
 	
 	@RequestMapping(value="/get/movieChart",method=RequestMethod.POST)
 	public @ResponseBody Map<?,?> getMovieChart(Model model){
@@ -390,4 +417,91 @@ public class AjaxController {
 			map.put("msg", result);
 			return map;
 		}
+	   
+	      @SuppressWarnings("unchecked")
+	      @RequestMapping(value="/post/reservation2", method=RequestMethod.POST)
+	         public @ResponseBody Map<?,?> postReservation2(@RequestBody Map<String, Object> param) {
+	             Map<String,Object> map = new HashMap<>();
+	                System.out.println("액션은 셀렉트");
+	                command.setTable("theater");
+	               map.put("theater", new IListService() {
+	                  
+	                  @Override
+	                  public List<?> excute(Object o) {
+	                     return mapper.selectSome(command);
+	                  }
+	               }.excute(command));
+	                
+	               command.setTable("schedule");
+
+	               map.put("schedule", new IListService() {
+	                  
+	                  @Override
+	                  public List<?> excute(Object o) {
+	                     return mapper.selectSome(command);
+	                  }
+	               }.excute(command));
+	                
+	                command.setTable("reservation2");
+	                command.setParam(param);
+	                Map<String, Object> temp = new HashMap<>();
+	                temp.put("seat1", new IListService() {
+	                  
+	                  @Override
+	                  public List<?> excute(Object o) {
+	                     return mapper.selectSome(command);
+	                  }
+	               }.excute(command));
+	                List<?> list = new ArrayList<>();
+	                System.out.println("셀렉트 된 시트정보"+temp.get("seat1"));
+	                String str1 = "";
+	                String[] str2 = {"0"};
+	                list = (List<?>) temp.get("seat1");
+	                int count = 0;
+	                Map<String, Object> map1 = new HashMap<>();
+	                for (int i=0; i<list.size();i++) {
+	                   map1 = (Map<String, Object>) list.get(i);
+	                   str1 = (String) map1.get("seat");
+	                   str2 = str1.split(",");
+	                   for (int j=0;j<str2.length;j++) {
+	                      //30개의 시트 배열로 나눈 정보
+	                      System.out.println(str2[j]);
+	                      if (str2[j].equals("0")) {
+	                         count++;
+	                      }
+	                   }
+	                   System.out.println("남는 시트 갯수는" + count);
+	                   map.put("count", count);
+	                   map.put("seatList1", str1);
+	                   count = 0;
+	                }
+	             
+	             
+	             return map;
+	         }
+	   
+	   @RequestMapping("/file/upload")
+		@ResponseBody
+		public String upload(@RequestParam(name="fileObj") MultipartFile file) throws Exception {
+			Map map2 = fileupload.execute(file);
+			System.out.println(map2);
+			String picurl = (String)map2.get("filelink");
+			System.out.println("picurl : "+picurl);
+			command.setTable("updatePicture");
+			command.setPicurl(picurl);
+			putService=(x) ->{
+				return mapper.update(command);
+			};
+			String result="";
+			
+			if(putService.excute(command)==0) {
+				result="fail";
+			}else {
+				result="success";
+			}
+			System.out.println("result :"+result);
+			return picurl;
+		}
+
+
 }

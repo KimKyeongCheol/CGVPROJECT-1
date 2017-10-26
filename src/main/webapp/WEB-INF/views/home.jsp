@@ -71,6 +71,9 @@
 </head>
 <body>
 	<div id="content" style="height: 100%;width: 100%;"></div>
+	
+
+
 </body>
 <script>
 	jahun.main.init('${path.ctx}');

@@ -186,11 +186,11 @@
 													<label for="profile"><span class="haze">"필수"</span> 프로필사진</label>
 												</th>
 												<td>
-													<img id="profile_img"></img>
-													<input type="file" id="fileName"/>
+													 <img id="profile_img"></img>
+														<input type="file" id="img_file" name="img_file"/>
+														 <button class="btn" id="uploadbutton" style="width:15%; height:5%; background-color:white;">등록</button>
 												</td>
 											</tr>
-										
 										
 											<tr class="input">
 												<th scope="row" class="mandatory">
@@ -379,6 +379,8 @@
 	<input type="hidden" name="upd_coopco_id" id="upd_coopco_id" value="">
 	<input type="hidden" name="card_chk" id="card_chk" value="">
 	</form>
+	
+	
 <script>
 kyungchul.logic.update();
 </script>

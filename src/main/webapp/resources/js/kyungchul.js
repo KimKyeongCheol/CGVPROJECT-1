@@ -113,6 +113,7 @@ kyungchul.logic=(()=>{
          	 $('#sample4_postcode').val(d.member.zipcode);
          	 $('#sample4_roadAddress').val(d.member.address);
          	 $('#sample4_jibunAddress').val(d.member.address);
+         	
             },
             error : (x,s,m)=>{
                alert('오류발생 : '+m);
@@ -160,6 +161,29 @@ kyungchul.logic=(()=>{
 
 			  
 		});
+		
+		$('#uploadbutton').click(()=>{
+			
+			alert('업로드');
+			var form = $('FILE_FORM')[0];
+			var formData = new FormData(form);
+			formData.append("fileObj", $("#img_file")[0].files[0]);
+			$.ajax({
+				url : sessionStorage.getItem('ctx')+'/file/upload',
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : 'POST',
+				success : function(d) {
+					alert(d);
+					alert('사진등록 완료 !');
+					$('#profile_img').attr('src',d);
+				}
+			});
+
+		});
+		
+		
 		
 	};
 

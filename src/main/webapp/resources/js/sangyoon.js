@@ -689,6 +689,112 @@ var reservationUI = {
 	+		'<!-- /Contents Area -->'
 	+	'</div>'
 	+	'<!-- /Contaniner -->'; },
+	complete : ()=> {
+		return '<div class="movielog-detail-wrap">'
+		+           '<!-- Title & Button Combo -->'
+		+           '<div class="tit-mycgv">'
+		+              '<h3>예약 확인 페이지</h3>'
+		+          '</div>'
+		+          '<!-- //Title & Button Combo -->'
+		+            '<!-- 작성 영역 -->'
+		+            ''
+		+            '<form name="aspnetForm" method="post" action="./diary.aspx" id="aspnetForm" enctype="multipart/form-data" novalidate="novalidate">'
+		+'<div>'
+		+'<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">'
+		+'<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">'
+		+'<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE1MDM3OTI0MDZkZHoOkVoLIB5GUJ0CUPnu6FY8zL+z">'
+		+'</div>'
+		+'<script type="text/javascript">'
+		+'//<![CDATA['
+		+'var theForm = document.forms[aspnetForm];'
+		+'if (!theForm) {'
+		+    'theForm = document.aspnetForm;'
+		+'}'
+		+'function __doPostBack(eventTarget, eventArgument) {'
+		+    'if (!theForm.onsubmit || (theForm.onsubmit() != false)) {'
+		+        'theForm.__EVENTTARGET.value = eventTarget;'
+		+        'theForm.__EVENTARGUMENT.value = eventArgument;'
+		+        'theForm.submit();'
+		+    '}'
+		+'}'
+		+'//]]>'
+		+'</script>'
+		+'<div>'
+		+'   <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="6361D8EB">'
+		+   '<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAKutYmMIl7pP5i3diDeHSSVf2CBCZ85OBcw/q3uyOapNcSG5+z2gCmGI2vu1uJYxlscNYUR">'
+		+'</div>'
+		+            '<input type="hidden" id="watchedIdx" name="watchedIdx">'
+		+'            <input type="hidden" id="hdnImageType1" name="hdnImageType1" value="-1"> <!-- 스틸컷 101 -->'
+		+            '<input type="hidden" id="hdnImageType2" name="hdnImageType2" value="-1"> <!-- 동영상 썸네일 201 -->'
+		+            '<input type="hidden" id="hdnImageType3" name="hdnImageType3" value="-1"> <!-- 동영상 URL 202 -->'
+		+            '<input type="hidden" id="hdnImageType4" name="hdnImageType4" value="-1"> <!-- 사용자 업로드 301 -->'
+		+            ''
+		+            '<input type="hidden" id="hdnImagePath1" name="hdnImagePath1" value=""> <!-- 스틸컷 ImagePath -->'
+		+            '<input type="hidden" id="hdnImagePath2" name="hdnImagePath2" value=""> <!-- 동영상 ImagePath -->'
+		+            '<input type="hidden" id="hdnImagePath3" name="hdnImagePath3" value=""> <!-- 동영상 URL -->'
+		+            '<input type="hidden" id="hdnImagePath4" name="hdnImagePath4" value=""> <!-- 사용자 ImagePath -->'
+		+'            <input type="hidden" id="hdnImageGalleryIdx1" name="hdnImageGalleryIdx1"> <!-- 스틸컷 관련 GalleryIdx1 -->'
+		+            '<input type="hidden" id="hdnImageGalleryIdx3" name="hdnImageGalleryIdx3"> <!-- 동영상 관련 GalleryIdx3 -->'
+		+            '<input type="hidden" id="hdnImageDesc4" name="hdnImageDesc4"> <!-- 사용자 이미지 업로드 대체 텍스트 -->'
+		+'            <div class="diary-register-wrap">'
+		+                '<div class="sect-diary-register">'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="member_id_text" name="txtMovieWith" maxlength="60">'
+		+                    '</div>'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_id_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_place_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_date_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_theater_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_time_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_count_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_price_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- 누구와 함게 보셨나요? -->'
+		+                    '<div class="article-who-together">'
+		+                        '<label for="txtMovieWith">같이 본 사람 기입</label>'
+		+                        '<input type="text" readonly="true" id="movie_seat_text" name="txtMovieWith" placeholder="누구와 함께 보셨나요?" maxlength="60">'
+		+                    '</div>'
+		+                    '<!-- //누구와 함게 보셨나요? -->'
+		+                '</div>'
+		+            '</div>'
+		+            '</form>'
+		+            '<!-- //작성 영역 -->'
+		+			'<div class="movie-diary-wrap none" style="padding:0px; cursor:pointer"><a class="round black"><span>홈으로 가기</span></a></div>'
+		+       '</div>'
+	},
 	selectSeat : ()=> {
 		return '    	<!-- Contaniner -->'
 		+	'<div id="contaniner">'
@@ -862,7 +968,7 @@ var reservationUI = {
 		+							'<span class="data letter-spacing-min ellipsis-line2"><a href="#" title="새창열기">영화정보 상세보기</a></span>'
 		+						'</div>'
 		+						'<div class="row movie_type" style="margin-top:20px;">'
-		+							'<span class="data ellipsis-line1"></span>'
+		+							'<span id="movie_name_text" class="data ellipsis-line1"></span>'
 		+						'</div>'
 		+						'<div class="row movie_rating" style="margin-top:20px;">'
 		+							'<span class="data"></span>'
@@ -1139,7 +1245,10 @@ var reservationUI = {
 		+	'<!-- /Contaniner -->'
 	}
 }
-
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
 lsy.common=(()=> {
 	var movie_text;
 	var init=ctx=> {
@@ -1153,10 +1262,6 @@ lsy.common=(()=> {
 	var setContentView=()=> {
 		$('#cgvwrap').remove();
 		$('body').append(compUI.div('cgvwrap').append(reservationUI.selectMovie()));
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth()+1; //January is 0!
-		var yyyy = today.getFullYear();
 
 		if(dd<10) {
 		    dd='0'+dd
@@ -1245,6 +1350,7 @@ lsy.movieDetail=(()=> {
 		$('#theater_text').text('');
 		$('#day_selected_ul>li').removeClass('selected');
 		$('#movie_list>ul>li').removeClass('selected');
+		$('#time_list_scrollbar').remove();
 		$('#date_select_detail').remove();
 		$('.info.movie').empty();
 		$('#movie_list>ul>li').css({'cursor':'pointer'});
@@ -1272,6 +1378,7 @@ lsy.detailSelect=(()=> {
 	var init = x=> {
 		$('#theater_select_box').remove();
 		$('#date_select_detail').remove();
+		$('#time_list_scrollbar').remove();
 		$('#row_date_detail').text('');
 		$('#row_time_detail').text('');
 		$('#theater_text').text('');
@@ -1281,6 +1388,8 @@ lsy.detailSelect=(()=> {
 		$('.theater_list'+x).addClass('selected');
 		$('.theater_list'+x).css({'color':'#fff'});
 		$('#theater_detail').text('CGV  '+$('.theater_list'+x).text());
+		sessionStorage.setItem('placeSeq',x+1);
+		alert('플레이스 시퀀스'+$$('placeSeq'));
 		setTimeout("lsy.btnOn.init()",100);
 	}
 	return {init:init};
@@ -1297,8 +1406,9 @@ lsy.btnOn=(()=> {
 				$('#time_list_scrollbar').append(compUI.div('time_list_box'));
 				$('#time_list_box').addClass('content scroll-y').css({'display':'inline-block'});
 				
+				
 				$.ajax({
-					url : sessionStorage.getItem('x')+'/get/reservation',
+					url : $$('x')+'/get/reservation',
 					method : 'POST',
 					contentType : 'application/json',
 					success : d=>{
@@ -1319,18 +1429,14 @@ lsy.btnOn=(()=> {
 											.append(compUI.noIdTag('span')
 											.css({'font-size':'17px','font-weight':'bold','line-height':'25px'})
 											.text(d.schedule[j].name))));
-											$('#date_select_detail_'+i+'_'+j+'>a').append(compUI.classTag('span','count'+j)
-											.text('30').css({'line-height':'30px','padding-left':'5px','padding-right':'7px'}));
 							}
 						}
+						$('#time_list_box>ul>li').css({'text-align':'center'});
 					},
 					error : (x,s,m)=>{
 						alert('에러발생');
 					}
 				});
-				
-				$('#date_select_detail_1>a>span>span').text('13:00');
-				$('#date_select_detail_2>a>span>span').text('16:30');
 			if ($('#row_time_detail').text()==="" || $('#row_date_detail').text()==="" || $('#movie_info_text').text()==="" || $('#theater_detail').text()==="") {
 				$('#tnb_step_btn_right').removeClass('btn-right on');
 				$('#tnb_step_btn_right').addClass('btn-right');				
@@ -1357,7 +1463,8 @@ lsy.selectTime=(()=> {
 		$('#date_select_detail_'+x+'_'+y+'>a>span>span').css({'color':'#fff'});
 		$('#date_select_detail_'+x+'_'+y+'>a').css({'color':'white'});
 		$('#theater_text').text($('#time_list_theater_detail'+x).text());
-		sessionStorage.setItem('restNum',$('#date_select_detail_'+x+'_'+y+'>a>span:nth-child(2)').text());
+		sessionStorage.setItem('theaterSeq',x+1);
+		sessionStorage.setItem('scheduleSeq',y+1);
 		
 		if ($('#row_time_detail')!=="" && $('#movie_info_text').text()!=="" && $('#theater_detail').text()!=="극장정보 상세보기" && $('#row_date_detail').text()!=="") {
 				$('#tnb_step_btn_right').removeClass('btn-right');
@@ -1370,7 +1477,6 @@ lsy.selectTime=(()=> {
 
 lsy.seatSelect=(()=> {
 	var init=()=> {
-		
 		if ($('#tnb_step_btn_right').hasClass('btn-right on') || $('#tnb_step_btn_right').hasClass('on.btn-right') || $('#tnb_step_btn_right').hasClass('on btn-right')) {
 			alert('좌석선택 페이지 갑니다');
 			sessionStorage.setItem('movieImg','영화더미');
@@ -1385,6 +1491,45 @@ lsy.seatSelect=(()=> {
 			$('body').append(compUI.div('cgvwrap').append(reservationUI.selectSeat()));
 			$('#seat_minimap_nano').append(compUI.div('background').css({'height':'350px','width':'700px','margin':'0 auto'}));
 			
+			
+			$.ajax({
+				url:$$('x') + '/post/reservation2',
+				method : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify({
+					'movie_seq' : $$('movieSeq'),
+					'place_seq' : $$('placeSeq'),
+					'advance_date' : $$('selectDate'),
+					'theater_seq' : $$('theaterSeq'),
+					'schedule_seq' : $$('scheduleSeq')
+				}),
+				success : d => {
+					alert('에이잭스 통신 성공 , 남은 좌석 개수는: '+d.count);
+					
+					$('#rest_num').text(d.count + '석');
+					if (typeof d.count == 'undefined') {
+						$('#rest_num').text('30석');
+					}
+					var arr1 = d.seatList1;
+					alert(typeof arr1+arr1);
+					var strArr = arr1.split(',');
+					var length = String(strArr).length;
+					alert('시트 배열 개수는 : '+strArr.length);
+					for(var i=0;i<strArr.length;i++) {
+						j=i+1;
+						$('#'+j+'>span>input').val(strArr[i]);
+						if ($('#'+j+'>span>input').val()==="1") {
+							$('#'+j).addClass('selected');
+							$('#'+j).attr('onclick','false');
+							$('#'+j).css({'background-color':'#bbb'});
+							$('#'+j+'>span>a').css({'color':'white'});
+						}
+					}
+				},
+				error : (x,s,m)=>{
+					alert('에러발생');
+				}
+			});
 			alert('선택된 영화 시퀀스 값은' + sessionStorage.getItem('movieSeq'));
 			
 
@@ -1427,7 +1572,7 @@ lsy.seatSelect=(()=> {
 			
 			$('#theater_name').text($$('theaterName'));
 			$('#theater_number').text($$('theaterNumber'));
-			$('#rest_num').text($$('restNum'));
+			$('#rest_num').text('30석');
 			$('.movie_type>span').text($$('movieName'));
 			$('.movie_rating>span').text($$('movieAge'));
 			$('#theater_name').text($$('theaterName'));
@@ -1494,6 +1639,8 @@ lsy.seatCount=(()=> {
 		if (x==0) {
 			total=0;
 		}
+		count=0;
+		$('#seats_list_ul>li>')
 		alert('토탈은'+total);
 	};
 	var onCreate = (x,y)=> {
@@ -1677,6 +1824,8 @@ lsy.date=(()=> {
 		var $date = $('#detail_date>span:nth-child(2)').text();
 		var $dayweek = $('#detail_dayweek'+x);
 		$('#row_date_detail').text($year+ '/' + $date + ' / ' + $dayweek.text());
+		var clickDay = parseInt(dd)+parseInt(x);
+		sessionStorage.setItem('selectDate',yyyy+ '-' + mm + '-'+clickDay);
 		setTimeout("lsy.btnOn.init()",100);
 	};
 	var setContentView = ()=> {
@@ -1761,20 +1910,69 @@ lsy.selectDetail=(()=>{
 
 lsy.pay = (()=> {
 	var init=()=> {
+		var str = "";
+		for (var i=0;i<30;i++) {
+			j=i+1;
+			var seat = $('#'+j+'>span>input').val();
+			if (i < 29) {
+				str+=seat + ',';
+			}
+			else {
+				str+=seat;
+			}
+		}
 		$.ajax({
-			url : $$('x')+'/post/reservation2',
+			url:$$('x') + '/post/reservation',
 			method : 'POST',
 			contentType : 'application/json',
 			data : JSON.stringify({
-				'movieSeq' : sessionStorage.getItem('movieSeq')
+				'movie_seq' : $$('movieSeq'),
+				'place_seq' : $$('placeSeq'),
+				'advance_date' : $$('selectDate'),
+				'theater_seq' : $$('theaterSeq'),
+				'schedule_seq' : $$('scheduleSeq'),
+				'total_cost' : $('#totalPrice').text(),
+				'member_id' : $$('member_id'),
+				'seat_list' : str
 			}),
 			success : d => {
-				alert('에이잭스 통신 성공 : '+d.msg);
+				alert(typeof d.apply);
+				if (typeof d.apply == "number") {
+					alert('예약 되셨습니다');
+					alert('예약된 아이디는' + $$('member_id') + '이고, 예약된 영화는 ' + $('#movie_name_text').text() +
+							'이고, 예약된 극장은 ' + $('#theater_detail>a').text()+'이고, 예약된 날짜는 '+$$('selectDate') +
+							'이고, 예약된 관은 ' + $('#theater_number').text() + '이고, 예약된 시간은 ' + 
+							$('#seat_select_time_detail>b:nth-child(3)').text() + '이고, ' +
+							'가격은 ' + $('#totalPrice').text() + '원 이고, ' +
+							'배당 좌석은 ' + $('#seat_number_list').text() + '입니다.');
+					sessionStorage.setItem('movieName',$('#movie_name_text').text());
+					sessionStorage.setItem('placeName',$('#theater_detail>a').text());
+					sessionStorage.setItem('theaterName',$('#theater_detail>a').text());
+					sessionStorage.setItem('price',$('#totalPrice').text());
+					sessionStorage.setItem('seatInfo',$('#seat_number_list').text());
+					sessionStorage.setItem('movieTime',$('#seat_select_time_detail>b:nth-child(3)').text());
+					sessionStorage.setItem('total_count',total);
+					
+					$('#cgvwrap').remove();
+					$('body').append(compUI.div('cgvwrap').append(reservationUI.complete()));
+					$('#cgvwrap').css({'background-color':'rgba(0, 0, 0, 0.15)','width':'70%','margin':'0 auto','margin-top':'100px'});
+					$('.tit-mycgv>h3').css({'height':'100px'});
+					$('#member_id_text').val('예약된 아이디 : '+$$('member_id'));
+					$('#movie_id_text').val('예약된 영화 : '+$$('movieName'));
+					$('#movie_place_text').val('예약된 지역 : '+$$('placeName'));
+					$('#movie_date_text').val('예약된 날짜 : '+$$('selectDate'));
+					$('#movie_theater_text').val('예약된 관 : '+$$('theaterName'));
+					$('#movie_time_text').val('예약된 시간 : '+$$('movieTime'));
+					$('#movie_price_text').val('가격 : '+$$('price')+'원');
+					$('#movie_seat_text').val('좌석 정보 : '+$$('seatInfo'));
+					$('#movie_count_text').val('총 인원 : '+$$('total_count')+'명');
+				}
 			},
 			error : (x,s,m)=>{
 				alert('에러발생');
 			}
 		});
+		alert(str);
 	}
 	return {init:init}
 })();

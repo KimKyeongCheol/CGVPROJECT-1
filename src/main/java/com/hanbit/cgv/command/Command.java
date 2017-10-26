@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Data @Component @Lazy
 public class Command{
-	protected String table,movieNum;
+	protected String table,movieNum,picurl;
 	protected Map<String,Object> param;
 	
 }
