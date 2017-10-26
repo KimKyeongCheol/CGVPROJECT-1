@@ -1252,6 +1252,10 @@ var yyyy = today.getFullYear();
 lsy.common=(()=> {
 	var movie_text;
 	var init=ctx=> {
+		if(sessionStorage.getItem('member_id')==null){
+			alert('로그인을 먼저 해주세요');
+			location.href=sessionStorage.getItem('ctx')+'/home';
+		}
 		lsy.session.init(ctx);
 		onCreate();
 	};

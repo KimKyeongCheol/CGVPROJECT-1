@@ -27,9 +27,13 @@ jahun.main=(()=>{
 		});
 		
 		$('#joinBtn').click(()=>{
-			alert('go joinBtn');
-			$('#content').empty();
-			location.href=sessionStorage.getItem('ctx')+"/join";
+			if(sessionStorage.getItem('member_id')!=null){
+				alert('로그아웃을 먼저 해주세요');
+				location.href=sessionStorage.getItem('ctx')+'/home';
+			}else{
+				$('#content').empty();
+				location.href=sessionStorage.getItem('ctx')+"/join";
+			}
 		});
 		
 		$('#mycgvBtn').click(()=>{

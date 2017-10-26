@@ -2,9 +2,14 @@ var kyungchul=kyungchul || {};
 
 kyungchul.main=(()=>{
    var init=(ctx)=>{
-	   kyungchul.session.init(ctx);
-	   kyungchul.UI.init();
-	   kyungchul.logic.init();
+	   if(sessionStorage.getItem('member_id')==null){
+		   alert('로그인을 먼저 해주세요');
+		   location.href=sessionStorage.getItem('ctx')+'/home';
+	   }else{
+		   kyungchul.session.init(ctx);
+		   kyungchul.UI.init();
+		   kyungchul.logic.init();
+	   }
    };
    return {
       init : init,

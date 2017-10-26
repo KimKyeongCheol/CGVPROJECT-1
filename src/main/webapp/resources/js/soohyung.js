@@ -187,7 +187,9 @@ soohyung.logic=(()=>{
                            $('#login_content').append(
       '<div class="sect-login"><ul class="tab-menu-round"><li class="on"><a href="/user/login/">로그인</a></li></ul><div class="box-login login_1408"><h3 class="hidden">회원로그인</h3><form id="form2_capcha"method="post"action="#"novalidate="novalidate"onsubmit="return false"style="display:block;"><fieldset><legend>회원로그인</legend><div id="login_txt_wrap"class="txt_wrap"><h3></h3><!--<p>정보보호를위해아이디,비밀번호와함께<br/>자동입력방지문자를입력하셔야합니다.</p>--><p>귀하의정보보호를위해실제사용자가<br>요청을보내고있는지<br>확인하는절차를거치고있습니다.</p></div><div id="login-form"class="login"><input type="text"title="아이디"id="txtUserId"name="txtUserId"data-title="아이디를 "data-message="입력하세요."required="required"value=""><input type="password"title="패스워드"id="txtPwd1"name="txtPwd1"data-title="패스워드를 "data-message="입력하세요."required="required"></div><button type="submit"id="submit"title="로그인"><span id="login_btn">로그인</span></button><div class="login-option"><button id="join">회원가입하기</button><button id="findId_btn">아이디찾기</button><button id="findPw_btn">비밀번호찾기</button></div></fieldset></form></div></div><div class="sect-loginad"style="background:#d2cbbe;"><div><iframe src="http://ad.cgv.co.kr/NetInsight/html/CGV/CGV_201401/sub@Login_bigbanner"width="350"height="300"title=""frameborder="0"scrolling="no"marginwidth="0"marginheight="0"name="Login_bigbanner"id="Login_bigbanner"></iframe></div></div>'	   
                            );
+                           soohyung.logic.login();
                            $('#txtUserId').val(d.member_id);
+                           
                         }else{
                            alert('로그인 실패 !!');
                            $('#txtUserId').val("");
