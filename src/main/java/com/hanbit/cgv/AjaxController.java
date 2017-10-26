@@ -269,7 +269,6 @@ public class AjaxController {
 			};
 			String result="";
 			
-			
 			if(postService.excute(command)==0) {
 				result="fail";
 			}else {

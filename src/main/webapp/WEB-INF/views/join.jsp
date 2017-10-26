@@ -230,6 +230,24 @@
 											<tr class="input">
 												<th scope="row" class="mandatory">
 													<label for="birth_yy">
+													<span class="haze">"필수"</span> 성별</label>
+												</th>
+												<td>
+													<div class="gender_select">
+														<span class="select w120" data-skin="form">
+															<select title="성별 중 선택" id="gender" name="gender">
+																
+															<option value="male">남자</option><option value="female">여자</option></select>
+														</span>
+														
+													</div>
+													
+												</td>
+											</tr>
+											
+											<tr class="input">
+												<th scope="row" class="mandatory">
+													<label for="birth_yy">
 													<span class="haze">"필수"</span> 생년월일</label>
 												</th>
 												<td>

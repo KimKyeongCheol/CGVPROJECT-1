@@ -68,11 +68,9 @@
 <script src="${path.js}/jahun.js"></script>
 <script src="${path.js}/soohyung.js"></script>
 <script src="${path.js}/sangyoon.js"></script>
-
-
 </head>
 <body>
-	<div id="content" style="height: 100%;width: 100%"></div>
+	<div id="content" style="height: 100%;width: 100%;"></div>
 </body>
 <script>
 	jahun.main.init('${path.ctx}');
