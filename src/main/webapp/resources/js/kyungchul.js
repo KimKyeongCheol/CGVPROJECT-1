@@ -101,7 +101,7 @@ kyungchul.logic=(()=>{
             }),
             contentType : 'application/json',
             success : d =>{
-            	$('#profile_img').attr("src",d.member.profile);
+            	$('#profile_img').attr("src",sessionStorage.getItem('img')+'/'+d.member.profile);
          	   $('#member_id').val(d.member.member_id);
          	  $('#name').val(d.member.name);
          	  var phone=d.member.phone;
@@ -128,7 +128,6 @@ kyungchul.logic=(()=>{
 			  var email=$('#email_first').val()+'@'+$('#email_input').val();
 			  var zipcode=$('#sample4_postcode').val();
 			  var address=$('#sample4_roadAddress').val();
-			  var profile='default.jpg';
 			  
 			  $.ajax({
 		             url : sessionStorage.getItem('ctx')+'/put/update',
@@ -140,8 +139,7 @@ kyungchul.logic=(()=>{
 		            	 phone : phone,
 		            	 email : email,
 		            	 zipcode : zipcode,
-		            	 address : address,
-		            	 profile : profile
+		            	 address : address
 		             }),
 		             contentType : 'application/json',
 		             success : d =>{
@@ -177,7 +175,7 @@ kyungchul.logic=(()=>{
 				data : formData,
 				type : 'POST',
 				success : function(d) {
-					$('#profile_img').attr('src',d);
+					$('#profile_img').attr('src',sessionStorage.getItem('img')+'/'+d);
 					alert(d);
 					alert('사진등록 완료 !');
 				}

@@ -111,7 +111,7 @@ select * from qna where member_id=#{param.member_id}
 		
 		<choose>
 		<when test="table eq 'update'">
-       		update member set name=#{param.name}, email=#{param.email}, phone=#{param.phone}, address=#{param.address}, profile=#{param.profile}, zipcode=#{param.zipcode}, pass=#{param.pass} where member_id=#{param.member_id}
+       		update member set name=#{param.name}, email=#{param.email}, phone=#{param.phone}, address=#{param.address}, zipcode=#{param.zipcode}, pass=#{param.pass} where member_id=#{param.member_id}
 		</when>
 		<when test="table eq 'like'">
        		update comment set comment_like=#{param.comment_like} where comment_seq=#{param.comment_seq}

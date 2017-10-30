@@ -29,7 +29,7 @@ public class FileUpload {
 		result.put("filesize", size);
 		String orgName = file.getOriginalFilename();
 		result.put("filename",orgName);
-		String path = application.getRealPath("/share");
+		String path = application.getRealPath("/resources/img");
 		File dir = new java.io.File(path);
 		if (!dir.exists())
 			dir.mkdirs(); 
@@ -38,6 +38,7 @@ public class FileUpload {
 		file.transferTo(dest); 
 		result.put("fileaddress", path2.getImg());
 		result.put("filelink", path2.getImg()+"/"+saveName);
+		result.put("saveName", saveName);
 		return result;
 	}
 

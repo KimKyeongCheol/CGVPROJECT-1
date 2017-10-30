@@ -186,7 +186,7 @@
 													<label for="profile"><span class="haze">"필수"</span> 프로필사진</label>
 												</th>
 												<td>
-													 <img id="profile_img"></img>
+													 <img id="profile_img" height="100px" width="100px"></img>
 														<input type="file" id="img_file" name="img_file"/>
 														 <button class="btn" id="uploadbutton" style="width:15%; height:5%; background-color:white;">등록</button>
 												</td>

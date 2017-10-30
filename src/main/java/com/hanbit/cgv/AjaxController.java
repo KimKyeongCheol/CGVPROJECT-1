@@ -486,7 +486,7 @@ public class AjaxController {
 		public String upload(@RequestParam(name="fileObj") MultipartFile file) throws Exception {
 			Map map2 = fileupload.execute(file);
 			System.out.println(map2);
-			String picurl = (String)map2.get("filelink");
+			String picurl = (String)map2.get("saveName");
 			System.out.println("picurl : "+picurl);
 			command.setTable("updatePicture");
 			command.setPicurl(picurl);
