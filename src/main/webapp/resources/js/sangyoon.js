@@ -1252,6 +1252,7 @@ var yyyy = today.getFullYear();
 lsy.common=(()=> {
 	var movie_text;
 	var init=ctx=> {
+		
 		if(sessionStorage.getItem('member_id')==null){
 			alert('로그인을 먼저 해주세요');
 			location.href=sessionStorage.getItem('ctx')+'/home';
@@ -1287,7 +1288,8 @@ lsy.common=(()=> {
 			contentType : 'application/json',
 			success : d=>{
 				for (var i=0;i<d.movie.length;i++) {
-					$('#movie_list_foreach').append(
+						
+						$('#movie_list_foreach').append(
 								'<li onclick="lsy.movieDetail.init('+i+');" style="cursor: pointer;" class="movie-list-detail'+i+'">'
 								+	'<span class="movie-icon">'
 								+		'<img src="'+$$("i")+'/'+d.movie[i].age_limit+'.PNG" alt="" />'
@@ -1296,7 +1298,10 @@ lsy.common=(()=> {
 								+	'</span>'
 								+	'<span style="font-weight: bold;" class="movie_text'+i+'">'+d.movie[i].name+'</span>'
 								+'</li>'
-					);
+						);
+					if($('#movie_seq'+i).val()==$$('movie_seq')){
+						lsy.movieDetail.init(i);
+					}
 				}
 				for (var i=0;i<d.place.length;i++) {
 					$('#content-scroll-seoul').append(
@@ -1328,7 +1333,6 @@ lsy.movieDetail=(()=> {
 		onCreate(x);
 	};
 	var onCreate=x=>{
-		setContentView();
 		sessionStorage.setItem('movieSeq',$('#movie_seq'+x).val());
 		$('#content-scroll-seoul>li').removeClass('selected').css({'color':'black'});
 		$('#row_date_detail').text('');

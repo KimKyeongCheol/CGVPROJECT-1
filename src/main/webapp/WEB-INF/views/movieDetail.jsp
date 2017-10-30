@@ -95,7 +95,7 @@
                 <div class="sect-bcrumb">
                     <ul>
                         <li><a href="${path.ctx}/home"><img alt="home" src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png"></a></li>
-                        <li><a href="/movies/">영화</a></li>
+                        <li><a>영화</a></li>
                         <li class="last">영화상세</li>
                     </ul>
                 </div>
@@ -172,13 +172,13 @@
         <div class="col-detail">
             <!-- 메뉴가 선택되면 a 에 title="선택" 이라고 넣는다 -->
             <ul class="tab-menu">
-                <li class="on"><a title="현재 선택됨" href="/movies/detail-view/?midx=79949#menu">주요정보 </a></li>
+                <li class="on"><a title="현재 선택됨">주요정보 </a></li>
              <!--   <li><a href="/movies/detail-view/cast.aspx?midx=79949#menu">감독/출연</a></li>-->
-                <li><a href="/movies/detail-view/trailer.aspx?midx=79949#menu">트레일러</a></li>
-                <li><a href="/movies/detail-view/still-cut.aspx?midx=79949#menu">스틸컷</a></li>
+                <li><a>트레일러</a></li>
+                <li><a>스틸컷</a></li>
                
                 <li data-target="heading-new"><a>평점/리뷰</a></li>
-                <li class="last" data-target=".heading-new"><a href="/movies/detail-view/show-times.aspx?midx=79949#menu">상영시간표</a></li>
+                <li class="last" data-target=".heading-new"><a>상영시간표</a></li>
             </ul>
             
            

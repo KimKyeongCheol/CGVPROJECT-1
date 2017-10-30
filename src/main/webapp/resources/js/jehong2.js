@@ -305,6 +305,7 @@ jehong2.main=(()=>{
    var logic=()=>{
 	   $(document).on("click",".link-reservation", function() {
            sessionStorage.setItem('movie_seq',$(this).attr("name"));
+           alert(sessionStorage.getItem('movie_seq'));
            location.href=sessionStorage.getItem('ctx')+"/reservation";
       });
 

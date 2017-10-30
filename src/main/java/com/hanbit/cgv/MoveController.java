@@ -23,7 +23,7 @@ public class MoveController {
 	public String index(Model model) {
 		logger.info("welcome ....");
 		model.addAttribute("path",PathFactory.create());
-		return "home";
+		return "intro";
 	}
 	
 	@RequestMapping("/{page}")
@@ -32,8 +32,6 @@ public class MoveController {
 		
 		return page;
 	}
-	
-	
 	
 	
 

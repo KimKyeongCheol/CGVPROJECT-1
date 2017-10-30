@@ -10,8 +10,8 @@
 		
 		<choose>
 			<when test="table eq 'movieChart'">
-				select t.*,s.*,p.*,i.* from movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq order by search_count desc
-			</when>
+            select t.*,s.*,p.*,i.* from (movie t join steelcut s on t.movie_seq=s.movie_seq join movie_picture p on t.movie_seq=p.movie_seq join movie_info i on t.movie_seq=i.movie_seq )order by cast(${param.movie_sort} as unsigned) desc;
+         </when>
 			<when test="table eq 'comment'">
 				select c.*,m.profile from comment c join member m on c.member_id=m.member_id where c.movie_seq=#{param.movie_seq} order by comment_seq desc
 			</when>
