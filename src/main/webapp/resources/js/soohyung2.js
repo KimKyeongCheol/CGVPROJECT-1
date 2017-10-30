@@ -165,7 +165,11 @@ soohyung2.logic=(()=>{
                 });   
          }
      });
+     $('#cancel').click(()=>{
+    	 location.href=sessionStorage.getItem('ctx')+'/home';
+     });
   };
+  
    
   
   var sample4_execDaumPostcode=()=>{

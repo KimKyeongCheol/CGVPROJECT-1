@@ -12,7 +12,7 @@
 	<script src="${path.js}/soohyung2.js"></script>
 </head>
 
-
+<a href="${path.ctx}/home"><img width="100px" height="100px" alt="home" src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png"/></a>
 <body>
 <!--skip navigation-->
 <div class="skipNavi">

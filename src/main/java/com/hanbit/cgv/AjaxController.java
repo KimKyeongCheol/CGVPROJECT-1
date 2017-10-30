@@ -1,17 +1,11 @@
 package com.hanbit.cgv;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -21,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.hanbit.cgv.command.Command;
 import com.hanbit.cgv.mapper.Mapper;
@@ -30,6 +23,7 @@ import com.hanbit.cgv.service.IGetService;
 import com.hanbit.cgv.service.IListService;
 import com.hanbit.cgv.service.IPostService;
 import com.hanbit.cgv.service.IPutService;
+import com.hanbit.cgv.service.TransactionService;
 import com.hanbit.cgv.util.FileUpload;
 
 
@@ -38,6 +32,7 @@ public class AjaxController {
 	@Autowired Command command;
 	@Autowired Mapper mapper;
 	@Autowired FileUpload fileupload;
+	@Autowired TransactionService tx;
 	IListService listService=null;
 	IGetService getService=null;
 	IPostService postService=null;
@@ -87,41 +82,25 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value="/post/reservation",method=RequestMethod.POST)
-	   public @ResponseBody Map<?,?> postReservation(@RequestBody Map<String,Object> param){
-	      Map<String,Object> map=new HashMap<>();
-	      command.setTable("reservation");
-	      command.setParam(param);
-	      
-	      map.put("result", new IPostService() {
-	         @Override
-	         public int excute(Object o) {
-	            return mapper.insert(command);
-	         }
-	      }.excute(command));
-	      if (map.get("result").equals(1)) {
-	         System.out.println("예약은 됐다");
-	         command.setTable("apply");
-	         command.setParam(param);
-	         map.put("apply", new IPutService() {
-	            @Override
-	            public int excute(Object o) {
-	               return mapper.update(command);
-	            }
-	         }.excute(command));
-	      }
-	      return map;
-	   }
+    public @ResponseBody Map<?,?> postReservation(@RequestBody Map<String,Object> param){
+       Map<String,Object> map=new HashMap<>();
+       tx.reservation(param);
+       map.put("reservation", "success");
+       return map;
+    }
 	
 	@RequestMapping(value="/get/movieChart",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> getMovieChart(Model model){
-		Map<String,Object> map=new HashMap<>();
-		command.setTable("movieChart");
-		listService=(x) ->{
-			return mapper.selectSome(command);
-		};
-		map.put("movieChart", listService.excute(command));
-		return map;
-	}
+	   public @ResponseBody Map<?,?> getMovieChart(@RequestBody Map<String,Object> param){
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("movieChart");
+	      command.setParam(param);
+	      listService=(x) ->{
+	         return mapper.selectSome(command);
+	      };
+	      map.clear();
+	      map.put("movieChart", listService.excute(command));
+	      return map;
+	   }
 	
 	@RequestMapping(value="/get/movieDetail",method=RequestMethod.POST)
 	   public @ResponseBody Map<?,?> getMovieDetail(@RequestBody Map<String,Object> param){
@@ -160,6 +139,14 @@ public class AjaxController {
 	         return mapper.selectOne(command);
 	      };
 	      map.put("ages", getService.excute(command));
+	      
+	      
+	      command.setTable("charmpoint");
+	      command.setParam(param);
+	      getService=(x) ->{
+	         return mapper.selectOne(command);
+	      };
+	      map.put("charmpoint", getService.excute(command));
 	      return map;
 	   }
 	
@@ -190,26 +177,26 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value="/post/comment",method=RequestMethod.POST)
-	public @ResponseBody Map<?,?> postComment(@RequestBody Map<String,Object> param){
-		
-		System.out.println("post comment 진입..");
-		Map<String,Object> map=new HashMap<>();
-		command.setTable("comment");
-		command.setParam(param);
-		postService=(x) ->{
-			return mapper.insert(command);
-		};
-		String result="";
-		
-		
-		if(postService.excute(command)==0) {
-			result="fail";
-		}else {
-			result="success";
-		}
-		map.put("msg", result);
-		return map;
-	}
+	   public @ResponseBody Map<?,?> postComment(@RequestBody Map<String,Object> param){
+	      
+	      System.out.println("post comment 진입..");
+	      Map<String,Object> map=new HashMap<>();
+	      command.setTable("comment");
+	      command.setParam(param);
+	      postService=(x) ->{
+	         return mapper.insert(command);
+	      };
+	      String result="";
+	      
+	      
+	      if(postService.excute(command)==0) {
+	         result="fail";
+	      }else {
+	         result="success";
+	      }
+	      map.put("msg", result);
+	      return map;
+	   }
 	@RequestMapping(value="/get/findId",method=RequestMethod.POST, consumes="application/json")
 	   public @ResponseBody Map<?,?> getFindId(@RequestBody Map<String,Object> param){
 	      Map<String,Object> map=new HashMap<>();
@@ -262,23 +249,23 @@ public class AjaxController {
 	  
 	   
 	   @RequestMapping(value="/put/like",method=RequestMethod.POST, consumes="application/json")
-	   public @ResponseBody Map<?,?> putLike(@RequestBody Map<String,Object> param){
-	      Map<String,Object> map=new HashMap<>();
-	      command.setTable("like");
-	      command.setParam(param);
-	      
-	      putService=(x) ->{
-	         return mapper.update(command);
-	      };
-	      String result="";
-	      if(putService.excute(command)==0) {
-	         result="fail";
-	      }else {
-	         result="success";
+	      public @ResponseBody Map<?,?> putLike(@RequestBody Map<String,Object> param){
+	         Map<String,Object> map=new HashMap<>();
+	         command.setTable("like");
+	         command.setParam(param);
+	         
+	         putService=(x) ->{
+	            return mapper.update(command);
+	         };
+	         String result="";
+	         if(putService.excute(command)==0) {
+	            result="fail";
+	         }else {
+	            result="success";
+	         }
+	         map.put("msg", result);
+	         return map;
 	      }
-	      map.put("msg", result);
-	      return map;
-	   }
 	   
 	   @RequestMapping(value="/get/idCheck",method=RequestMethod.POST, consumes="application/json")
 	   public @ResponseBody Map<?,?> idCheck(@RequestBody Map<String,Object> param){
@@ -361,55 +348,55 @@ public class AjaxController {
 		}
 	   
 	   @RequestMapping(value="/put/qnaDelete",method=RequestMethod.POST)
-		public @ResponseBody Map<?,?> putDelete(@RequestBody Map<String,Object> param){
-			
-			Map<String,Object> map=new HashMap<>();
-			command.setTable("deleteQna");
-			command.setParam(param);
-			deleteService=(x) ->{
-				return mapper.delete(command);
-			};
-			String result="";
-			
-			
-			if(deleteService.excute(command)==0) {
-				result="fail";
-			}else {
-				result="success";
-			}
-			map.put("msg", result);
-			return map;
-		}
+	      public @ResponseBody Map<?,?> putDelete(@RequestBody Map<String,Object> param){
+	         
+	         Map<String,Object> map=new HashMap<>();
+	         command.setTable("deleteQna");
+	         command.setParam(param);
+	         deleteService=(x) ->{
+	            return mapper.delete(command);
+	         };
+	         String result="";
+	         
+	         
+	         if(deleteService.excute(command)==0) {
+	            result="fail";
+	         }else {
+	            result="success";
+	         }
+	         map.put("msg", result);
+	         return map;
+	      }
 	   
 	   @RequestMapping(value="/post/qna",method=RequestMethod.POST)
-		public @ResponseBody Map<?,?> postQna(@RequestBody Map<String,Object> param){
-			Map<String,Object> map=new HashMap<>();
-			command.setTable("qna");
-			command.setParam(param);
-			postService=(x) ->{
-				return mapper.insert(command);
-			};
-			map.put("msg", postService.excute(command));
-			return param;
-		}
-	   @RequestMapping(value="/put/movieLike",method=RequestMethod.POST, consumes="application/json")
-	   public @ResponseBody Map<?,?> putMovieLike(@RequestBody Map<String,Object> param){
-	      Map<String,Object> map=new HashMap<>();
-	      command.setTable("movieLike");
-	      command.setParam(param);
-	      
-	      putService=(x) ->{
-	         return mapper.update(command);
-	      };
-	      String result="";
-	      if(putService.excute(command)==0) {
-	         result="fail";
-	      }else {
-	         result="success";
+	      public @ResponseBody Map<?,?> postQna(@RequestBody Map<String,Object> param){
+	         Map<String,Object> map=new HashMap<>();
+	         command.setTable("qna");
+	         command.setParam(param);
+	         postService=(x) ->{
+	            return mapper.insert(command);
+	         };
+	         map.put("msg", postService.excute(command));
+	         return param;
 	      }
-	      map.put("msg", result);
-	      return map;
-	   }
+	   @RequestMapping(value="/put/movieLike",method=RequestMethod.POST, consumes="application/json")
+	      public @ResponseBody Map<?,?> putMovieLike(@RequestBody Map<String,Object> param){
+	         Map<String,Object> map=new HashMap<>();
+	         command.setTable("movieLike");
+	         command.setParam(param);
+	         
+	         putService=(x) ->{
+	            return mapper.update(command);
+	         };
+	         String result="";
+	         if(putService.excute(command)==0) {
+	            result="fail";
+	         }else {
+	            result="success";
+	         }
+	         map.put("msg", result);
+	         return map;
+	      }
 	   
 	   @RequestMapping(value="/delete/member",method=RequestMethod.POST)
 		public @ResponseBody Map<?,?> deleteMember(@RequestBody Map<String,Object> param){
@@ -513,9 +500,8 @@ public class AjaxController {
 			}else {
 				result="success";
 			}
-			System.out.println("result :"+result);
+			System.out.println("picurl :"+picurl);
 			return picurl;
 		}
-
 
 }

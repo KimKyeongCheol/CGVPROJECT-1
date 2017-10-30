@@ -2,23 +2,29 @@ var jehong=jehong || {};
 
 jehong.main=(()=>{
    var init=(ctx)=>{
-      alert('sessionStorage_getItem_movie_seq is '+sessionStorage.getItem('movie_seq'));
       jehong.session.init(ctx);
       drawMovieChart();
       logic();
    };
    var logic=()=>{
 	   $(document).on("click",".movie_steelcut, .li_searchList",function(){
-		   alert('go MovieDetail/seq: '+$(this).attr("name"));
            sessionStorage.setItem('movie_seq',$(this).attr("name"));
            location.href=sessionStorage.getItem('ctx')+'/movieDetail';
            event.stopPropagation();
 	   });
        $(document).on("click",".link-reservation", function() {
-            alert('go MovieReservation /seq: '+$(this).attr("name"));
             sessionStorage.setItem('movie_seq',$(this).attr("name"));
             location.href=sessionStorage.getItem('ctx')+"/reservation";
        });
+	   $('#sort_btn').click(()=>{
+		   $('#movie_chart').empty();
+		   $('#searchList').empty();
+		   $('.col-rank-trailer').remove();
+		   $('.btn-more-fontbold').remove();
+		   $('.date').remove();
+		   drawMovieChart();
+			
+	   });
        
 
    };
@@ -26,11 +32,12 @@ jehong.main=(()=>{
       $.ajax({
          url : sessionStorage.getItem('ctx')+'/get/movieChart',
          method : 'POST',
+         data : JSON.stringify({
+             'movie_sort' : $("#order_type option:selected").val(),
+          }),
          contentType : 'application/json',
          context: this,
          success : d=>{
-            
-            alert('0번쨰 ? '+d.movieChart[0].name);
               //Type Conversion (Date to String)
               var calDate = function(x){
                  var date= new Date(x);
@@ -38,9 +45,10 @@ jehong.main=(()=>{
                  return date;
               };
               //MovieChart
+              $('#movie_chart').append('<h4 class="hidden"></h4>');
               $('#movie_chart').append('<ol id="ol"></ol>');
               for(var i=0;i<4;i++){
-                 $('#ol').append('<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">'+d.movieChart[i].score+'%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>'+calDate(d.movieChart[i].release_date)+'<span> 개봉</span></strong></span><span class="like"><button id="likeBtn_'+d.movieChart[i].movie_seq+'" class="btn-like" onclick="jehong.main.likeMovie('+d.movieChart[i].movie_seq+')" value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation" name="'+d.movieChart[i].movie_seq+'">예매</a></span></div></li>');
+                 $('#ol').append('<li><div class="box-image"><strong class="rank">No.'+(i+1)+'</strong><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">12세이상</span></span><span class="screentype"></span></div><div class="box-contents"><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-10]에그포인트적용범위1~3위.start:add_mwpark--><div class="egg-gage small"><span class="egg great"></span><span class="percent">'+d.movieChart[i].score+'%</span></div><!--[2015-12-10]에그포인트적용범위1~3위.end:add_mwpark--><!--[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark<div class="point"><em>102.0</em></div>[2015-12-11]무비차트평점개편별점UI삭제start:del_mwpark--></div><span class="txt-info"><strong>'+calDate(d.movieChart[i].release_date)+'<span> 개봉</span></strong></span><span class="like"><button id="likeBtn_'+d.movieChart[i].movie_seq+'" class="btn-like" onclick="jehong.main.likeMovie('+d.movieChart[i].movie_seq+')" value="'+d.movieChart[i].like_count+'">영화찜하기</button><span class="count"><strong><i id="countBox_'+d.movieChart[i].movie_seq+'">'+d.movieChart[i].like_count+'</i><span>명이선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation" name="'+d.movieChart[i].movie_seq+'">예매</a></span></div></li>');
               }
               $('#movie_chart').append('<ol id="ol2"></ol>');
               for(var i=4;i<8;i++){
@@ -194,7 +202,6 @@ jehong.main=(()=>{
               
                 $('.thumb-image').on("click", function() {
                     var i = $(this).attr("name");
-                    alert('clikck thumb-image :'+i);
                        $('html').append(
                            '<div class="mask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 100; background-color: rgba(0, 0, 0, 0.8);"></div>'
                            +'<div class="layer-wrap" style="margin-top: -355px; margin-left: -510px; position: fixed;" tabindex="0"><div class="popwrap">'
@@ -233,14 +240,14 @@ jehong.main=(()=>{
                            +'</div></div>'
                      );
                        $('.btn-close').click(()=>{
-                           alert('btn-close');
                            $('.mask').remove();
                            $('.layer-wrap').remove();
                          });
                      
                     
                        });
-                    //More Content View
+                   //More Content View
+                   $('#movie_chart').after('<button class="btn-more-fontbold" style="float: right; margin-top: 10px">더보기 <i class="link-more">더보기</i></button>');
                    $('.btn-more-fontbold').click(()=>{
                       $('#movie_chart').append('<ol id="movie_more_container" class="list-more"></ol>');
                       for(var i=8;i<d.movieChart.length;i++){
@@ -248,31 +255,17 @@ jehong.main=(()=>{
                                '<li style="float: left; width: 260px; margin: 0 0 -3px 0; padding: 30px 0 30px 64px; border-top: 3px solid #241d1e; border-bottom: 3px solid #241d1e;";"><div class="box-image"><span class="thumb-image"><img class="movie_steelcut" src="'+d.movieChart[i].poster+'" name="'+d.movieChart[i].movie_seq+'"><span class="ico-grade grade-'+d.movieChart[i].age_limit+'">15세 이상</span></span><span class="screentype"></span></div><div class="box-contents" style=" width: 193px";><strong class="title">'+d.movieChart[i].name+'</strong><div class="score"><strong class="percent">예매율<span>'+d.movieChart[i].reserve_rate+'%</span></strong><!--[2015-12-14] 평점 개편 에그 포인트 및 에그 이미지 노출 추가. start : add_mwpark--><div class="egg-gage small"><span class="egg good"></span><span class="percent">'+d.movieChart[i].score+'%</span></div><!--[2015-12-14] 평점 개편 에그 포인트 및 에그 이미지 노출 추가. end : add_mwpark--></div><span class="txt-info"><strong>'+calDate(d.movieChart[i].release_date)+'<span>개봉</span></strong></span><span class="like"><button class="btn-like" value="80061">영화 찜하기</button><span class="count"><strong><i>'+d.movieChart[i].like_count+'</i><span>명이 선택</span></strong><i class="corner-RT"></i><i class="corner-LT"></i><i class="corner-LB"></i><i class="corner-RB"></i><i class="corner-arrow"></i></span><a class="link-reservation" name="'+d.movieChart[i].movie_seq+'">예매</a></span></div></li>'
                          );
                       }
-                      $('.btn-more-fontbold').remove();
-                      
-                   });
-                   
+                      $('.btn-more-fontbold').remove();                  
+                   });                
             },
             error : (x,s,m)=>{
                alert('에러가발생');
             }
          });
-      }
-   
-/*   var goReservation=(x)=>{
-      sessionStorage.setItem('movie_seq',x);
-      location.href=sessionStorage.getItem('ctx')+"/reservation";
-   };
-   
-   var goDetail=(x)=>{
-      sessionStorage.setItem('movie_seq',x);
-      location.href=sessionStorage.getItem('ctx')+"/movieDetail";
-   };*/
-   
+      }  
    var likeMovie=(x)=>{
-      
       var likeNum=$('#likeBtn_'+x+'').val()*1+1;
-         $('#likeText'+x+'').text(likeNum);
+         $('#countBox_'+x+'').text(likeNum);
          $('#likeBtn_'+x+'').removeAttr("onclick");
          $('#likeBtn_'+x+'').attr("class","btn-del");
          
@@ -286,7 +279,6 @@ jehong.main=(()=>{
                 contentType : 'application/json',
                 success : d=>{
                    if(d.msg=='success'){
-                      alert('좋아요 성공!');
                    }
                 },
                 error : (x,s,m)=>{

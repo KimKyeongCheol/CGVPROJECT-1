@@ -18,7 +18,7 @@
 			<when test="table eq 'myreservation'">
 select r.*,p.poster from reservation r join movie_picture p on r.movie_seq=p.movie_seq where r.member_id=#{param.member_id}
 			</when>
-			<when test="table eq 'myreservation'">
+			<when test="table eq 'qna'">
 select * from qna where member_id=#{param.member_id}
 			</when>
 			 <when test="table eq 'reservation2'">
@@ -54,30 +54,33 @@ select * from qna where member_id=#{param.member_id}
          </when> 
           <when test="table eq 'genderGraph'">
               select ROUND((male/total*100),1) male,ROUND((female/total*100),1) female
-           from
-           (select count(CASE WHEN gender='male' THEN 1 END) male,count(CASE WHEN gender='female' THEN 1 END) female, count(g.gender) total
-           from(select r.movie_seq, r.member_id, m.gender from reservation r join member m on r.member_id = m.member_id
-           where r.movie_seq=#{param.movie_seq})g
-           group by g.movie_seq)g2;
+			  from
+			  (select count(CASE WHEN gender='male' THEN 1 END) male,count(CASE WHEN gender='female' THEN 1 END) female, count(g.gender) total
+			  from(select r.movie_seq, r.member_id, m.gender from reservation r join member m on r.member_id = m.member_id
+			  where r.movie_seq=#{param.movie_seq})g
+			  group by g.movie_seq)g2;
+         </when>
+         <when test="table eq 'charmpoint'">
+            select * FROM charmpoint where movie_seq=#{param.movie_seq};
          </when>
          <when test="table eq 'ages'">
               select 
-            ROUND((teen/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'teen',
-            ROUND((twenty/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'twenty',
-            ROUND((thirty/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'thirty',
-            ROUND((forty/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'forty'
+				ROUND((teen/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'teen',
+				ROUND((twenty/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'twenty',
+				ROUND((thirty/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'thirty',
+				ROUND((forty/sum(t3.teen+t3.twenty+t3.thirty+t3.forty)*100),1) 'forty'
         
-              from(select 
-                 COUNT((CASE WHEN t2.ages DIV 10 = 1 THEN 1 ELSE NULL END)) 'teen',
-                 COUNT((CASE WHEN t2.ages DIV 10 = 2 THEN 1 ELSE NULL END)) 'twenty',
-                 COUNT((CASE WHEN t2.ages DIV 10 = 3 THEN 1 ELSE NULL END)) 'thirty',
-                 COUNT((CASE WHEN t2.ages DIV 10 = 4 THEN 1 ELSE NULL END)) 'forty'
-               
-            from
-                (select (YEAR(now())-(MID(ssn,1,2)+(IF (MID(ssn, 8, 1) = '1' OR MID(ssn, 8, 1) = '2', 1900, 2000)))) AS ages
-                  From 
-                (select ssn from reservation r join member m on r.member_id = m.member_id
-                  where r.movie_seq=#{param.movie_seq})t1)t2)t3;
+				  from(select 
+				     COUNT((CASE WHEN t2.ages DIV 10 = 1 THEN 1 ELSE NULL END)) 'teen',
+				     COUNT((CASE WHEN t2.ages DIV 10 = 2 THEN 1 ELSE NULL END)) 'twenty',
+				     COUNT((CASE WHEN t2.ages DIV 10 = 3 THEN 1 ELSE NULL END)) 'thirty',
+				     COUNT((CASE WHEN t2.ages DIV 10 = 4 THEN 1 ELSE NULL END)) 'forty'
+			      
+				from
+				    (select (YEAR(now())-(MID(ssn,1,2)+(IF (MID(ssn, 8, 1) = '1' OR MID(ssn, 8, 1) = '2', 1900, 2000)))) AS ages
+				      From 
+				    (select ssn from reservation r join member m on r.member_id = m.member_id
+				      where r.movie_seq=#{param.movie_seq})t1)t2)t3;
          </when>
 			<otherwise>
 				select * from ${table}

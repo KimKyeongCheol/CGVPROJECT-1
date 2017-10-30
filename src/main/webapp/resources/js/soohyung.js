@@ -91,7 +91,6 @@ soohyung.logic=(()=>{
    var ctx,id,pass,jahun;
    var join=(ctx)=>{     
       $('#submit_btn').click(()=>{
-         alert('이름 : '+$('#input_member_name').val());
       });
    };
    var login=()=>{
@@ -99,10 +98,8 @@ soohyung.logic=(()=>{
       
       /*로그인*/
       $('#login_btn').click(()=>{
-         alert('로그인버튼 클릭');
          id=$('#txtUserId').val();
          pass=$('#txtPwd1').val();
-         alert('아이디 : '+id+' 비밀번호 : '+pass);         
          $.ajax({
           url : sessionStorage.getItem('ctx')+'/get/loginPage',
           method : 'POST',
@@ -132,7 +129,6 @@ soohyung.logic=(()=>{
       
       /*아이디찾기*/
       $('#findId_btn').click(()=>{
-         alert('아이디 찾기');
          soohyung.template.findIdUI();
          
          $('#name').before(compUI.label().text('고객님의 이름을 입력하세요'));
@@ -170,7 +166,6 @@ soohyung.logic=(()=>{
            var phone2=$('#phone_no2').val();
            var phone3=$('#phone_no3').val();
            var phone=phone1+phone2+phone3;
-          alert('이름 : '+name+' 핸드폰 번호 :'+phone);
           $.ajax({
              url : sessionStorage.getItem('ctx')+'/get/findId',
              method : 'POST',
@@ -210,7 +205,6 @@ soohyung.logic=(()=>{
       /*비밀번호 찾기*/
       $('#findPw_btn').click(()=>{
          soohyung.template.findPwUI();
-         alert('비밀번호 찾기');
          
          $('#id').before(compUI.label().text('고객님의 아이디를 입력하세요'));
          $('#phone').before(compUI.label().text('고객님의 휴대폰 번호를 입력하세요'));
@@ -245,7 +239,6 @@ soohyung.logic=(()=>{
            var phone2=$('#phone_no2').val();
            var phone3=$('#phone_no3').val();
            var phone=phone1+phone2+phone3;
-         alert('아이디 : '+id+' 핸드폰 번호 :'+phone);
              $.ajax({
                url : sessionStorage.getItem('ctx')+'/get/findPw',
                method : 'POST',
@@ -256,7 +249,6 @@ soohyung.logic=(()=>{
                contentType : 'application/json',
                success : d =>{
             	   	
-            		   alert(d.findId);
             		   sessionStorage.setItem('member_id',d.findId);
             		   location.href=sessionStorage.getItem('ctx')+"/update";
                },

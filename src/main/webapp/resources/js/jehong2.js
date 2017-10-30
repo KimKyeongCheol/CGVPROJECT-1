@@ -2,9 +2,6 @@ var jehong2=jehong2 || {};
 
 jehong2.main=(()=>{
    var init=(ctx)=>{
-      alert('detail init!');
-      alert(sessionStorage.getItem('movie_seq'));
-      var today=''; 
       jehong2.session.init(ctx);
       drawPicture();
       logic();
@@ -20,7 +17,6 @@ jehong2.main=(()=>{
 	            }),
 	         contentType : 'application/json',
 	         success : d=>{
-	             alert(d.movieDetail.name);
 	             var calDate = function(x){
 	              var date= new Date(x);
 	              date=date.getFullYear()+'년'+(date.getMonth()+1)+'월'+date.getDate()+'일';
@@ -36,6 +32,7 @@ jehong2.main=(()=>{
 	            $('#staff').text(d.movieDetail.staff);
 	            $('#genre').text('장르 : '+d.movieDetail.genre);
 	            $('#release_date').text('개봉날짜 : '+calDate(d.movieDetail.release_date));
+	            $('.btn-like').attr('value',d.movieDetail.like_count);
 	            $('#like_count').text(d.movieDetail.like_count);
 	            $('#introduce_text').text(d.movieDetail.introduce);
 	            $('#poster_img').attr("src",d.movieDetail.poster);
@@ -53,7 +50,6 @@ jehong2.main=(()=>{
 	            //trailerPopUp
 	            $('.thumb-image').on("click", function() {
 	                var i = $(this).attr("name");
-	                alert('clikck thumb-image :'+i);
 	                   $('html').append(
 	                       '<div class="mask" style="position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 100; background-color: rgba(0, 0, 0, 0.8);"></div>'
 	                       +'<div class="layer-wrap" style="margin-top: -355px; margin-left: -510px; position: fixed;" tabindex="0"><div class="popwrap">'
@@ -92,7 +88,6 @@ jehong2.main=(()=>{
 	                       +'</div></div>'
 	                 );
 	                   $('.btn-close').click(()=>{
-	                       alert('btn-close');
 	                       $('.mask').remove();
 	                       $('.layer-wrap').remove();
 	                     });
@@ -103,7 +98,6 @@ jehong2.main=(()=>{
 	            
 	            
 	          //graph Chart
-	            alert(d.genderGraph.male);
 	            var data = {
 	                    period: [["5주전", 0.000000],["4주전", 0.000000],["3주전", 0.000000],["2주전", 0.000000],["1주전", 0.000000]],
 	                    age: [["10대", d.ages.teen],["20대", d.ages.twenty],["30대", d.ages.thirty],["40대", d.ages.forty]],
@@ -121,7 +115,7 @@ jehong2.main=(()=>{
 	                            pointStrokeColor: "#fff",
 	                            pointHighlightFill: "#fff",
 	                            pointHighlightStroke: "rgba(151,187,205,1)",
-	                            data: [41, 48, 24, 93, 12 ]
+	                            data: [d.charmpoint.Directed, d.charmpoint.OST, d.charmpoint.acting, d.charmpoint.Visual, d.charmpoint.story ]
 	                        }
 	                    ]
 	                };
@@ -293,6 +287,7 @@ jehong2.main=(()=>{
 	                      }
 	                      
 	                      $('#comment_content').empty();
+	                      $('#cgvEggCountTxt').text($('#cgvEggCountTxt').text()*1+1);
 	                      door='true';
 	                      
 	                  },
@@ -305,24 +300,40 @@ jehong2.main=(()=>{
 	         
 	      });
 	   
-	   
-	   
-	   
-	   
-
-        
-
    };
    
    var logic=()=>{
 	   $(document).on("click",".link-reservation", function() {
-           alert('go MovieReservation /seq: '+$(this).attr("name"));
            sessionStorage.setItem('movie_seq',$(this).attr("name"));
            location.href=sessionStorage.getItem('ctx')+"/reservation";
       });
-      
 
-      
+	   $('#goldenEggAlert').click(()=>{
+		   alert('CGV의 실제 관람 고객 평가로 산정된 지수입니다. 결과에 따라 GoldenEGG 아이콘이 정해 집니다');
+	   });
+	   
+	   $('.btn-like').click(()=>{
+		   $('#like_count').text($('.btn-like').val()*1+1);
+	       $('.btn-like').removeAttr("onclick");
+	       $('.btn-like').attr("class","btn-del");
+	         
+	       $.ajax({
+	              url : sessionStorage.getItem('ctx')+'/put/movieLike',
+	              method : 'POST',
+	              data : JSON.stringify({
+	                'like_count' : $('#like_count').text(),
+	                'movie_seq' : sessionStorage.getItem('movie_seq')
+	             }),
+	              contentType : 'application/json',
+	              success : d=>{
+	                 if(d.msg=='success'){
+	                 }
+	              },
+	              error : (x,s,m)=>{
+	                 alert('에러가발생');
+	              }
+	           });  
+	   });
    };
    
    var comment=(page)=>{
@@ -383,32 +394,6 @@ jehong2.main=(()=>{
       
    };
    
-   var like=(comment_seq)=>{
-      var likeNum=$('#'+comment_seq+'').text()*1+1;
-      $('#'+comment_seq+'').text(likeNum);
-      $('#like_'+comment_seq+'').removeAttr("onclick");
-      $('#img_'+comment_seq+'').attr("src","http://img.cgv.co.kr/R2014/images/point/ico_point_like.png");
-      
-      $.ajax({
-             url : sessionStorage.getItem('ctx')+'/put/like',
-             method : 'POST',
-             data : JSON.stringify({
-               'comment_like' : likeNum,
-               'comment_seq' : comment_seq
-            }),
-             contentType : 'application/json',
-             success : d=>{
-                
-             },
-             error : (x,s,m)=>{
-                alert('에러가발생');
-             }
-          });  
-     
-      
-      
-      
-   };
    var paging=(startPage,pageCount)=>{
       var currentPage=startPage;
       if(startPage%5==0){
@@ -469,6 +454,31 @@ jehong2.main=(()=>{
             }
          });
       
+      
+   };
+   var like=(comment_seq)=>{
+	   var likeNum=$('#'+comment_seq+'').text()*1+1;
+	   $('#'+comment_seq+'').text(likeNum);
+	   $('#like_'+comment_seq+'').removeAttr("onclick");
+	   $('#img_'+comment_seq+'').attr("src","http://img.cgv.co.kr/R2014/images/point/ico_point_like.png");
+	   
+	   $.ajax({
+		   url : sessionStorage.getItem('ctx')+'/put/like',
+		   method : 'POST',
+		   data : JSON.stringify({
+			   'comment_like' : likeNum,
+			   'comment_seq' : comment_seq
+		   }),
+		   contentType : 'application/json',
+		   success : d=>{
+			   
+		   },
+		   error : (x,s,m)=>{
+			   alert('에러가발생');
+		   }
+	   });  
+	   
+	   
    };
    
    return {

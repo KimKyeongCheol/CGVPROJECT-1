@@ -21,7 +21,6 @@ kyungchul.logic=(()=>{
 	var init=()=>{
 		
 		$('#member_update').click(()=>{
-			alert('업데이트 클릭 !');
 			location.href=sessionStorage.getItem('ctx')+"/update";
 		});
 		
@@ -38,8 +37,6 @@ kyungchul.logic=(()=>{
 		});
 		
 		$('#qnaSubmit').click(()=>{
-			
-			alert('qnaSubmit !!');
 			var content=$('#qnaContent').val();
 			
 			$.ajax({
@@ -61,9 +58,7 @@ kyungchul.logic=(()=>{
 		});	
 		
 		$('#member_delete').click(()=>{
-			alert('회원탈퇴 !');
 			var pass=prompt("비밀번호를 입력해주세요", "password");
-			
 			$.ajax({
 	            url : sessionStorage.getItem('ctx')+'/delete/member',
 	            method : 'POST',
@@ -167,9 +162,11 @@ kyungchul.logic=(()=>{
 			  
 		});
 		
+		$('#cancel').click(()=>{
+	    	 location.href=sessionStorage.getItem('ctx')+'/home';
+	     });
+		
 		$('#uploadbutton').click(()=>{
-			
-			alert('업로드');
 			var form = $('FILE_FORM')[0];
 			var formData = new FormData(form);
 			formData.append("fileObj", $("#img_file")[0].files[0]);
@@ -180,9 +177,9 @@ kyungchul.logic=(()=>{
 				data : formData,
 				type : 'POST',
 				success : function(d) {
+					$('#profile_img').attr('src',d);
 					alert(d);
 					alert('사진등록 완료 !');
-					$('#profile_img').attr('src',d);
 				}
 			});
 

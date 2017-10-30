@@ -10,6 +10,9 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.hanbit.cgv.complex.PathFactory;
+import com.hanbit.cgv.products.PathDTO;
  
  
 
@@ -18,6 +21,9 @@ public class FileUpload {
 	@Autowired
 	ServletContext application;
 	public HashMap execute(MultipartFile file) throws Exception {
+		PathDTO path2=new PathDTO();
+		path2=PathFactory.create();
+		
 		HashMap result = new HashMap<>();
 		long size = file.getSize();
 		result.put("filesize", size);
@@ -30,8 +36,8 @@ public class FileUpload {
 		String saveName = System.currentTimeMillis()+orgName;
 		File dest = new File(path, saveName);
 		file.transferTo(dest); 
-		result.put("fileaddress", dest.getPath());
-		result.put("filelink", "/share/"+saveName);
+		result.put("fileaddress", path2.getImg());
+		result.put("filelink", path2.getImg()+"/"+saveName);
 		return result;
 	}
 

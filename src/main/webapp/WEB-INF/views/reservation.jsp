@@ -42,6 +42,20 @@
 </head>
 
 <body class="">
+<div id="contaniner" class="">
+        <div id="ctl00_navigation_line" class="linemap-wrap">
+            <div class="sect-linemap">
+                <div class="sect-bcrumb">
+                    <ul>
+                        <li><a href="${path.ctx}/home"><img alt="home" src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png"></a></li>
+                        <li><a href="/movies/">영화</a></li>
+                        <li class="last">영화상세</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+</div>
 <script>
 lsy.common.init('${path.ctx }');
 </script>

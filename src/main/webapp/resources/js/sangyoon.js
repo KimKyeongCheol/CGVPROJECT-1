@@ -791,9 +791,9 @@ var reservationUI = {
 		+                '</div>'
 		+            '</div>'
 		+            '</form>'
-		+            '<!-- //작성 영역 -->'
-		+			'<div class="movie-diary-wrap none" style="padding:0px;"><a class="round black" style="cursor:pointer;" onclick="lsy.main.init()"><span>홈으로 가기</span></a></div>'
-		+       '</div>'
+		  +            '<!-- //작성 영역 -->'
+	      +         '<div class="movie-diary-wrap none" style="padding:0px;"><a class="round black" style="cursor:pointer;" onclick="lsy.main.init()"><span>홈으로 가기</span></a><a class="round black" style="cursor:pointer;" onclick="lsy.main.road()"><span>영화관 길찾기</span></a></div>'
+	      +       '</div>'
 	},
 	selectSeat : ()=> {
 		return '    	<!-- Contaniner -->'
@@ -1276,7 +1276,6 @@ lsy.common=(()=> {
 		}
 
 		today = yyyy+'/'+mm+'/'+dd;
-		alert(today);
 		
 		$('#detail_date>span:nth-child(1)').text(yyyy);
 		$('#detail_date>span:nth-child(2)').text(mm);
@@ -1306,30 +1305,14 @@ lsy.common=(()=> {
 				}
 				for (var i=0;i<5;i++) {
 					var x = Number(dd)+Number(i);
-					var dayOfWeek = "";
-					if (i==0 || i % 7 == 0) {
-						dayOfWeek = "금";
-					}else if (i == 1 || i % 8 == 0) {dayOfWeek = "토";}
-					else if (i == 2 || i % 9 == 0) {dayOfWeek = "일";}
-					else if (i == 3) {dayOfWeek = "월";}
-					else if (i == 4) {dayOfWeek = "화";}
-					else if (i == 5) {dayOfWeek = "수";}
-					else if (i == 6) {dayOfWeek = "목";}
-					
 					$('#day_selected_ul').append(
 							'<li data-index="'+i+'" class="day day_selected'+i+'" onclick="lsy.date.init('+i+')">'
 							+'<a href="#">'
 							+'<span class="sreader"></span>'
-							+'<span class="dayweek" style="font-weight:bold; width:60px;" id="detail_dayweek'+i+'">'+x+' / '+dayOfWeek+'</span>'
+							+'<span class="dayweek" style="font-weight:bold; width:60px;" id="detail_dayweek'+i+'">'+x+'일</span>'
 							+'</a>'
 							+'</li>'					
 					);
-					if (i==1) {
-						$('#detail_dayweek'+i).css({'color':'#31597e'});
-					}
-					else if (i==2) {
-						$('#detail_dayweek'+i).css({'color':'#ad2727'});
-					}
 				}
 			},
 			error : (x,s,m)=>{
@@ -1393,7 +1376,6 @@ lsy.detailSelect=(()=> {
 		$('.theater_list'+x).css({'color':'#fff'});
 		$('#theater_detail').text('CGV  '+$('.theater_list'+x).text());
 		sessionStorage.setItem('placeSeq',x+1);
-		alert('플레이스 시퀀스'+$$('placeSeq'));
 		setTimeout("lsy.btnOn.init()",100);
 	}
 	return {init:init};
@@ -1482,7 +1464,6 @@ lsy.selectTime=(()=> {
 lsy.seatSelect=(()=> {
 	var init=()=> {
 		if ($('#tnb_step_btn_right').hasClass('btn-right on') || $('#tnb_step_btn_right').hasClass('on.btn-right') || $('#tnb_step_btn_right').hasClass('on btn-right')) {
-			alert('좌석선택 페이지 갑니다');
 			sessionStorage.setItem('movieImg','영화더미');
 			sessionStorage.setItem('movieName',$('#movie_info_text').text());
 			sessionStorage.setItem('movieAge',$('#movie_rating').text());
@@ -1508,17 +1489,13 @@ lsy.seatSelect=(()=> {
 					'schedule_seq' : $$('scheduleSeq')
 				}),
 				success : d => {
-					alert('에이잭스 통신 성공 , 남은 좌석 개수는: '+d.count);
-					
 					$('#rest_num').text(d.count + '석');
 					if (typeof d.count == 'undefined') {
 						$('#rest_num').text('30석');
 					}
 					var arr1 = d.seatList1;
-					alert(typeof arr1+arr1);
 					var strArr = arr1.split(',');
 					var length = String(strArr).length;
-					alert('시트 배열 개수는 : '+strArr.length);
 					for(var i=0;i<strArr.length;i++) {
 						j=i+1;
 						$('#'+j+'>span>input').val(strArr[i]);
@@ -1534,9 +1511,7 @@ lsy.seatSelect=(()=> {
 					alert('에러발생');
 				}
 			});
-			alert('선택된 영화 시퀀스 값은' + sessionStorage.getItem('movieSeq'));
 			
-
 			/*좌석 선택 표 부분*/
 			$('#seats_list').append(compUI.tag('ul','seats_list_ul').css({'height':'230px','width':'110px','margin':'0 auto','text-align':'center','display':'-webkit-inline-box'}));
 			$('#seats_list').css({'text-align':'center'});
@@ -1640,17 +1615,21 @@ var childCount;
 lsy.seatCount=(()=> {
 	var init = (x,y)=> {
 		onCreate(x,y);
-		if (x==0) {
-			total=0;
+
+		if (total!=count) {
+			$('#tnb_step_btn_right').removeClass('btn-right on');
+			$('#tnb_step_btn_right').addClass('btn-right');
+			$('#tnb_step_btn_right').attr('onclick','false');
 		}
-		count=0;
-		$('#seats_list_ul>li>')
-		alert('토탈은'+total);
+		else {
+			$('#tnb_step_btn_right').removeClass('btn-right');
+			$('#tnb_step_btn_right').addClass('btn-right on');
+			$('#tnb_step_btn_right').attr('onclick','lsy.pay.init()');
+		}
 	};
 	var onCreate = (x,y)=> {
 		setContentView();
 		var age = "";
-		alert('인덱스는 : '+x +' 이고 나이제한은 ' + y);
 		var adultMsg;
 		var youthMsg;
 		var childMsg;
@@ -1719,6 +1698,17 @@ lsy.seatCount=(()=> {
 			}
 		}
 		
+		if (total < count) {
+			alert('선택하신 좌석이 인원수보다 많습니다.');
+			total = count;
+			return false;
+		}
+		
+		if (x==0 && count>x) {
+			alert('선택하신 좌석이 인원수보다 많습니다.');
+			return false;
+		}
+		
 		if (total==0) {
 			$('#background').css({'background-color':'rgba(0, 0, 0, 0.15)'});
 			$('#background').addClass('mouse_block');
@@ -1764,7 +1754,6 @@ lsy.seatCount=(()=> {
 				$('#people_count>span:nth-child(4)').text(','+childMsg);
 			}
 		}
-		
 		$('#nop_group_'+age+'>ul>li').removeClass('selected');
 		$('#select_'+age+x).addClass('selected');
 		$('#people_count').css({'display':'inline-block'});
@@ -1772,9 +1761,6 @@ lsy.seatCount=(()=> {
 		var $text = $('#people_count>span:nth-child(2)').text();
 		
 		if (x==0) {
-			$('#adultCount').val(x);
-			$('#youthCount').val(x);
-			$('#childCount').val(x);
 			$('#nop_group_adult>ul>li').removeClass('selected');
 			$('#nop_group_youth>ul>li').removeClass('selected');
 			$('#nop_group_child>ul>li').removeClass('selected');
@@ -1795,6 +1781,7 @@ lsy.seatCount=(()=> {
 			}
 		}
 	};
+	
 	var setContentView = ()=> {
 		
 	};
@@ -1847,9 +1834,9 @@ lsy.selectDetail=(()=>{
 			count=0;
 			return false;
 		}
-		alert('현재 카운트는'+count);
 		if (count>total) {
 			alert('좌석을 더이상 선택할수 없습니다');
+			count=count-1;
 			return false;
 		}
 		$('#'+x+'>span>input').val('1');
@@ -1940,15 +1927,9 @@ lsy.pay = (()=> {
 				'seat_list' : str
 			}),
 			success : d => {
-				alert(typeof d.apply);
-				if (typeof d.apply == "number") {
+				if (d.reservation === "success") {
 					alert('예약 되셨습니다');
-					alert('예약된 아이디는' + $$('member_id') + '이고, 예약된 영화는 ' + $('#movie_name_text').text() +
-							'이고, 예약된 극장은 ' + $('#theater_detail>a').text()+'이고, 예약된 날짜는 '+$$('selectDate') +
-							'이고, 예약된 관은 ' + $('#theater_number').text() + '이고, 예약된 시간은 ' + 
-							$('#seat_select_time_detail>b:nth-child(3)').text() + '이고, ' +
-							'가격은 ' + $('#totalPrice').text() + '원 이고, ' +
-							'배당 좌석은 ' + $('#seat_number_list').text() + '입니다.');
+					
 					sessionStorage.setItem('movieName',$('#movie_name_text').text());
 					sessionStorage.setItem('placeName',$('#theater_detail>a').text());
 					sessionStorage.setItem('theaterName',$('#theater_detail>a').text());
@@ -1971,23 +1952,55 @@ lsy.pay = (()=> {
 					$('#movie_price_text').val('가격 : '+$$('price')+'원');
 					$('#movie_seat_text').val('좌석 정보 : '+$$('seatInfo'));
 					$('#movie_count_text').val('총 인원 : '+$$('total_count')+'명');
+					sessionStorage.setItem('movieName','');
+					sessionStorage.setItem('placeName','');
+					sessionStorage.setItem('theaterName','');
+					sessionStorage.setItem('theaterNumber','');
+					sessionStorage.setItem('price','');
+					sessionStorage.setItem('seatInfo','');
+					sessionStorage.setItem('movieTime','');
+					sessionStorage.setItem('total_count','');
 				}
 			},
 			error : (x,s,m)=>{
 				alert('에러발생');
 			}
 		});
-		alert(str);
 	}
 	return {init:init}
 })();
 
 lsy.main = (()=> {
-	var init = ()=> {
-		location.href=$$('x')+'/home';
-	};
-	return {init:init};
-})();
+	   var init = ()=> {
+	      location.href=$$('x')+'/home';
+	   };
+	   var road=()=>{
+	      if($$('placeSeq')==1){
+	          window.open("http://map.daum.net/link/to/대한민국 서울특별시 서초구 역삼1동 강남대로 438,37.5015650,127.0263130",
+	         "영화관길찾기", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+	      }
+	      if($$('placeSeq')==2){
+	          window.open("http://map.daum.net/link/to/대한민국 서울특별시 강북구 송중동 도봉로 34 트레지오 쇼핑몰,37.6120540,127.0307200",
+	         "영화관길찾기", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+	      }
+	      if($$('placeSeq')==3){
+	          window.open("http://map.daum.net/link/to/대한민국 서울특별시 마포구 동교동 양화로 153,37.5564410,126.9226100",
+	         "영화관길찾기", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" ); 
+	      }
+	      if($$('placeSeq')==4){
+	          window.open("http://map.daum.net/link/to/대한민국 서울특별시 서대문구 신촌동 신촌로 129,37.5564820,126.9403270",
+	         "영화관길찾기", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+	      }
+	      if($$('placeSeq')==5){
+	         window.open("http://map.daum.net/link/to/대한민국 서울특별시 중구 명동2가 83-5,37.5633410,126.9828580",
+	         "영화관길찾기", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
+	      } 
+	   };
+	   return {
+	      init:init,
+	      road:road
+	      };
+	})();
 
 lsy.session=
 {

@@ -60,18 +60,18 @@
 <div id="contaniner" class=""><!-- 벽돌 배경이미지 사용 시 class="bg-bricks" 적용 / 배경이미지가 없을 경우 class 삭제  -->
 <!-- LineMap -->
 <div id="ctl00_navigation_line" class="linemap-wrap">
-<div class="sect-linemap">
-<div class="sect-bcrumb">
-<ul>
-<li><a href="/"><img alt="home" src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png" /></a></li>
-<li >
-<a href="/user/login/">회원서비스</a>
-</li>               
-<li  class="last">
-로그인
-</li>                        
-</ul>
-</div>  
+<div id="ctl00_navigation_line" class="linemap-wrap">
+            <div class="sect-linemap">
+                <div class="sect-bcrumb">
+                    <ul>
+                        <li><a href="${path.ctx}/home"><img alt="home" src="http://img.cgv.co.kr/R2014/images/common/btn/btn_home.png"/></a></li>
+                        <li><a href="/movies/">영화</a></li>
+                        <li class="last">로그인</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
 </div>
 </div>
 <!-- //LineMap -->
