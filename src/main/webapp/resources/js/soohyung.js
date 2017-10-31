@@ -265,8 +265,78 @@ soohyung.logic=(()=>{
       $('#join').click(()=>{
          location.href=sessionStorage.getItem('ctx')+'/join';
       });
+    	  
    };
-   return {join : join, login: login}
+   var kakao=()=>{
+	   alert('kakao start');
+	   Kakao.init("7044fbb75ccde339068c10a25389a394");
+	   Kakao.Auth.login({
+		   persistAccessToken: true,
+		   persistRefreshToken: true,
+		   success: function(authObj) {
+			   getKakaotalkUserProfile();
+		   },
+		   fail: function(err) {
+			   console.log(err);
+		   }
+	   });
+	   
+		function getKakaotalkUserProfile(){
+			Kakao.API.request({
+				url: '/v1/user/me',
+				success: function(res) {
+					alert(res.properties.nickname+'님 환영합니다 !!');
+					
+					$.ajax({
+		                   url : sessionStorage.getItem('ctx')+'/post/member',
+		                   method : 'POST',
+		                   data : JSON.stringify({
+		                      name : res.properties.nickname,
+		                      member_id : res.properties.nickname,
+		                      pass : 'kakao',
+		                      ssn : 'kakao',
+		                      phone : 'kakao',
+		                      email : 'kakao',
+		                      zipcode : 'kakao',
+		                      address : 'kakao',
+		                      profile : res.properties.profile_image,
+		                      gender : 'male'
+		                   }),
+		                   contentType : 'application/json',
+		                   success : d =>{
+		                       sessionStorage.setItem('member_id',res.properties.nickname);
+		                       sessionStorage.setItem('member_img',res.properties.profile_image);
+		                       location.href=sessionStorage.getItem('ctx')+'/home';
+		                   },
+		                   error : (x,s,m)=>{
+		                      alert('오류발생 : '+m);
+		                   }             
+		                });  
+				},
+				fail: function(error) {
+					console.log(error);
+				}
+			});
+		}
+		
+		function createKakaotalkLogout(){
+			$("#kakao-logged-group .kakao-logout-btn,#kakao-logged-group .kakao-login-btn").remove();
+			var logoutBtn = $("<a/>",{"class":"kakao-logout-btn","text":"로그아웃"});
+			logoutBtn.click(function(){
+				Kakao.Auth.logout();
+				createKakaotalkLogin();
+				$("#kakao-profile").text("");
+			});
+			$("#kakao-logged-group").prepend(logoutBtn);
+		}
+		if(Kakao.Auth.getRefreshToken()!=undefined&&Kakao.Auth.getRefreshToken().replace(/ /gi,"")!=""){
+			createKakaotalkLogout();
+			getKakaotalkUserProfile();
+		}else{
+			createKakaotalkLogin();
+		}
+   };
+   return {join : join, login: login, kakao: kakao}
 })();
 
 

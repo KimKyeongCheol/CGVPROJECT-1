@@ -93,32 +93,46 @@ kyungchul.logic=(()=>{
 			alert('로그인을 먼저 해주세요');
 			location.href=sessionStorage.getItem('ctx')+"/loginpage";
 		}
-		$.ajax({
-            url : sessionStorage.getItem('ctx')+'/get/idCheck',
-            method : 'POST',
-            data : JSON.stringify({
-               member_id : sessionStorage.getItem('member_id')
-            }),
-            contentType : 'application/json',
-            success : d =>{
-            	$('#profile_img').attr("src",sessionStorage.getItem('img')+'/'+d.member.profile);
-         	   $('#member_id').val(d.member.member_id);
-         	  $('#name').val(d.member.name);
-         	  var phone=d.member.phone;
-         	  $('#phone_mid').val(phone.substr(3,4));
-         	 $('#phone_last').val(phone.substr(7,4));
-         	 var emails=d.member.email.split('@');
-         	 $('#email_first').val(emails[0]);
-         	 $('#email_input').val(emails[1]);
-         	 $('#sample4_postcode').val(d.member.zipcode);
-         	 $('#sample4_roadAddress').val(d.member.address);
-         	 $('#sample4_jibunAddress').val(d.member.address);
-         	
-            },
-            error : (x,s,m)=>{
-               alert('오류발생 : '+m);
-            }             
-         });
+		if(sessionStorage.getItem('member_img')==null){
+			$.ajax({
+				url : sessionStorage.getItem('ctx')+'/get/idCheck',
+				method : 'POST',
+				data : JSON.stringify({
+					member_id : sessionStorage.getItem('member_id')
+				}),
+				contentType : 'application/json',
+				success : d =>{
+					
+						$('#profile_img').attr("src",sessionStorage.getItem('img')+'/'+d.member.profile);
+					$('#member_id').val(d.member.member_id);
+					$('#name').val(d.member.name);
+					var phone=d.member.phone;
+					$('#phone_mid').val(phone.substr(3,4));
+					$('#phone_last').val(phone.substr(7,4));
+					var emails=d.member.email.split('@');
+					$('#email_first').val(emails[0]);
+					$('#email_input').val(emails[1]);
+					$('#sample4_postcode').val(d.member.zipcode);
+					$('#sample4_roadAddress').val(d.member.address);
+					$('#sample4_jibunAddress').val(d.member.address);
+					
+				},
+				error : (x,s,m)=>{
+					alert('오류발생 : '+m);
+				}             
+			});
+		}else{
+			$('#profile_img').attr("src",sessionStorage.getItem('member_img'));
+			$('#member_id').val(sessionStorage.getItem('member_id'));
+			$('#name').val(sessionStorage.getItem('member_id'));
+			$('#phone_mid').val('kakao');
+			$('#phone_last').val('kakao');
+			$('#email_first').val('kakao');
+			$('#email_input').val('kakao');
+			$('#sample4_postcode').val('kakao');
+			$('#sample4_roadAddress').val('kakao');
+			$('#sample4_jibunAddress').val('kakao');
+		}
 		
 		$('#submit').click(()=>{
 			var name=$('#name').val();
@@ -148,12 +162,13 @@ kyungchul.logic=(()=>{
 		                	 location.href=sessionStorage.getItem('ctx')+"/home";
 		                 }else{
 		                	 alert('회원정보 수정 실패.. ');
-		                	 return false;
+		                	 location.href=sessionStorage.getItem('ctx')+"/home";
 		                 }
 		                 
 		             },
 		             error : (x,s,m)=>{
 		                alert('오류발생 : '+m);
+		                location.href=sessionStorage.getItem('ctx')+"/home";
 		             }             
 		          });
 

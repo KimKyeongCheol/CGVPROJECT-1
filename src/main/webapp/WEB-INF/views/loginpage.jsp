@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="${path.ctx}/resources/css/soohyung.css"/> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="${path.js}/soohyung.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
    
 </head>
 <html>
@@ -69,7 +70,7 @@
                         <li class="last">로그인</li>
                     </ul>
                 </div>
-                
+                <h1 style="height: 100px;width: 100px;"></h1>
             </div>
         </div>
 </div>
@@ -102,7 +103,10 @@
 <input type="password" title="패스워드" id="txtPwd1" name="txtPwd1" data-title="패스워드를 " data-message="입력하세요." required="required" />
 </div>
 <!-- 캡차 영역-->   
-<button type="submit" id="submit" title="로그인"><span id="login_btn">로그인</span></button>                                    
+<button type="submit" id="submit" title="로그인"><span id="login_btn">로그인</span></button>
+<img src="http://sooribingo.com/assets/usr/images/login/login_kakao.png" height="70px" width="250px" onclick="soohyung.logic.kakao()"></img>
+<div id="kakao-logged-group"></div>
+<div id="kakao-profile"></div>                                   
 <div class="login-option">
 <button id="join">회원가입하기</button>
 <button id="findId_btn">아이디 찾기</button>
@@ -134,6 +138,8 @@
 <!-- /Contaniner -->   
 <script>
 soohyung.main.init('${path.ctx}');
+
+
 </script>
 </body>
 </html>
