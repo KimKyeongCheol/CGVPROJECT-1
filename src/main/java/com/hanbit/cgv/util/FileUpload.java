@@ -1,8 +1,6 @@
 package com.hanbit.cgv.util;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -14,8 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hanbit.cgv.complex.PathFactory;
 import com.hanbit.cgv.products.PathDTO;
  
- 
-
 @Component
 public class FileUpload {
 	@Autowired

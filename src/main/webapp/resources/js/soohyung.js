@@ -319,22 +319,7 @@ soohyung.logic=(()=>{
 			});
 		}
 		
-		function createKakaotalkLogout(){
-			$("#kakao-logged-group .kakao-logout-btn,#kakao-logged-group .kakao-login-btn").remove();
-			var logoutBtn = $("<a/>",{"class":"kakao-logout-btn","text":"로그아웃"});
-			logoutBtn.click(function(){
-				Kakao.Auth.logout();
-				createKakaotalkLogin();
-				$("#kakao-profile").text("");
-			});
-			$("#kakao-logged-group").prepend(logoutBtn);
-		}
-		if(Kakao.Auth.getRefreshToken()!=undefined&&Kakao.Auth.getRefreshToken().replace(/ /gi,"")!=""){
-			createKakaotalkLogout();
-			getKakaotalkUserProfile();
-		}else{
-			createKakaotalkLogin();
-		}
+		
    };
    return {join : join, login: login, kakao: kakao}
 })();
